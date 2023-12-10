@@ -12,22 +12,48 @@ main {
 .new-task {
   display: flex;
   padding: 16px;
-  border: 1px solid blue;
+  background-color: #F9F9F9;
 }
 
 .new-task__title {
   margin-right: auto;
 }
-
+.new-task__actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
 .tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   width: 100%;
-  padding: 16px;
+  padding: 16px 0;
 }
 
 .task {
+  background-color: #F9F9F9;
   display: flex;
-  padding: 4px;
+  justify-content: space-between;
+  padding: 8px;
+  border-radius: 4px;
+}
+.task input {
+  border-color: transparent;
+  background: none;
+}
+.task__details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 .task__title {
   margin-right: auto;
+}
+.task__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
