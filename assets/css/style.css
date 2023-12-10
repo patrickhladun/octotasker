@@ -1,0 +1,33 @@
+.app {
+  display: flex;
+}
+header {
+  width: 180px;
+}
+main {
+  width: 100%;
+  padding: 16px;
+}
+
+.new-task {
+  display: flex;
+  padding: 16px;
+  border: 1px solid blue;
+}
+
+.new-task__title {
+  margin-right: auto;
+}
+
+.tasks {
+  width: 100%;
+  padding: 16px;
+}
+
+.task {
+  display: flex;
+  padding: 4px;
+}
+.task__title {
+  margin-right: auto;
+}
