@@ -3,29 +3,58 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./assets/css/normalize.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Octotasker</title>
   </head>
   <body>
     <div class="app">
-      <aside>
+      <header>
         <div>Logo</div>
-        <ul>
-          <li><a href="#">Tasks</a></li>
-          <li><a href="#">Projects</a></li>
-        </ul>
-        <a href="#">Account</a>
-      </aside>
+        <nav>
+          <ul>
+            <li><a href="./">Tasks</a></li>
+            <li><a href="./projects.html">Projects</a></li>
+          </ul>
+        </nav>
+      </header>
       <main>
-        <section class="new-task"></section>
+        <section>
+          <div class="new-task">
+            <input type="text" class="new-task__title" />
+            <div class="new-task__buttons">
+              <button class="new-task__add">+</button>
+              <button class="new-task__timer">time</button>
+            </div>
+          </div>
+        </section>
+        <section class="daily-stats">
+          <p>Today total: 00:00:00</p>
+        </section>
         <section class="tasks">
           <div class="task">
-            <div class="task__title">This is my task</div>
+            <input
+              type="text"
+              class="task__title"
+              value="My new incredible task"
+            />
+            <button class="task__timer">time</button>
+            <button class="task__options">&#183; &#183; &#183;</button>
           </div>
           <div class="task">
-            <div class="task__title">This is my task</div>
+            <input type="text" class="task__title" value="Another cool task" />
+            <button class="task__timer">time</button>
+            <button class="task__options">&#183; &#183; &#183;</button>
           </div>
           <div class="task">
-            <div class="task__title">This is my task</div>
+            <input
+              type="text"
+              class="task__title"
+              value="This is impossible task"
+            />
+            <button class="task__timer">time</button>
+            <button class="task__options">&#183; &#183; &#183;</button>
           </div>
         </section>
       </main>
