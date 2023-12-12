@@ -21,12 +21,14 @@
       </header>
       <main>
         <section class="new-task">
-          <input type="text" class="new-task__title" />
-          <div class="new-task__actions">
-            <div>00:00:00</div>
-            <button class="new-task__timer">time</button>
-            <button class="new-task__add">+</button>
-          </div>
+          <form id="task-form">
+            <input id="task-name" type="text" class="new-task__name" required />
+            <div class="new-task__actions">
+              <div>00:00:00</div>
+              <button class="new-task__timer">time</button>
+              <button type="submit" class="new-task__add">+</button>
+            </div>
+          </form>
         </section>
 
         <section class="daily-stats">
@@ -133,5 +135,7 @@
         </section>
       </main>
     </div>
+
+    <script src="./assets/js/index.js"></script>
   </body>
 </html>
