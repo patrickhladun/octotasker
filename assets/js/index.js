@@ -29,6 +29,12 @@ class Task {
     // Get the task name from the form
     const taskName = document.getElementById("task-name").value.trim();
 
+    // Check if the task name is empty
+    if (taskName === "" || !taskName) {
+      alert("Please enter a task name");
+      return;
+    }
+
     // Create a new task object
     const newTask = new Task(taskName);
 
