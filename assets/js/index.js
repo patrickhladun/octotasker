@@ -35,10 +35,15 @@ class Task {
       return;
     }
 
+    // Get the tasks from local storage
+    const tasks = this.getTasks();
+
     // Create a new task object
     const newTask = new Task(taskName);
 
-    console.log(newTask);
+    // Add the new task to the tasks array
+    tasks.push(newTask);
+    console.log(tasks);
 
     document.getElementById("task-form").reset();
   }
