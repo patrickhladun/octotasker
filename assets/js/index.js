@@ -54,6 +54,12 @@ class Task {
     document.getElementById("task-form").reset();
   }
 
+  renderTasks() {
+    // Get the tasks from local storage
+    const tasks = this.getTasks();
+    console.log(tasksList);
+  }
+
   /**
    * Returns an array of tasks from local storage
    * @returns {Array}
