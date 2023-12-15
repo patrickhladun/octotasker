@@ -10,9 +10,6 @@ class Utils {
   }
 }
 
-// Generate a unique id
-const uniqueId = Utils.generateUniqueId();
-
 class Task {
   /**
    * Task constructor function to create a new task object with the following properties: name, dueDate, timeSpent, id
@@ -20,8 +17,8 @@ class Task {
    * @param {*} dueDate
    * @param {*} creationDate
    */
-  constructor(name) {
-    this.id = uniqueId;
+  constructor(name, id) {
+    this.id = id;
     this.name = name;
     this.dueDate = "";
     this.creationDate = new Date();
@@ -33,6 +30,8 @@ class Task {
 
     // Get the task name from the form
     const taskName = document.getElementById("task-name").value.trim();
+    // Generate a unique id
+    const taskId = Utils.generateUniqueId();
 
     // Check if the task name is empty
     if (taskName === "" || !taskName) {
@@ -44,8 +43,8 @@ class Task {
     const tasks = this.getTasks();
 
     // Create a new task object
-    const newTask = new Task(taskName);
-
+    const newTask = new Task(taskName, taskId);
+    console.log(newTask);
     // Add the new task to the tasks array
     tasks.push(newTask);
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -86,5 +85,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document
     .getElementById("task-form")
-    .addEventListener("submit", (e) => task.addTask(e));
+    .addEventListener("submit", (e) => app.task.addTask(e));
 });
