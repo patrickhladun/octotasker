@@ -1,12 +1,17 @@
-let task;
+class Utils {
+  /**
+   * Generate unique id using random numbers and the date
+   * @returns string
+   */
+  static generateUniqueId() {
+    const random = Math.random().toString().slice(2, 5);
+    const date = new Date().getTime().toString();
+    return random + date;
+  }
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-  task = new Task();
-
-  document
-    .getElementById("task-form")
-    .addEventListener("submit", (e) => task.addTask(e));
-});
+// Generate a unique id
+const uniqueId = Utils.generateUniqueId();
 
 class Task {
   /**
@@ -58,17 +63,12 @@ class Task {
   }
 }
 
-class Utils {
-  /**
-   * Generate unique id using random numbers and the date
-   * @returns string
-   */
-  static generateUniqueId() {
-    const random = Math.random().toString().slice(2, 5);
-    const date = new Date().getTime().toString();
-    return random + date;
-  }
-}
+let task;
 
-// Generate a unique id
-const uniqueId = Utils.generateUniqueId();
+document.addEventListener("DOMContentLoaded", () => {
+  task = new Task();
+
+  document
+    .getElementById("task-form")
+    .addEventListener("submit", (e) => task.addTask(e));
+});
