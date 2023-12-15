@@ -57,7 +57,7 @@ class Task {
   renderTasks() {
     // Get the tasks from local storage
     const tasks = this.getTasks();
-    console.log(tasksList);
+    console.log(tasks);
   }
 
   /**
@@ -69,10 +69,20 @@ class Task {
   }
 }
 
+class App {
+  constructor() {
+    this.task = new Task();
+  }
+  init() {
+    this.task.renderTasks();
+  }
+}
+
 let task;
 
 document.addEventListener("DOMContentLoaded", () => {
-  task = new Task();
+  app = new App();
+  app.init();
 
   document
     .getElementById("task-form")
