@@ -16,7 +16,7 @@ class Task {
    * @param {*} creationDate
    */
   constructor(name) {
-    this.id = "dfh9237623gf";
+    this.id = uniqueId;
     this.name = name;
     this.dueDate = "";
     this.creationDate = new Date();
@@ -43,8 +43,9 @@ class Task {
 
     // Add the new task to the tasks array
     tasks.push(newTask);
-    console.log(tasks);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 
+    // Reset the form
     document.getElementById("task-form").reset();
   }
 
@@ -56,3 +57,18 @@ class Task {
     return JSON.parse(localStorage.getItem("tasks")) || [];
   }
 }
+
+class Utils {
+  /**
+   * Generate unique id using random numbers and the date
+   * @returns string
+   */
+  static generateUniqueId() {
+    const random = Math.random().toString().slice(2, 5);
+    const date = new Date().getTime().toString();
+    return random + date;
+  }
+}
+
+// Generate a unique id
+const uniqueId = Utils.generateUniqueId();
