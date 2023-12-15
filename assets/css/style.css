@@ -90,10 +90,23 @@ main {
   border-radius: 4px;
 }
 .task__status {
-  border: 4px solid #D3D3D3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #D3D3D3;
   border-radius: 50%;
   width: 24px;
   height: 24px;
+}
+.task__status svg {
+  fill: #D3D3D3;
+  width: 70%;
+  height: 70%;
+  opacity: 0;
+  transition: all 0.1s ease-in-out;
+}
+.task__status:hover svg {
+  opacity: 1;
 }
 .task input {
   border-color: transparent;
@@ -112,4 +125,17 @@ main {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+.task--done .task__status {
+  background-color: #6dbe45;
+  border-color: #6dbe45;
+}
+.task--done .task__status svg {
+  fill: #ffffff;
+  opacity: 1;
+}
+.task--done .task__title,
+.task--done .task__project,
+.task--done .task__actions {
+  color: lightgray;
 }
