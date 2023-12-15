@@ -42,4 +42,12 @@ class Task {
 
     document.getElementById("task-form").reset();
   }
+
+  /**
+   * Returns an array of tasks from local storage
+   * @returns {Array}
+   */
+  getTasks() {
+    return JSON.parse(localStorage.getItem("tasks")) || [];
+  }
 }
