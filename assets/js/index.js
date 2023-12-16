@@ -98,6 +98,44 @@ class Task {
       startButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="m31.79,16.33c1.21.74,1.21,2.6,0,3.34l-12.88,7.87-12.88,7.87c-1.21.74-2.73-.19-2.73-1.67V2.25C3.3.77,4.82-.16,6.03.58l12.88,7.87,12.88,7.87Z" /></svg>`;
       taskActions.appendChild(startButton);
 
+      const optionsButton = document.createElement("button");
+      optionsButton.classList.add("task__options", "action-icon");
+      optionsButton.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+        <circle cx="4.21" cy="18.95" r="3.97" />
+        <circle cx="18.01" cy="18.95" r="3.97" />
+        <circle cx="31.81" cy="18.95" r="3.97" />
+      </svg>`;
+      optionsButton.addEventListener("click", () =>
+        this.openOptionsMenu(task.id)
+      );
+      taskActions.appendChild(optionsButton);
+
+      const optionsMenu = document.createElement("div");
+      optionsMenu.classList.add("task__options-menu");
+      optionsMenu.id = `options-menu-${task.id}`;
+
+      const editButton = document.createElement("button");
+      editButton.classList.add("task__options-menu-item");
+      editButton.innerHTML = "Edit";
+
+      const deleteButton = document.createElement("button");
+      deleteButton.classList.add(`task__options-menu-item`);
+      deleteButton.innerHTML = "Delete";
+
+      const closeButton = document.createElement("button");
+      closeButton.classList.add("task__options-menu-item");
+      closeButton.addEventListener("click", () =>
+        this.closeOptionsMenu(task.id)
+      );
+      closeButton.innerHTML = "X";
+
+      optionsMenu.appendChild(editButton);
+      optionsMenu.appendChild(deleteButton);
+      optionsMenu.appendChild(closeButton);
+
+      taskActions.appendChild(optionsMenu);
+
       taskItem.appendChild(taskActions);
 
       taskList.appendChild(taskItem);
@@ -110,6 +148,28 @@ class Task {
    */
   getTasks() {
     return JSON.parse(localStorage.getItem("tasks")) || [];
+  }
+
+  /**
+   * Open the options menu for a task
+   * @param {*} taskId
+   */
+  openOptionsMenu(taskId) {
+    const menu = document.getElementById(`options-menu-${taskId}`);
+    if (menu) {
+      menu.style.display = "flex";
+    }
+  }
+
+  /**
+   * Close the options menu for a task
+   * @param {*} taskId
+   */
+  closeOptionsMenu(taskId) {
+    const menu = document.getElementById(`options-menu-${taskId}`);
+    if (menu) {
+      menu.style.display = "none";
+    }
   }
 }
 

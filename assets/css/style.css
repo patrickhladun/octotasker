@@ -82,6 +82,7 @@ main {
 }
 
 .task {
+  position: relative;
   background-color: #F9F9F9;
   display: flex;
   justify-content: space-between;
@@ -125,6 +126,24 @@ main {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+.task__options-menu {
+  background-color: #f2f2f2;
+  position: absolute;
+  right: 6px;
+  padding: 10px 16px;
+  border-radius: 4px;
+  display: none;
+  justify-content: center;
+  gap: 16px;
+}
+.task__options-menu-item {
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
 }
 .task--done .task__status {
   background-color: #6dbe45;
