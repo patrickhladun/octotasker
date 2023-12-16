@@ -61,9 +61,11 @@ class Task {
     taskList.innerHTML = "";
 
     tasks.forEach((task) => {
+      // Create a task item
       const taskItem = document.createElement("div");
       taskItem.classList.add("task");
 
+      // Create a task details
       const taskDetails = document.createElement("div");
       taskDetails.classList.add("task__details");
       taskDetails.innerHTML = `
@@ -79,8 +81,24 @@ class Task {
           class="task__title"
           value="${task.name}"
         />
+        <div class="task__project">Project</div>
       `;
       taskItem.appendChild(taskDetails);
+
+      // Create a task actions
+      const taskActions = document.createElement("div");
+      taskActions.classList.add("task__actions");
+
+      const taskTimer = document.createElement("div");
+      taskTimer.innerHTML = `00:00:00`;
+      taskActions.appendChild(taskTimer);
+
+      const startButton = document.createElement("button");
+      startButton.classList.add("task__timer", "action-icon");
+      startButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="m31.79,16.33c1.21.74,1.21,2.6,0,3.34l-12.88,7.87-12.88,7.87c-1.21.74-2.73-.19-2.73-1.67V2.25C3.3.77,4.82-.16,6.03.58l12.88,7.87,12.88,7.87Z" /></svg>`;
+      taskActions.appendChild(startButton);
+
+      taskItem.appendChild(taskActions);
 
       taskList.appendChild(taskItem);
     });
