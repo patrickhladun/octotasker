@@ -51,12 +51,39 @@ class Task {
 
     // Reset the form
     document.getElementById("task-form").reset();
+    this.renderTasks();
   }
 
   renderTasks() {
     // Get the tasks from local storage
     const tasks = this.getTasks();
-    console.log(tasks);
+    const taskList = document.getElementById("tasks");
+    taskList.innerHTML = "";
+
+    tasks.forEach((task) => {
+      const taskItem = document.createElement("div");
+      taskItem.classList.add("task");
+
+      const taskDetails = document.createElement("div");
+      taskDetails.classList.add("task__details");
+      taskDetails.innerHTML = `
+        <div class="task__status">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+            <path
+              d="m34.52,9.87l-4.9-4.9c-.44-.44-1.16-.44-1.61,0l-12.57,12.57c-.44.44-1.16.44-1.61,0l-5.84-5.84c-.44-.44-1.16-.44-1.61,0l-4.9,4.9c-.44.44-.44,1.16,0,1.61l13.15,13.15h0s19.9-19.88,19.9-19.88c.44-.44.44-1.16,0-1.61Z"
+            />
+          </svg>
+        </div>
+        <input
+          type="text"
+          class="task__title"
+          value="${task.name}"
+        />
+      `;
+      taskItem.appendChild(taskDetails);
+
+      taskList.appendChild(taskItem);
+    });
   }
 
   /**
@@ -76,8 +103,6 @@ class App {
     this.task.renderTasks();
   }
 }
-
-let task;
 
 document.addEventListener("DOMContentLoaded", () => {
   app = new App();
