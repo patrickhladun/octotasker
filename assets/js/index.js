@@ -54,6 +54,10 @@ class Task {
     this.renderTasks();
   }
 
+  /**
+   * Render the tasks in the DOM
+   * @returns void
+   */
   renderTasks() {
     // Get the tasks from local storage
     const tasks = this.getTasks();
@@ -89,15 +93,18 @@ class Task {
       const taskActions = document.createElement("div");
       taskActions.classList.add("task__actions");
 
+      // Create a task timer
       const taskTimer = document.createElement("div");
       taskTimer.innerHTML = `00:00:00`;
       taskActions.appendChild(taskTimer);
 
+      // Create a start button
       const startButton = document.createElement("button");
       startButton.classList.add("task__timer", "action-icon");
       startButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="m31.79,16.33c1.21.74,1.21,2.6,0,3.34l-12.88,7.87-12.88,7.87c-1.21.74-2.73-.19-2.73-1.67V2.25C3.3.77,4.82-.16,6.03.58l12.88,7.87,12.88,7.87Z" /></svg>`;
       taskActions.appendChild(startButton);
 
+      // Create a stop button
       const optionsButton = document.createElement("button");
       optionsButton.classList.add("task__options", "action-icon");
       optionsButton.innerHTML = `
@@ -111,18 +118,25 @@ class Task {
       );
       taskActions.appendChild(optionsButton);
 
+      // Create an options menu
       const optionsMenu = document.createElement("div");
       optionsMenu.classList.add("task__options-menu");
       optionsMenu.id = `options-menu-${task.id}`;
 
+      // Create an edit button
       const editButton = document.createElement("button");
       editButton.classList.add("task__options-menu-item");
       editButton.innerHTML = "Edit";
 
+      // Create a delete button
       const deleteButton = document.createElement("button");
       deleteButton.classList.add(`task__options-menu-item`);
       deleteButton.innerHTML = "Delete";
+      deleteButton.addEventListener("click", () =>
+        this.deleteTaskById(task.id)
+      );
 
+      // Create a close button
       const closeButton = document.createElement("button");
       closeButton.classList.add("task__options-menu-item");
       closeButton.addEventListener("click", () =>
@@ -130,14 +144,18 @@ class Task {
       );
       closeButton.innerHTML = "X";
 
+      // Append the buttons to the options menu
       optionsMenu.appendChild(editButton);
       optionsMenu.appendChild(deleteButton);
       optionsMenu.appendChild(closeButton);
 
+      // Append the options menu to the task actions
       taskActions.appendChild(optionsMenu);
 
+      // Append the task actions to the task item
       taskItem.appendChild(taskActions);
 
+      // Append the task item to the task list
       taskList.appendChild(taskItem);
     });
   }
@@ -148,6 +166,17 @@ class Task {
    */
   getTasks() {
     return JSON.parse(localStorage.getItem("tasks")) || [];
+  }
+
+  /**
+   * Delete a task by id
+   * @param {*} taskId
+   */
+  deleteTaskById(taskId) {
+    let tasks = this.getTasks(); // Retrieve the current list of tasks
+    tasks = tasks.filter((task) => task.id !== taskId); // Filter out the task with the given ID
+    localStorage.setItem("tasks", JSON.stringify(tasks)); // Update the tasks in local storage
+    this.renderTasks(); // Refresh the displayed task list
   }
 
   /**

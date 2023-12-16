@@ -62,17 +62,33 @@ main {
   background-color: #F9F9F9;
   margin-right: 16px;
 }
+
+/*** Icons ***/
+
 .action-icon {
-  background: none;
+  background-color: transparent;
   border: none;
+  border-radius: 50%;
   width:32px;
   height:32px;
+  transition: background-color 0.2s ease-in-out;
+}
+.action-icon:hover {
+  background-color: #f2f2f2;
 }
 .action-icon svg {
   fill: lightgray;
   width: 100%;
   height: 100%;
 }
+.new-task__timer svg,
+.task__timer svg {
+  width: 80%;
+  transform: translateX(2px);
+}
+
+/*** Tasks ***/
+
 .tasks {
   display: flex;
   flex-direction: column;
@@ -131,7 +147,7 @@ main {
   background-color: #f2f2f2;
   position: absolute;
   right: 6px;
-  padding: 10px 16px;
+  padding: 8px;
   border-radius: 4px;
   display: none;
   justify-content: center;
