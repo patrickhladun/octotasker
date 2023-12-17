@@ -143,6 +143,9 @@ main {
   align-items: center;
   gap: 8px;
 }
+.task__timer svg {
+  pointer-events: none; // Prevents the svg of the button from being clicked
+}
 .task__options-menu {
   background-color: #f2f2f2;
   position: absolute;

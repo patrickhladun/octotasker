@@ -105,9 +105,11 @@ class Task {
         const startButton = document.createElement("button");
         startButton.classList.add("task__timer", "action-icon");
         startButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="m31.79,16.33c1.21.74,1.21,2.6,0,3.34l-12.88,7.87-12.88,7.87c-1.21.74-2.73-.19-2.73-1.67V2.25C3.3.77,4.82-.16,6.03.58l12.88,7.87,12.88,7.87Z" /></svg>`;
+        startButton.setAttribute("data-task-id", task.id);
+        startButton.addEventListener("click", (e) => app.timer.startTimer(e));
         taskActions.appendChild(startButton);
 
-        // Create a stop button
+        // Create an options buttons
         const optionsButton = document.createElement("button");
         optionsButton.classList.add("task__options", "action-icon");
         optionsButton.innerHTML = `
@@ -209,9 +211,18 @@ class Task {
   }
 }
 
+class Timer {
+  startTimer(e) {
+    let taskId;
+    taskId = e.target.getAttribute("data-task-id");
+    console.log(taskId);
+  }
+}
+
 class App {
   constructor() {
     this.task = new Task();
+    this.timer = new Timer();
   }
   init() {
     this.task.renderTasks();
