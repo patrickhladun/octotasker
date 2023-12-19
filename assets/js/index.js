@@ -212,10 +212,21 @@ class Task {
 }
 
 class Timer {
+  constructor() {
+    this.activeTimer = {};
+  }
+
   startTimer(e) {
     let taskId;
     taskId = e.target.getAttribute("data-task-id");
     console.log(taskId);
+
+    if (taskId) {
+      // stop eny running tasks should go here
+      this.activeTimer = setInterval(() => {
+        console.log("timer is running");
+      });
+    }
   }
 }
 
