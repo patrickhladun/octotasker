@@ -22,6 +22,7 @@ class Task {
     this.name = name;
     this.dueDate = "";
     this.creationDate = new Date();
+    this.isRunning = false;
   }
 
   addTask(e) {
@@ -217,15 +218,15 @@ class Timer {
   }
 
   startTimer(e) {
-    let taskId;
-    taskId = e.target.getAttribute("data-task-id");
-    console.log(taskId);
+    const taskEl = e.target;
+    const taskId = taskEl.getAttribute("data-task-id");
 
     if (taskId) {
       // stop eny running tasks should go here
-      this.activeTimer = setInterval(() => {
-        console.log("timer is running");
-      });
+
+      const tasks = app.task.getTasks();
+      const taskIndex = tasks.findIndex((task) => task.id === taskId);
+      console.log(tasks[taskIndex]);
     }
   }
 }
