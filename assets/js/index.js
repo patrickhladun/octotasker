@@ -226,7 +226,14 @@ class Timer {
 
       const tasks = app.task.getTasks();
       const taskIndex = tasks.findIndex((task) => task.id === taskId);
-      console.log(tasks[taskIndex]);
+
+      if (taskIndex !== -1) {
+        tasks[taskIndex].isRunning = true;
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+      }
+      // this.activeTimer = setInterval(() => {
+      //   console.log("timer is running");
+      // });
     }
   }
 }
