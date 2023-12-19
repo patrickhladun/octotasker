@@ -105,7 +105,9 @@ class Task {
         // Create a start button
         const startButton = document.createElement("button");
         startButton.classList.add("task__timer", "action-icon");
-        startButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="m31.79,16.33c1.21.74,1.21,2.6,0,3.34l-12.88,7.87-12.88,7.87c-1.21.74-2.73-.19-2.73-1.67V2.25C3.3.77,4.82-.16,6.03.58l12.88,7.87,12.88,7.87Z" /></svg>`;
+        startButton.innerHTML = `
+        <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="m31.79,16.33c1.21.74,1.21,2.6,0,3.34l-12.88,7.87-12.88,7.87c-1.21.74-2.73-.19-2.73-1.67V2.25C3.3.77,4.82-.16,6.03.58l12.88,7.87,12.88,7.87Z" /></svg>
+        <svg class="icon-stop" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="4.71" y="4.71" width="26.58" height="26.58" rx="2.03" ry="2.03"/></svg>`;
         startButton.setAttribute("data-task-id", task.id);
         startButton.addEventListener("click", (e) => app.timer.toggleTimer(e));
         taskActions.appendChild(startButton);
@@ -222,23 +224,20 @@ class Timer {
     const taskId = taskEl.getAttribute("data-task-id");
 
     if (taskId) {
-      // stop eny running tasks should go here
-
       const tasks = app.task.getTasks();
       const taskIndex = tasks.findIndex((task) => task.id === taskId);
 
-      if (taskIndex !== -1 && !tasks[taskIndex].isRunning) {
-        taskEl.classList.add("task__timer--active");
+      const isRunning = tasks[taskIndex].isRunning;
 
+      if (!isRunning) {
+        this.stopAnyRunningTimers();
+        taskEl.classList.add("task__timer--active");
         tasks[taskIndex].isRunning = true;
         localStorage.setItem("tasks", JSON.stringify(tasks));
       } else {
         taskEl.classList.remove("task__timer--active");
-
-        if (taskIndex !== -1 && tasks[taskIndex].isRunning) {
-          tasks[taskIndex].isRunning = false;
-          localStorage.setItem("tasks", JSON.stringify(tasks));
-        }
+        tasks[taskIndex].isRunning = false;
+        localStorage.setItem("tasks", JSON.stringify(tasks));
       }
 
       console.log(tasks[taskIndex]);
@@ -246,6 +245,19 @@ class Timer {
       //   console.log("timer is running");
       // });
     }
+  }
+
+  stopAnyRunningTimers() {
+    let tasks = app.task.getTasks();
+
+    tasks.forEach((task) => {
+      if (task.isRunning) {
+        const taskEl = document.querySelector(`[data-task-id="${task.id}"]`);
+        taskEl.classList.remove("task__timer--active");
+        task.isRunning = false;
+      }
+    });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 }
 

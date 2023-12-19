@@ -146,6 +146,24 @@ main {
 .task__timer svg {
   pointer-events: none; // Prevents the svg of the button from being clicked
 }
+
+.task__timer .icon-start {
+  display: block;
+}
+
+.task__timer .icon-stop {
+  display: none;
+}
+
+.task__timer--active .icon-start {
+  display: none;
+}
+
+.task__timer--active .icon-stop {
+  display: block;
+  fill: #ff0000;
+}
+
 .task__options-menu {
   background-color: #f2f2f2;
   position: absolute;
