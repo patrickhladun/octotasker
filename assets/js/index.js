@@ -8,6 +8,10 @@ class Utils {
     const date = new Date().getTime().toString();
     return random + date;
   }
+
+  formatTime(number) {
+    return number < 10 ? "0" + number : number;
+  }
 }
 
 class Task {
@@ -22,6 +26,7 @@ class Task {
     this.name = name;
     this.dueDate = "";
     this.creationDate = new Date();
+    this.timeSpent = 0;
     this.isRunning = false;
   }
 
@@ -99,7 +104,14 @@ class Task {
 
         // Create a task timer
         const taskTimer = document.createElement("div");
-        taskTimer.innerHTML = `00:00:00`;
+        const totalSeconds = task.timeSpent;
+        let hours = Math.floor(totalSeconds / 3600);
+        hours = app.utils.formatTime(hours);
+        let minutes = Math.floor((totalSeconds % 3600) / 60);
+        minutes = app.utils.formatTime(minutes);
+        let seconds = totalSeconds % 60;
+        seconds = app.utils.formatTime(seconds);
+        taskTimer.innerHTML = `${hours}:${minutes}:${seconds}`;
         taskActions.appendChild(taskTimer);
 
         // Create a start button
@@ -222,29 +234,40 @@ class Timer {
   toggleTimer(e) {
     const taskEl = e.target;
     const taskId = taskEl.getAttribute("data-task-id");
-
+    console.log(taskId);
+    // Check if the task id is valid
     if (taskId) {
       const tasks = app.task.getTasks();
       const taskIndex = tasks.findIndex((task) => task.id === taskId);
-
       const isRunning = tasks[taskIndex].isRunning;
+
+      if (taskIndex < 0) return;
 
       if (!isRunning) {
         this.stopAnyRunningTimers();
         taskEl.classList.add("task__timer--active");
         tasks[taskIndex].isRunning = true;
+        this.activeTimer[taskId] = setInterval(() => {
+          this.updateTaskTime(taskId);
+        }, 1000);
         localStorage.setItem("tasks", JSON.stringify(tasks));
       } else {
+        clearInterval(this.activeTimer[taskId]);
+        delete this.activeTimer[taskId];
         taskEl.classList.remove("task__timer--active");
         tasks[taskIndex].isRunning = false;
         localStorage.setItem("tasks", JSON.stringify(tasks));
       }
-
-      console.log(tasks[taskIndex]);
-      // this.activeTimer = setInterval(() => {
-      //   console.log("timer is running");
-      // });
     }
+  }
+
+  updateTaskTime(taskId) {
+    console.log("Updating task time");
+    let tasks = app.task.getTasks();
+    let taskIndex = tasks.findIndex((task) => task.id === taskId);
+    tasks[taskIndex].timeSpent++;
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    console.log(tasks[taskIndex].timeSpent);
   }
 
   stopAnyRunningTimers() {
@@ -265,6 +288,7 @@ class App {
   constructor() {
     this.task = new Task();
     this.timer = new Timer();
+    this.utils = new Utils();
   }
   init() {
     this.task.renderTasks();
