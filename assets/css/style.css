@@ -143,6 +143,14 @@ main {
   align-items: center;
   gap: 8px;
 }
+
+/* Make the numbers same width */
+.task__actions div {
+  font-variant-numeric: tabular-nums;
+  -moz-font-feature-settings: "tnum";
+  -webkit-font-feature-settings: "tnum";
+  font-feature-settings: "tnum";
+}
 .task__timer {
   cursor: pointer;
 }
