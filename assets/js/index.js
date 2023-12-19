@@ -107,7 +107,7 @@ class Task {
         startButton.classList.add("task__timer", "action-icon");
         startButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="m31.79,16.33c1.21.74,1.21,2.6,0,3.34l-12.88,7.87-12.88,7.87c-1.21.74-2.73-.19-2.73-1.67V2.25C3.3.77,4.82-.16,6.03.58l12.88,7.87,12.88,7.87Z" /></svg>`;
         startButton.setAttribute("data-task-id", task.id);
-        startButton.addEventListener("click", (e) => app.timer.startTimer(e));
+        startButton.addEventListener("click", (e) => app.timer.toggleTimer(e));
         taskActions.appendChild(startButton);
 
         // Create an options buttons
@@ -217,7 +217,7 @@ class Timer {
     this.activeTimer = {};
   }
 
-  startTimer(e) {
+  toggleTimer(e) {
     const taskEl = e.target;
     const taskId = taskEl.getAttribute("data-task-id");
 
@@ -227,10 +227,21 @@ class Timer {
       const tasks = app.task.getTasks();
       const taskIndex = tasks.findIndex((task) => task.id === taskId);
 
-      if (taskIndex !== -1) {
+      if (taskIndex !== -1 && !tasks[taskIndex].isRunning) {
+        taskEl.classList.add("task__timer--active");
+
         tasks[taskIndex].isRunning = true;
         localStorage.setItem("tasks", JSON.stringify(tasks));
+      } else {
+        taskEl.classList.remove("task__timer--active");
+
+        if (taskIndex !== -1 && tasks[taskIndex].isRunning) {
+          tasks[taskIndex].isRunning = false;
+          localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
       }
+
+      console.log(tasks[taskIndex]);
       // this.activeTimer = setInterval(() => {
       //   console.log("timer is running");
       // });
