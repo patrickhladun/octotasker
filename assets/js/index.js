@@ -234,7 +234,7 @@ class Timer {
   toggleTimer(e) {
     const taskEl = e.target;
     const taskId = taskEl.getAttribute("data-task-id");
-    console.log(taskId);
+
     // Check if the task id is valid
     if (taskId) {
       const tasks = app.task.getTasks();
@@ -242,23 +242,43 @@ class Timer {
       const isRunning = tasks[taskIndex].isRunning;
 
       if (taskIndex < 0) return;
-
+      this.startTimer(taskId);
       if (!isRunning) {
-        this.stopAnyRunningTimers();
-        taskEl.classList.add("task__timer--active");
-        tasks[taskIndex].isRunning = true;
-        this.activeTimer[taskId] = setInterval(() => {
-          this.updateTaskTime(taskId);
-        }, 1000);
-        localStorage.setItem("tasks", JSON.stringify(tasks));
       } else {
-        clearInterval(this.activeTimer[taskId]);
-        delete this.activeTimer[taskId];
-        taskEl.classList.remove("task__timer--active");
-        tasks[taskIndex].isRunning = false;
-        localStorage.setItem("tasks", JSON.stringify(tasks));
+        this.stopTimer(taskId);
       }
     }
+  }
+
+  startTimer(taskId) {
+    this.stopAnyRunningTimers();
+
+    const tasks = app.task.getTasks();
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+
+    const taskEl = document.querySelector(`[data-task-id="${taskId}"]`);
+    taskEl.classList.add("task__timer--active");
+
+    tasks[taskIndex].isRunning = true;
+
+    this.activeTimer[taskId] = setInterval(() => {
+      this.updateTaskTime(taskId);
+    }, 1000);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+
+  stopTimer(taskId) {
+    clearInterval(this.activeTimer[taskId]);
+    delete this.activeTimer[taskId];
+
+    const tasks = app.task.getTasks();
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+
+    const taskEl = document.querySelector(`[data-task-id="${taskId}"]`);
+    taskEl.classList.remove("task__timer--active");
+
+    tasks[taskIndex].isRunning = false;
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 
   updateTaskTime(taskId) {
