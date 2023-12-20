@@ -366,9 +366,16 @@ class Timer {
   }
 
   updateTaskTime(taskId) {
+    const now = new Date();
     let tasks = app.task.getTasks();
     let taskIndex = tasks.findIndex((task) => task.id === taskId);
+    
+    // Increment the time spent
     tasks[taskIndex].timeSpent++;
+
+    // Update the start time
+    tasks[taskIndex].startTime = now.getTime();
+    
     localStorage.setItem("tasks", JSON.stringify(tasks));
     this.updateTaskTimeUI(taskId);
     console.log(
