@@ -81,11 +81,6 @@ main {
   width: 100%;
   height: 100%;
 }
-.new-task__timer svg,
-.task__timer svg {
-  width: 80%;
-  transform: translateX(2px);
-}
 
 /*** Tasks ***/
 
@@ -143,6 +138,41 @@ main {
   align-items: center;
   gap: 8px;
 }
+
+/* Make the numbers same width */
+.task__actions div {
+  font-variant-numeric: tabular-nums;
+  -moz-font-feature-settings: "tnum";
+  -webkit-font-feature-settings: "tnum";
+  font-feature-settings: "tnum";
+}
+
+/*** Timer Toggle Button ***/
+
+.timer-toggle {
+  cursor: pointer;
+}
+.timer-toggle svg {
+  pointer-events: none; // Prevents the svg of the button from being clicked
+}
+
+.timer-toggle .icon-start {
+  display: block;
+}
+
+.timer-toggle .icon-stop {
+  display: none;
+}
+
+.timer-toggle--active .icon-start {
+  display: none;
+}
+
+.timer-toggle--active .icon-stop {
+  display: block;
+  fill: #ff0000;
+}
+
 .task__options-menu {
   background-color: #f2f2f2;
   position: absolute;

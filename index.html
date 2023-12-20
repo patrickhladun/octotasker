@@ -49,31 +49,29 @@
       </header>
       <main>
         <section class="new-task">
-          <form id="task-form">
-            <input
-              id="task-name"
-              type="text"
-              class="new-task__name"
-              placeholder="Add task ..."
-            />
-            <div class="new-task__actions">
-              <div>00:00:00</div>
-              <button class="new-task__timer action-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-                  <path
-                    d="m31.79,16.33c1.21.74,1.21,2.6,0,3.34l-12.88,7.87-12.88,7.87c-1.21.74-2.73-.19-2.73-1.67V2.25C3.3.77,4.82-.16,6.03.58l12.88,7.87,12.88,7.87Z"
-                  />
-                </svg>
-              </button>
-              <button type="submit" class="new-task__add action-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-                  <path
-                    d="m33.52,13.56h-11.09V2.48c0-1.22-.99-2.22-2.22-2.22h-4.44c-1.22,0-2.22.99-2.22,2.22v11.09H2.48c-1.22,0-2.22.99-2.22,2.22v4.44c0,1.22.99,2.22,2.22,2.22h11.09v11.09c0,1.22.99,2.22,2.22,2.22h4.44c1.22,0,2.22-.99,2.22-2.22v-11.09h11.09c1.22,0,2.22-.99,2.22-2.22v-4.44c0-1.22-.99-2.22-2.22-2.22Z"
-                  />
-                </svg>
-              </button>
-            </div>
-          </form>
+          <input
+            id="task-name"
+            type="text"
+            class="new-task__name"
+            placeholder="Add task ..."
+          />
+          <div class="new-task__actions">
+            <div>00:00:00</div>
+            <button class="action-icon" data-action="task-timer">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+                <path
+                  d="m31.79,16.33c1.21.74,1.21,2.6,0,3.34l-12.88,7.87-12.88,7.87c-1.21.74-2.73-.19-2.73-1.67V2.25C3.3.77,4.82-.16,6.03.58l12.88,7.87,12.88,7.87Z"
+                />
+              </svg>
+            </button>
+            <button class="action-icon" data-action="task-add">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+                <path
+                  d="m33.52,13.56h-11.09V2.48c0-1.22-.99-2.22-2.22-2.22h-4.44c-1.22,0-2.22.99-2.22,2.22v11.09H2.48c-1.22,0-2.22.99-2.22,2.22v4.44c0,1.22.99,2.22,2.22,2.22h11.09v11.09c0,1.22.99,2.22,2.22,2.22h4.44c1.22,0,2.22-.99,2.22-2.22v-11.09h11.09c1.22,0,2.22-.99,2.22-2.22v-4.44c0-1.22-.99-2.22-2.22-2.22Z"
+                />
+              </svg>
+            </button>
+          </div>
         </section>
 
         <section class="daily-stats">
