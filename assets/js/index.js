@@ -27,6 +27,7 @@ class Task {
     this.dueDate = "";
     this.creationDate = new Date();
     this.timeSpent = 0;
+    this.startTime = 0;
     this.isRunning = false;
   }
 
@@ -68,6 +69,9 @@ class Task {
     const tasks = this.getTasks();
     const taskList = document.getElementById("tasks");
 
+    // Get running task
+    const runningTask = tasks.find((task) => task.isRunning === true);
+
     // Check if there are any tasks
     if (tasks.length !== 0) {
       // If there are tasks, clear the task list
@@ -103,6 +107,7 @@ class Task {
 
         // Create a task timer
         const taskTimer = document.createElement("div");
+        taskTimer.setAttribute("data-task-timer", task.id);
         const totalSeconds = task.timeSpent;
         let hours = Math.floor(totalSeconds / 3600);
         hours = app.utils.formatTime(hours);
@@ -115,7 +120,15 @@ class Task {
 
         // Create a start button
         const startButton = document.createElement("button");
-        startButton.classList.add("timer-toggle", "action-icon");
+        if (task.isRunning && task.startTime !== 0) {
+          startButton.classList.add(
+            "timer-toggle",
+            "timer-toggle--active",
+            "action-icon"
+          );
+        } else {
+          startButton.classList.add("timer-toggle", "action-icon");
+        }
         startButton.innerHTML = `
         <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="m31.79,16.33c1.21.74,1.21,2.6,0,3.34l-12.88,7.87-12.88,7.87c-1.21.74-2.73-.19-2.73-1.67V2.25C3.3.77,4.82-.16,6.03.58l12.88,7.87,12.88,7.87Z" /></svg>
         <svg class="icon-stop" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="4.71" y="4.71" width="26.58" height="26.58" rx="2.03" ry="2.03"/></svg>`;
@@ -261,19 +274,60 @@ class Timer {
   }
 
   startTimer() {
-    const taskId = this.runningTaskId;
+    console.log("Start timer");
+    if (this.runningTaskId === "") {
+      console.log("No running task");
+      return;
+    }
+    console.log(`Running id: ${this.runningTaskId}`);
 
+    const now = new Date();
+    const taskId = this.runningTaskId;
     const tasks = app.task.getTasks();
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
 
     const taskEl = document.querySelector(`[data-task-id="${taskId}"]`);
+    console.log(taskEl);
     taskEl.classList.add("timer-toggle--active");
 
+    console.log(tasks[taskIndex]);
+
     tasks[taskIndex].isRunning = true;
+    tasks[taskIndex].startTime = now.getTime();
 
     this.activeTimer[taskId] = setInterval(() => {
       this.updateTaskTime(taskId);
     }, 1000);
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+
+  restartTimer() {
+    const tasks = app.task.getTasks();
+    console.log(tasks);
+
+    const taskIndex = tasks.findIndex((task) => task.isRunning === true);
+    if (taskIndex < 0) return;
+
+    const task = tasks[taskIndex];
+    const taskId = task.id;
+    console.log(task);
+
+    const now = new Date().getTime();
+    const elapsed = now - task.startTime;
+    const elapsedSeconds = Math.floor(elapsed / 1000);
+    console.log(`Elapsed: ${elapsedSeconds}`);
+
+    const totalTime = task.timeSpent + elapsedSeconds;
+    console.log(`Total: ${totalTime}`);
+
+    tasks[taskIndex].timeSpent = totalTime;
+    tasks[taskIndex].startTime = now;
+
+    this.activeTimer[taskId] = setInterval(() => {
+      this.updateTaskTime(taskId);
+    }, 1000);
+
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 
@@ -291,8 +345,24 @@ class Timer {
     taskEl.classList.remove("timer-toggle--active");
 
     tasks[taskIndex].isRunning = false;
+    tasks[taskIndex].startTime = 0;
     this.runningTaskId = "";
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    this.updateTaskTimeUI(taskId);
+  }
+
+  updateTaskTimeUI(taskId) {
+    const tasks = app.task.getTasks();
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+    const taskEl = document.querySelector(`[data-task-timer="${taskId}"]`);
+    const totalSeconds = tasks[taskIndex].timeSpent;
+    let hours = Math.floor(totalSeconds / 3600);
+    hours = app.utils.formatTime(hours);
+    let minutes = Math.floor((totalSeconds % 3600) / 60);
+    minutes = app.utils.formatTime(minutes);
+    let seconds = totalSeconds % 60;
+    seconds = app.utils.formatTime(seconds);
+    taskEl.innerHTML = `${hours}:${minutes}:${seconds}`;
   }
 
   updateTaskTime(taskId) {
@@ -300,6 +370,7 @@ class Timer {
     let taskIndex = tasks.findIndex((task) => task.id === taskId);
     tasks[taskIndex].timeSpent++;
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    this.updateTaskTimeUI(taskId);
     console.log(
       `Update: ${tasks[taskIndex].timeSpent} id: ${taskId} id: ${this.runningTaskId}`
     );
@@ -314,6 +385,7 @@ class App {
   }
   init() {
     this.task.renderTasks();
+    this.timer.restartTimer();
   }
 }
 
@@ -322,8 +394,12 @@ document.addEventListener("DOMContentLoaded", () => {
   app.init();
 
   document
+    .querySelector('[data-action="task-timer"]')
+    .addEventListener("click", (e) => app.task.addTask(e));
+
+  document
     .querySelector('[data-action="task-add"]')
-    .addEventListener("click", () => app.task.addTask());
+    .addEventListener("click", (e) => app.task.addTask(e));
 
   document.querySelector("#task-name").addEventListener("keypress", (event) => {
     if (event.key == "Enter") {
