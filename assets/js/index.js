@@ -228,30 +228,40 @@ class Task {
 class Timer {
   constructor() {
     this.activeTimer = {};
+    this.runningTaskId = "";
   }
 
   toggleTimer(e) {
+    // Get the task id from the button
     const taskEl = e.target;
     const taskId = taskEl.getAttribute("data-task-id");
 
-    // Check if the task id is valid
-    if (taskId) {
+    // Check if there is a running timer when the button is clicked and stop it before running a new one
+    if (this.runningTaskId !== "" && this.runningTaskId !== taskId) {
+      this.stopTimer();
+    }
+
+    this.runningTaskId = taskId;
+
+    if (this.runningTaskId) {
       const tasks = app.task.getTasks();
-      const taskIndex = tasks.findIndex((task) => task.id === taskId);
+      const taskIndex = tasks.findIndex(
+        (task) => task.id === this.runningTaskId
+      );
       const isRunning = tasks[taskIndex].isRunning;
 
       if (taskIndex < 0) return;
 
       if (!isRunning) {
-        this.startTimer(taskId);
+        this.startTimer();
       } else {
-        this.stopTimer(taskId);
+        this.stopTimer();
       }
     }
   }
 
-  startTimer(taskId) {
-    this.stopAnyRunningTimers();
+  startTimer() {
+    const taskId = this.runningTaskId;
 
     const tasks = app.task.getTasks();
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
@@ -267,7 +277,10 @@ class Timer {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 
-  stopTimer(taskId) {
+  stopTimer() {
+    if (!this.runningTaskId) return;
+    const taskId = this.runningTaskId;
+
     clearInterval(this.activeTimer[taskId]);
     delete this.activeTimer[taskId];
 
@@ -278,29 +291,18 @@ class Timer {
     taskEl.classList.remove("timer-toggle--active");
 
     tasks[taskIndex].isRunning = false;
+    this.runningTaskId = "";
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 
   updateTaskTime(taskId) {
-    console.log("Updating task time");
     let tasks = app.task.getTasks();
     let taskIndex = tasks.findIndex((task) => task.id === taskId);
     tasks[taskIndex].timeSpent++;
     localStorage.setItem("tasks", JSON.stringify(tasks));
-    console.log(tasks[taskIndex].timeSpent);
-  }
-
-  stopAnyRunningTimers() {
-    let tasks = app.task.getTasks();
-
-    tasks.forEach((task) => {
-      if (task.isRunning) {
-        const taskEl = document.querySelector(`[data-task-id="${task.id}"]`);
-        taskEl.classList.remove("timer-toggle--active");
-        task.isRunning = false;
-      }
-    });
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    console.log(
+      `Update: ${tasks[taskIndex].timeSpent} id: ${taskId} id: ${this.runningTaskId}`
+    );
   }
 }
 
