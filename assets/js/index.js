@@ -30,12 +30,11 @@ class Task {
     this.isRunning = false;
   }
 
-  addTask(e) {
-    // Prevent default form submission so the page doesn't reload
-    e.preventDefault();
+  addTask() {
+    // Get the task name from the input
+    const taskInput = document.getElementById("task-name");
+    const taskName = taskInput.value.trim();
 
-    // Get the task name from the form
-    const taskName = document.getElementById("task-name").value.trim();
     // Generate a unique id
     const taskId = Utils.generateUniqueId();
 
@@ -56,7 +55,7 @@ class Task {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
     // Reset the form
-    document.getElementById("task-form").reset();
+    taskInput.value = "";
     this.renderTasks();
   }
 
@@ -321,6 +320,12 @@ document.addEventListener("DOMContentLoaded", () => {
   app.init();
 
   document
-    .getElementById("task-form")
-    .addEventListener("submit", (e) => app.task.addTask(e));
+    .querySelector('[data-action="task-add"]')
+    .addEventListener("click", () => app.task.addTask());
+
+  document.querySelector("#task-name").addEventListener("keypress", (event) => {
+    if (event.key == "Enter") {
+      app.task.addTask();
+    }
+  });
 });
