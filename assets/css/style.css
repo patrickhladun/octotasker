@@ -81,11 +81,6 @@ main {
   width: 100%;
   height: 100%;
 }
-.new-task__timer svg,
-.task__timer svg {
-  width: 80%;
-  transform: translateX(2px);
-}
 
 /*** Tasks ***/
 
@@ -151,26 +146,29 @@ main {
   -webkit-font-feature-settings: "tnum";
   font-feature-settings: "tnum";
 }
-.task__timer {
+
+/*** Timer Toggle Button ***/
+
+.timer-toggle {
   cursor: pointer;
 }
-.task__timer svg {
+.timer-toggle svg {
   pointer-events: none; // Prevents the svg of the button from being clicked
 }
 
-.task__timer .icon-start {
+.timer-toggle .icon-start {
   display: block;
 }
 
-.task__timer .icon-stop {
+.timer-toggle .icon-stop {
   display: none;
 }
 
-.task__timer--active .icon-start {
+.timer-toggle--active .icon-start {
   display: none;
 }
 
-.task__timer--active .icon-stop {
+.timer-toggle--active .icon-stop {
   display: block;
   fill: #ff0000;
 }

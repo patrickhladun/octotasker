@@ -116,7 +116,7 @@ class Task {
 
         // Create a start button
         const startButton = document.createElement("button");
-        startButton.classList.add("task__timer", "action-icon");
+        startButton.classList.add("timer-toggle", "action-icon");
         startButton.innerHTML = `
         <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="m31.79,16.33c1.21.74,1.21,2.6,0,3.34l-12.88,7.87-12.88,7.87c-1.21.74-2.73-.19-2.73-1.67V2.25C3.3.77,4.82-.16,6.03.58l12.88,7.87,12.88,7.87Z" /></svg>
         <svg class="icon-stop" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="4.71" y="4.71" width="26.58" height="26.58" rx="2.03" ry="2.03"/></svg>`;
@@ -258,7 +258,7 @@ class Timer {
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
 
     const taskEl = document.querySelector(`[data-task-id="${taskId}"]`);
-    taskEl.classList.add("task__timer--active");
+    taskEl.classList.add("timer-toggle--active");
 
     tasks[taskIndex].isRunning = true;
 
@@ -276,7 +276,7 @@ class Timer {
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
 
     const taskEl = document.querySelector(`[data-task-id="${taskId}"]`);
-    taskEl.classList.remove("task__timer--active");
+    taskEl.classList.remove("timer-toggle--active");
 
     tasks[taskIndex].isRunning = false;
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -297,7 +297,7 @@ class Timer {
     tasks.forEach((task) => {
       if (task.isRunning) {
         const taskEl = document.querySelector(`[data-task-id="${task.id}"]`);
-        taskEl.classList.remove("task__timer--active");
+        taskEl.classList.remove("timer-toggle--active");
         task.isRunning = false;
       }
     });
