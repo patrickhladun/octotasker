@@ -242,8 +242,9 @@ class Timer {
       const isRunning = tasks[taskIndex].isRunning;
 
       if (taskIndex < 0) return;
-      this.startTimer(taskId);
+
       if (!isRunning) {
+        this.startTimer(taskId);
       } else {
         this.stopTimer(taskId);
       }
