@@ -274,12 +274,9 @@ class Timer {
   }
 
   startTimer() {
-    console.log("Start timer");
     if (this.runningTaskId === "") {
-      console.log("No running task");
       return;
     }
-    console.log(`Running id: ${this.runningTaskId}`);
 
     const now = new Date();
     const taskId = this.runningTaskId;
@@ -287,7 +284,6 @@ class Timer {
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
 
     const taskEl = document.querySelector(`[data-task-id="${taskId}"]`);
-    console.log(taskEl);
     taskEl.classList.add("timer-toggle--active");
 
     console.log(tasks[taskIndex]);
@@ -312,6 +308,8 @@ class Timer {
     const task = tasks[taskIndex];
     const taskId = task.id;
     console.log(task);
+
+    this.runningTaskId = taskId;
 
     const now = new Date().getTime();
     const elapsed = now - task.startTime;
@@ -369,17 +367,17 @@ class Timer {
     const now = new Date();
     let tasks = app.task.getTasks();
     let taskIndex = tasks.findIndex((task) => task.id === taskId);
-    
+
     // Increment the time spent
     tasks[taskIndex].timeSpent++;
 
     // Update the start time
     tasks[taskIndex].startTime = now.getTime();
-    
+
     localStorage.setItem("tasks", JSON.stringify(tasks));
     this.updateTaskTimeUI(taskId);
     console.log(
-      `Update: ${tasks[taskIndex].timeSpent} id: ${taskId} id: ${this.runningTaskId}`
+      `Update: ${tasks[taskIndex].timeSpent} id: ${taskId} running task id: ${this.runningTaskId}`
     );
   }
 }
