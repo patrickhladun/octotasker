@@ -56,11 +56,29 @@
             placeholder="Add task ..."
           />
           <div class="new-task__actions">
-            <div>00:00:00</div>
-            <button class="action-icon" data-action="task-timer">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+            <div id="timer">00:00:00</div>
+            <button class="timer-toggle action-icon" data-action="task-timer">
+              <svg
+                class="icon-start"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 36 36"
+              >
                 <path
                   d="m31.79,16.33c1.21.74,1.21,2.6,0,3.34l-12.88,7.87-12.88,7.87c-1.21.74-2.73-.19-2.73-1.67V2.25C3.3.77,4.82-.16,6.03.58l12.88,7.87,12.88,7.87Z"
+                />
+              </svg>
+              <svg
+                class="icon-stop"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 36 36"
+              >
+                <rect
+                  x="4.71"
+                  y="4.71"
+                  width="26.58"
+                  height="26.58"
+                  rx="2.03"
+                  ry="2.03"
                 />
               </svg>
             </button>

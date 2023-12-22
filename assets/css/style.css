@@ -120,6 +120,20 @@ main {
 .task__status:hover svg {
   opacity: 1;
 }
+
+.task[data-completed="true"] .task__status {
+  border-color: #6dbe45;
+}
+.task[data-completed="true"] .task__status svg {
+  opacity: 1;
+  fill: #6dbe45;
+}
+.task[data-completed="true"] input {
+  color: #D3D3D3;
+}
+.task[data-completed="true"] .task__timer {
+  color: #D3D3D3;
+}
 .task input {
   border-color: transparent;
   background: none;
@@ -140,7 +154,8 @@ main {
 }
 
 /* Make the numbers same width */
-.task__actions div {
+#timer,
+.task__timer {
   font-variant-numeric: tabular-nums;
   -moz-font-feature-settings: "tnum";
   -webkit-font-feature-settings: "tnum";
