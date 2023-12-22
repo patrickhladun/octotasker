@@ -39,6 +39,7 @@ class Task {
     this.timeSpent = 0;
     this.startTime = 0;
     this.isRunning = false;
+    this.completed = false;
   }
 
   addTask() {
@@ -91,26 +92,40 @@ class Task {
       tasks.forEach((task) => {
         // Create a task item
         const taskItem = document.createElement("div");
+        taskItem.setAttribute("data-completed", task.completed);
+        taskItem.setAttribute("data-task-id", task.id);
+
         taskItem.classList.add("task");
 
-        // Create a task details
+        // Create a task details node
         const taskDetails = document.createElement("div");
         taskDetails.classList.add("task__details");
-        taskDetails.innerHTML = `
-          <div class="task__status">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-              <path
-                d="m34.52,9.87l-4.9-4.9c-.44-.44-1.16-.44-1.61,0l-12.57,12.57c-.44.44-1.16.44-1.61,0l-5.84-5.84c-.44-.44-1.16-.44-1.61,0l-4.9,4.9c-.44.44-.44,1.16,0,1.61l13.15,13.15h0s19.9-19.88,19.9-19.88c.44-.44.44-1.16,0-1.61Z"
-              />
-            </svg>
-          </div>
-          <input
-            type="text"
-            class="task__title"
-            value="${task.name}"
+
+        // Create a task status node
+        const detailsStatus = document.createElement("div");
+        detailsStatus.classList.add("task__status");
+        detailsStatus.setAttribute("data-completed", task.completed);
+        detailsStatus.setAttribute("data-task-id", task.id);
+        detailsStatus.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+          <path
+            d="m34.52,9.87l-4.9-4.9c-.44-.44-1.16-.44-1.61,0l-12.57,12.57c-.44.44-1.16.44-1.61,0l-5.84-5.84c-.44-.44-1.16-.44-1.61,0l-4.9,4.9c-.44.44-.44,1.16,0,1.61l13.15,13.15h0s19.9-19.88,19.9-19.88c.44-.44.44-1.16,0-1.61Z"
           />
-          <div class="task__project">Project</div>
-        `;
+        </svg>
+      `;
+        detailsStatus.addEventListener("click", () =>
+          this.toggleCompleted(task.id)
+        );
+
+        // Create a task title node
+        const detailsInput = document.createElement("input");
+        detailsInput.setAttribute("type", "text");
+        detailsInput.setAttribute("value", task.name);
+        detailsInput.classList.add("task__title");
+
+        // Build the task details
+        taskDetails.appendChild(detailsStatus);
+        taskDetails.appendChild(detailsInput);
         taskItem.appendChild(taskDetails);
 
         // Create a task actions
@@ -241,6 +256,18 @@ class Task {
     if (menu) {
       menu.style.display = "none";
     }
+  }
+
+  /**
+   * Toggle the completed status of a task
+   * @param {*} taskId
+   */
+  toggleCompleted(taskId) {
+    const tasks = this.getTasks();
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+    tasks[taskIndex].completed = !tasks[taskIndex].completed;
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    this.renderTasks();
   }
 }
 
