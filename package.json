@@ -1,7 +1,7 @@
 {
   "name": "octotasker",
   "description": "Code Institute Project 2 - Octotasker",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/patrickhladun/octotasker.git"
