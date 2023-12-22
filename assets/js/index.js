@@ -342,6 +342,9 @@ class Timer {
     tasks[taskIndex].isRunning = true;
     tasks[taskIndex].startTime = now.getTime();
 
+    const taskName = document.getElementById("task-name");
+    taskName.value = tasks[taskIndex].name;
+
     this.activeTimer[taskId] = setInterval(() => {
       this.updateTaskTime(taskId);
     }, 1000);
@@ -364,10 +367,11 @@ class Timer {
     const now = new Date().getTime();
     const elapsed = now - task.startTime;
     const elapsedSeconds = Math.floor(elapsed / 1000);
-    console.log(`Elapsed: ${elapsedSeconds}`);
 
     const totalTime = task.timeSpent + elapsedSeconds;
-    console.log(`Total: ${totalTime}`);
+
+    const taskName = document.getElementById("task-name");
+    taskName.value = tasks[taskIndex].name;
 
     tasks[taskIndex].timeSpent = totalTime;
     tasks[taskIndex].startTime = now;
@@ -383,6 +387,9 @@ class Timer {
   stopTimer() {
     if (!this.runningTaskId) return;
     const taskId = this.runningTaskId;
+
+    const taskName = document.getElementById("task-name");
+    taskName.value = "";
 
     clearInterval(this.activeTimer[taskId]);
     delete this.activeTimer[taskId];
