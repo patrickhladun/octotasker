@@ -117,18 +117,11 @@ class Task {
         const taskActions = document.createElement("div");
         taskActions.classList.add("task__actions");
 
-        // Create a task timer
+        // Create a task timer node
         const taskTimer = document.createElement("div");
         taskTimer.classList.add("task__timer");
         taskTimer.setAttribute("data-task-timer", task.id);
-        const totalSeconds = task.timeSpent;
-        let hours = Math.floor(totalSeconds / 3600);
-        hours = app.utils.padZero(hours);
-        let minutes = Math.floor((totalSeconds % 3600) / 60);
-        minutes = app.utils.padZero(minutes);
-        let seconds = totalSeconds % 60;
-        seconds = app.utils.padZero(seconds);
-        taskTimer.innerHTML = `${hours}:${minutes}:${seconds}`;
+        taskTimer.innerHTML = app.utils.formatTime(task.timeSpent);
         taskActions.appendChild(taskTimer);
 
         // Create a start button
