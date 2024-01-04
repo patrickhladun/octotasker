@@ -277,6 +277,15 @@ class Timer {
     this.runningTaskId = "";
   }
 
+  updateWeeklyTime() {
+    const tasks = app.task.getTasks();
+    const weeklyTime = document.querySelector(".weekly-time");
+    const weeklyTotal = tasks.reduce((total, task) => {
+      return total + task.timeSpent;
+    }, 0);
+    weeklyTime.innerHTML = app.utils.formatTime(weeklyTotal);
+  }
+
   updateRunningTimer() {
     const timer = document.querySelector("#timer");
     const timerButton = document.querySelector("[data-action='task-timer']");
@@ -453,6 +462,7 @@ class App {
   init() {
     this.task.renderTasks();
     this.timer.restartTimer();
+    this.timer.updateWeeklyTime();
   }
 }
 
