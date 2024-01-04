@@ -36,6 +36,7 @@ class Task {
     this.name = name;
     this.dueDate = "";
     this.creationDate = new Date();
+    this.details = "";
     this.timeSpent = 0;
     this.startTime = 0;
     this.isRunning = false;
@@ -181,7 +182,7 @@ class Task {
         editButton.classList.add("task__options-edit");
         editButton.addEventListener("click", () => {
           this.closeOptionsMenu(task.id);
-          this.editTask(task.id);
+          this.renderTaskEditWindow(task.id);
         });
         editButton.innerHTML = "Edit";
 
@@ -281,19 +282,20 @@ class Task {
     }
   }
 
-  editTask(taskId) {
+  renderTaskEditWindow(taskId) {
+    const task = this.getTaskDetails(taskId);
+
     const app = document.getElementById("app");
     const editWindow = document.createElement("div");
     editWindow.classList.add("edit-window");
     editWindow.innerHTML = `
       <div class="edit-window__header">
         <h2>Edit Task</h2>
-        <button class="edit-window__close">X</button>
       </div>
       <div class="edit-window__body">
-        <input type="text" id="edit-task-name" placeholder="Task Name" />
-        <input type="date" id="edit-task-due-date" placeholder="Due Date" />
-        <textarea id="edit-task-details" placeholder="Details"></textarea>
+        <input type="text" id="edit-task-name" placeholder="Task Name" value="${task.name}" >
+        <input type="date" id="edit-task-due-date" placeholder="Due Date" value="${task.dueDate}">
+        <textarea id="edit-task-details" placeholder="Details">${task.details}</textarea>
       </div>
     `;
 
@@ -306,21 +308,38 @@ class Task {
     saveButton.addEventListener("click", () => {
       const taskName = document.getElementById("edit-task-name").value;
       const dueDate = document.getElementById("edit-task-due-date").value;
-      this.updateTask(taskId, taskName, dueDate);
+      const details = document.getElementById("edit-task-details").value;
+      this.updateTask(taskId, taskName, dueDate, details);
     });
 
-    const cancelButton = document.createElement("button");
-    cancelButton.classList.add("edit-window__cancel");
-    cancelButton.innerHTML = "Cancel";
-    cancelButton.addEventListener("click", () => {
+    const closeButton = document.createElement("button");
+    closeButton.classList.add("edit-window__close");
+    closeButton.innerHTML = "Close";
+    closeButton.addEventListener("click", () => {
       editWindow.remove();
     });
 
     footer.appendChild(saveButton);
-    footer.appendChild(cancelButton);
+    footer.appendChild(closeButton);
     editWindow.appendChild(footer);
 
     app.appendChild(editWindow);
+  }
+  updateTask(taskId, taskName, dueDate, details) {
+    const tasks = this.getTasks();
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+    tasks[taskIndex].name = taskName;
+    tasks[taskIndex].dueDate = dueDate;
+    tasks[taskIndex].details = details;
+    console.log(tasks[taskIndex]);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    this.renderTasks();
+  }
+
+  getTaskDetails(taskId) {
+    const tasks = this.getTasks();
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+    return tasks[taskIndex];
   }
 }
 

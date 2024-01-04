@@ -238,3 +238,9 @@ main {
   z-index: 100;
   padding: 36px;
 }
+
+.edit-window__body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
