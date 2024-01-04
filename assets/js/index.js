@@ -178,7 +178,11 @@ class Task {
 
         // Create an edit button
         const editButton = document.createElement("button");
-        editButton.classList.add("task__options-menu-item");
+        editButton.classList.add("task__options-edit");
+        editButton.addEventListener("click", () => {
+          this.closeOptionsMenu(task.id);
+          this.editTask(task.id);
+        });
         editButton.innerHTML = "Edit";
 
         // Create a delete button
@@ -268,6 +272,55 @@ class Task {
     tasks[taskIndex].completed = !tasks[taskIndex].completed;
     localStorage.setItem("tasks", JSON.stringify(tasks));
     this.renderTasks();
+  }
+
+  closeOptionsMenu(taskId) {
+    const menu = document.getElementById(`options-menu-${taskId}`);
+    if (menu) {
+      menu.style.display = "none";
+    }
+  }
+
+  editTask(taskId) {
+    const app = document.getElementById("app");
+    const editWindow = document.createElement("div");
+    editWindow.classList.add("edit-window");
+    editWindow.innerHTML = `
+      <div class="edit-window__header">
+        <h2>Edit Task</h2>
+        <button class="edit-window__close">X</button>
+      </div>
+      <div class="edit-window__body">
+        <input type="text" id="edit-task-name" placeholder="Task Name" />
+        <input type="date" id="edit-task-due-date" placeholder="Due Date" />
+        <textarea id="edit-task-details" placeholder="Details"></textarea>
+      </div>
+    `;
+
+    const footer = document.createElement("div");
+    footer.classList.add("edit-window__footer");
+
+    const saveButton = document.createElement("button");
+    saveButton.classList.add("edit-window__save");
+    saveButton.innerHTML = "Save";
+    saveButton.addEventListener("click", () => {
+      const taskName = document.getElementById("edit-task-name").value;
+      const dueDate = document.getElementById("edit-task-due-date").value;
+      this.updateTask(taskId, taskName, dueDate);
+    });
+
+    const cancelButton = document.createElement("button");
+    cancelButton.classList.add("edit-window__cancel");
+    cancelButton.innerHTML = "Cancel";
+    cancelButton.addEventListener("click", () => {
+      editWindow.remove();
+    });
+
+    footer.appendChild(saveButton);
+    footer.appendChild(cancelButton);
+    editWindow.appendChild(footer);
+
+    app.appendChild(editWindow);
   }
 }
 
