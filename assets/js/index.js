@@ -500,8 +500,6 @@ class Timer {
     const time = app.utils.formatTime(tasks[taskIndex].timeSpent);
     taskTimer.innerHTML = `${time}`;
 
-    // taskEl.innerHTML = `
-
     tasks[taskIndex].isRunning = false;
     tasks[taskIndex].startTime = 0;
     this.runningTaskId = "";
@@ -540,34 +538,53 @@ class Timer {
   }
 }
 
-class App {
-  constructor() {
-    this.task = new Task();
-    this.timer = new Timer();
-    this.utils = new Utils();
+class Project {
+  constructor(id, name) {
+    this.id = id;
+    this.name = name;
+    this.color = "";
   }
-  init() {
-    this.task.renderTasks();
-    this.timer.restartTimer();
-    this.timer.updateWeeklyTime();
+  renderProjects() {
+    console.log("render projects");
+    const projectsList = document.querySelector(".projects-list");
+    projectsList.innerHTML = "Projects goe here";
   }
 }
+
+class App {
+  constructor() {
+    this.utils = new Utils();
+    this.task = new Task();
+    this.timer = new Timer();
+    this.project = new Project();
+  }
+  init() {
+    if (window.location.href.toLowerCase().includes("projects.html")) {
+      console.log("projects");
+      this.project.renderProjects();
+    } else {
+      this.task.renderTasks();
+      this.timer.restartTimer();
+      this.timer.updateWeeklyTime();
+      document
+        .querySelector('[data-action="task-timer"]')
+        .addEventListener("click", (e) => this.timer.toggleTimer(e));
+      document
+        .querySelector('[data-action="task-add"]')
+        .addEventListener("click", (e) => this.task.addTask(e));
+      document.querySelector("#task-name").addEventListener("keypress", (e) => {
+        if (e.key == "Enter") {
+          this.task.addTask();
+        }
+      });
+    }
+  }
+}
+
+let app;
 
 document.addEventListener("DOMContentLoaded", () => {
   app = new App();
   app.init();
-
-  document
-    .querySelector('[data-action="task-timer"]')
-    .addEventListener("click", (e) => app.timer.toggleTimer(e));
-
-  document
-    .querySelector('[data-action="task-add"]')
-    .addEventListener("click", (e) => app.task.addTask(e));
-
-  document.querySelector("#task-name").addEventListener("keypress", (e) => {
-    if (e.key == "Enter") {
-      app.task.addTask();
-    }
-  });
+  console.log("App initialized");
 });
