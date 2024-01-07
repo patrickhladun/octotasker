@@ -545,9 +545,61 @@ class Project {
     this.name = name;
     this.color = "";
   }
+
+  addProject() {
+    // Get the project name from the input
+    const projectInput = document.getElementById("project-name");
+    const projectName = projectInput.value.trim();
+
+    // Generate a unique id
+    const projectId = Utils.generateUniqueId();
+
+    // Check if the project name is empty
+    if (projectName === "" || !projectName) {
+      return;
+    }
+
+    // Get the projects from local storage
+    const projects = this.getProjects();
+
+    // Create a new project object
+    const newProject = new Project(projectId, projectName);
+
+    // Add the new project to the projects array
+    projects.push(newProject);
+    localStorage.setItem("projects", JSON.stringify(projects));
+
+    // Reset the form
+    projectInput.value = "";
+    this.renderProjects();
+
+    return projectId;
+  }
+
   renderProjects() {
-    const projectsList = document.querySelector(".projects-list");
-    projectsList.innerHTML = "Projects goe here";
+    // Get the projects from local storage
+    const projects = this.getProjects();
+    const projectList = document.querySelector(".projects-list");
+
+    const addProject = document.createElement("div");
+    addProject.classList.add("project", "project--add");
+    addProject.innerHTML = `
+    <div class="project__details">
+      <input type="text" class="project__title" id="project-name" placeholder="Project Name" />
+    </div>
+    `;
+
+    const projectActions = document.createElement("div");
+    projectActions.classList.add("project__actions");
+
+    const projectAdd = document.createElement("button");
+    projectAdd.classList.add("project__add");
+    projectAdd.innerHTML = `Add Project`;
+    projectAdd.addEventListener("click", () => this.addProject());
+
+    projectActions.appendChild(projectAdd);
+    addProject.appendChild(projectActions);
+    projectList.appendChild(addProject);
   }
 
   getProjects() {
@@ -555,8 +607,6 @@ class Project {
   }
 
   renderProjectsDropdown() {
-    console.log("render projects dropdown")
-    console.log(this.getProjects());
     const projectsDropdown = document.querySelector(".projects-dropdown");
     const projectsItem = `
       <option value="">Select Project</option>
@@ -574,7 +624,6 @@ class App {
   }
   init() {
     if (window.location.href.toLowerCase().includes("projects.html")) {
-      console.log("projects");
       this.project.renderProjects();
     } else {
       this.task.renderTasks();
