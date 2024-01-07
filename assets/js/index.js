@@ -802,9 +802,6 @@ class Timer {
 
     localStorage.setItem("tasks", JSON.stringify(tasks));
     this.updateRunningTaskTimeUI(taskId);
-    console.log(
-      `Update: ${tasks[taskIndex].timeSpent} id: ${taskId} running task id: ${this.runningTaskId}`
-    );
   }
 }
 
@@ -821,7 +818,7 @@ class App {
     } else {
       this.task.renderTasks();
       this.timer.restartTimer();
-      this.timer.updateWeeklyTime();
+      // this.timer.updateWeeklyTime();
       this.project.renderProjectsDropdown();
       document
         .querySelector('[data-action="task-timer"]')
