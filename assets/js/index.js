@@ -599,6 +599,55 @@ class Project {
 
     projectActions.appendChild(projectAdd);
     addProject.appendChild(projectActions);
+
+    // Check if there are any projects
+    if (projects.length !== 0) {
+      // If there are projects, clear the project list
+      projectList.innerHTML = "";
+      projects.forEach((project) => {
+        console.log(project);
+        // Create a project item
+        const projectItem = document.createElement("div");
+        projectItem.setAttribute("data-project-id", project.id);
+        projectItem.classList.add("project");
+
+        // Create a project details node
+        const projectDetails = document.createElement("div");
+        projectDetails.classList.add("project__details");
+
+        // Create a project title node
+        const detailsInput = document.createElement("input");
+        detailsInput.setAttribute("type", "text");
+        detailsInput.setAttribute("value", project.name);
+        detailsInput.classList.add("project__title");
+
+        const colorPicker = document.createElement("input");
+        colorPicker.setAttribute("type", "color");
+        colorPicker.classList.add("project__color-picker");
+        colorPicker.value = project.color || "#ffffff"; // Default to white if no color is set
+        colorPicker.addEventListener("change", (e) => {
+          this.updateProjectColor(project.id, e.target.value);
+        });
+
+        const projectActions = document.createElement("div");
+        projectActions.classList.add("project__actions");
+
+        const projectDelete = document.createElement("button");
+        projectDelete.classList.add("project__delete");
+        projectDelete.innerHTML = `Delete`;
+
+        projectActions.appendChild(colorPicker);
+        projectActions.appendChild(projectDelete);
+
+        // Build the project details
+        projectDetails.appendChild(detailsInput);
+        projectItem.appendChild(projectDetails);
+        projectItem.appendChild(projectActions);
+
+        projectList.appendChild(projectItem);
+      });
+    }
+
     projectList.appendChild(addProject);
   }
 

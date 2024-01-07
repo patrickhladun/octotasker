@@ -257,3 +257,45 @@ main {
   flex-direction: column;
   gap: 16px;
 }
+
+/*** Projects ***/
+
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding: 16px 0;
+}
+
+.project {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #F9F9F9;
+  margin-bottom: 4px;
+}
+.project__details {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+}
+.project__title {
+  border: none;
+  border-radius: 4px;
+  padding: 8px;
+  width: 100%;
+  background-color: #F9F9F9;
+  margin-right: 16px;
+}
+.project__actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
