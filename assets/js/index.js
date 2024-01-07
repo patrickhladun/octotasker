@@ -263,9 +263,11 @@ class Task {
 
     const tasksUncompleted = document.createElement("div");
     tasksUncompleted.classList.add("tasks__uncompleted");
+    tasksUncompleted.innerHTML = "<h2>Tasks</h2>";
 
     const tasksCompleted = document.createElement("div");
     tasksCompleted.classList.add("tasks__completed");
+    tasksCompleted.innerHTML = "<h2>Completed</h2>";
 
     // Get running task
     const runningTask = tasks.find((task) => task.isRunning === true);
@@ -406,7 +408,14 @@ class Task {
       taskItem.appendChild(taskActions);
 
       // Append the task item to the task list
-      taskList.appendChild(taskItem);
+      if (task.completed) {
+        tasksCompleted.appendChild(taskItem);
+      } else {
+        tasksUncompleted.appendChild(taskItem);
+      }
+
+      taskList.appendChild(tasksUncompleted);
+      taskList.appendChild(tasksCompleted);
     });
     
   }
