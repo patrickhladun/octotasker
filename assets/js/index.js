@@ -24,6 +24,181 @@ class Utils {
   }
 }
 
+class Project {
+  constructor(id, name) {
+    this.id = id;
+    this.name = name;
+    this.color = "";
+  }
+
+  addProject() {
+    // Get the project name from the input
+    const projectInput = document.getElementById("project-name");
+    const projectName = projectInput.value.trim();
+
+    // Generate a unique id
+    const projectId = Utils.generateUniqueId();
+
+    // Check if the project name is empty
+    if (projectName === "" || !projectName) {
+      return;
+    }
+
+    // Get the projects from local storage
+    const projects = this.getProjects();
+
+    // Create a new project object
+    const newProject = new Project(projectId, projectName);
+
+    // Add the new project to the projects array
+    projects.push(newProject);
+    localStorage.setItem("projects", JSON.stringify(projects));
+
+    // Reset the form
+    projectInput.value = "";
+    this.renderProjects();
+
+    return projectId;
+  }
+
+  updateProjectColor(projectId, color) {
+    const projects = this.getProjects();
+    const projectIndex = projects.findIndex(
+      (project) => project.id === projectId
+    );
+    if (projectIndex !== -1) {
+      projects[projectIndex].color = color;
+      localStorage.setItem("projects", JSON.stringify(projects));
+      this.renderProjects();
+    }
+  }
+
+  updateProjectName(projectId, projectName) {
+    const projects = this.getProjects();
+    const projectIndex = projects.findIndex(
+      (project) => project.id === projectId
+    );
+    if (projectIndex !== -1) {
+      projects[projectIndex].name = projectName;
+      localStorage.setItem("projects", JSON.stringify(projects));
+      this.renderProjects();
+    }
+  }
+
+  renderProjects() {
+    // Get the projects from local storage
+    const projects = this.getProjects();
+    const projectList = document.querySelector(".projects-list");
+
+    const addProject = document.createElement("div");
+    addProject.classList.add("project", "project--add");
+    addProject.innerHTML = `
+    <div class="project__details">
+      <input type="text" class="project__title" id="project-name" placeholder="Project Name" />
+    </div>
+    `;
+
+    const projectActions = document.createElement("div");
+    projectActions.classList.add("project__actions");
+
+    const projectAdd = document.createElement("button");
+    projectAdd.classList.add("project__add");
+    projectAdd.innerHTML = `Add Project`;
+    projectAdd.addEventListener("click", () => this.addProject());
+
+    projectActions.appendChild(projectAdd);
+    addProject.appendChild(projectActions);
+
+    // Check if there are any projects
+    if (projects.length !== 0) {
+      // If there are projects, clear the project list
+      projectList.innerHTML = "";
+      projects.forEach((project) => {
+        console.log(project);
+        // Create a project item
+        const projectItem = document.createElement("div");
+        projectItem.setAttribute("data-project-id", project.id);
+        projectItem.classList.add("project");
+
+        // Create a project details node
+        const projectDetails = document.createElement("div");
+        projectDetails.classList.add("project__details");
+
+        // Create a project title node
+        const detailsInput = document.createElement("input");
+        detailsInput.setAttribute("type", "text");
+        detailsInput.setAttribute("value", project.name);
+        detailsInput.classList.add("project__title");
+        detailsInput.addEventListener("change", (e) => {
+          this.updateProjectName(project.id, e.target.value);
+        });
+
+        const colorPicker = document.createElement("input");
+        colorPicker.setAttribute("type", "color");
+        colorPicker.classList.add("project__color-picker");
+        colorPicker.value = project.color || "#ffffff"; // Default to white if no color is set
+        colorPicker.addEventListener("change", (e) => {
+          this.updateProjectColor(project.id, e.target.value);
+        });
+
+        const projectActions = document.createElement("div");
+        projectActions.classList.add("project__actions");
+
+        const projectDelete = document.createElement("button");
+        projectDelete.classList.add("project__delete");
+        projectDelete.innerHTML = `Delete`;
+        projectDelete.addEventListener("click", () => {
+          this.deleteProject(project.id);
+        });
+
+        projectActions.appendChild(colorPicker);
+        projectActions.appendChild(projectDelete);
+
+        // Build the project details
+        projectDetails.appendChild(detailsInput);
+        projectItem.appendChild(projectDetails);
+        projectItem.appendChild(projectActions);
+
+        projectList.appendChild(projectItem);
+      });
+    }
+
+    projectList.appendChild(addProject);
+  }
+
+  getProjects() {
+    return JSON.parse(localStorage.getItem("projects")) || [];
+  }
+
+  renderProjectsDropdown() {
+    const projectsDropdown = document.querySelector(".projects-dropdown");
+    const projects = this.getProjects();
+
+    const defaultOption = document.createElement("option");
+    defaultOption.classList.add("projects-dropdown__item");
+    defaultOption.setAttribute("value", "");
+    defaultOption.innerHTML = "No Project";
+    projectsDropdown.appendChild(defaultOption);
+
+    if (projects.length !== 0) {
+      projects.forEach((project) => {
+        const projectItem = document.createElement("option");
+        projectItem.classList.add("projects-dropdown__item");
+        projectItem.setAttribute("value", project.id);
+        projectItem.innerHTML = project.name;
+        projectsDropdown.appendChild(projectItem);
+      });
+    }
+  }
+
+  deleteProject(projectId) {
+    let projects = this.getProjects(); // Retrieve the current list of projects
+    projects = projects.filter((project) => project.id !== projectId); // Filter out the project with the given ID
+    localStorage.setItem("projects", JSON.stringify(projects)); // Update the projects in local storage
+    this.renderProjects(); // Refresh the displayed project list
+  }
+}
+
 class Task {
   /**
    * Task constructor function to create a new task object with the following properties: name, dueDate, timeSpent, id
@@ -51,7 +226,6 @@ class Task {
 
     const taskProject = document.getElementById("task-project");
     const projectId = taskProject.value;
-    console.log(projectId)
 
     // Generate a unique id
     const taskId = Utils.generateUniqueId();
@@ -66,7 +240,7 @@ class Task {
 
     // Create a new task object
     const newTask = new Task(taskName, taskId, projectId);
-    console.log(newTask)
+
     // Add the new task to the tasks array
     tasks.push(newTask);
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -87,147 +261,154 @@ class Task {
     const tasks = this.getTasks();
     const taskList = document.getElementById("tasks");
 
+    const tasksUncompleted = document.createElement("div");
+    tasksUncompleted.classList.add("tasks__uncompleted");
+
+    const tasksCompleted = document.createElement("div");
+    tasksCompleted.classList.add("tasks__completed");
+
     // Get running task
     const runningTask = tasks.find((task) => task.isRunning === true);
 
-    // Check if there are any tasks
-    if (tasks.length !== 0) {
-      // If there are tasks, clear the task list
-      taskList.innerHTML = "";
-      tasks.forEach((task) => {
-        // Create a task item
-        const taskItem = document.createElement("div");
-        taskItem.setAttribute("data-completed", task.completed);
-        taskItem.setAttribute("data-task-id", task.id);
-
-        taskItem.classList.add("task");
-
-        // Create a task details node
-        const taskDetails = document.createElement("div");
-        taskDetails.classList.add("task__details");
-
-        // Create a task status node
-        const detailsStatus = document.createElement("div");
-        detailsStatus.classList.add("task__status");
-        detailsStatus.setAttribute("data-completed", task.completed);
-        detailsStatus.setAttribute("data-task-id", task.id);
-        detailsStatus.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-          <path
-            d="m34.52,9.87l-4.9-4.9c-.44-.44-1.16-.44-1.61,0l-12.57,12.57c-.44.44-1.16.44-1.61,0l-5.84-5.84c-.44-.44-1.16-.44-1.61,0l-4.9,4.9c-.44.44-.44,1.16,0,1.61l13.15,13.15h0s19.9-19.88,19.9-19.88c.44-.44.44-1.16,0-1.61Z"
-          />
-        </svg>
-      `;
-        detailsStatus.addEventListener("click", () =>
-          this.toggleCompleted(task.id)
-        );
-
-        // Create a task title node
-        const detailsInput = document.createElement("input");
-        detailsInput.setAttribute("type", "text");
-        detailsInput.setAttribute("value", task.name);
-        detailsInput.classList.add("task__title");
-        detailsInput.setAttribute("data-task-id", task.id);
-        detailsInput.addEventListener("change", (e) => {
-          this.updateTaskName(task.id, e.target.value);
-        });
-
-        // Build the task details
-        taskDetails.appendChild(detailsStatus);
-        taskDetails.appendChild(detailsInput);
-        taskItem.appendChild(taskDetails);
-
-        // Create a task actions
-        const taskActions = document.createElement("div");
-        taskActions.classList.add("task__actions");
-
-        // Create a task timer node
-        const taskTimer = document.createElement("div");
-        taskTimer.classList.add("task__timer");
-        taskTimer.setAttribute("data-task-timer", task.id);
-        taskTimer.innerHTML = app.utils.formatTime(task.timeSpent);
-        taskActions.appendChild(taskTimer);
-
-        // Create a start button
-        const startButton = document.createElement("button");
-        if (task.isRunning && task.startTime !== 0) {
-          startButton.classList.add(
-            "timer-toggle",
-            "timer-toggle--active",
-            "action-icon"
-          );
-        } else {
-          startButton.classList.add("timer-toggle", "action-icon");
-        }
-        startButton.innerHTML = `
-        <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="m31.79,16.33c1.21.74,1.21,2.6,0,3.34l-12.88,7.87-12.88,7.87c-1.21.74-2.73-.19-2.73-1.67V2.25C3.3.77,4.82-.16,6.03.58l12.88,7.87,12.88,7.87Z" /></svg>
-        <svg class="icon-stop" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="4.71" y="4.71" width="26.58" height="26.58" rx="2.03" ry="2.03"/></svg>`;
-        startButton.setAttribute("data-task-id", task.id);
-        startButton.addEventListener("click", (e) => app.timer.toggleTimer(e));
-        taskActions.appendChild(startButton);
-
-        // Create an options buttons
-        const optionsButton = document.createElement("button");
-        optionsButton.classList.add("task__options", "action-icon");
-        optionsButton.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-          <circle cx="4.21" cy="18.95" r="3.97" />
-          <circle cx="18.01" cy="18.95" r="3.97" />
-          <circle cx="31.81" cy="18.95" r="3.97" />
-        </svg>`;
-        optionsButton.addEventListener("click", () =>
-          this.openOptionsMenu(task.id)
-        );
-        taskActions.appendChild(optionsButton);
-
-        // Create an options menu
-        const optionsMenu = document.createElement("div");
-        optionsMenu.classList.add("task__options-menu");
-        optionsMenu.id = `options-menu-${task.id}`;
-
-        // Create an edit button
-        const editButton = document.createElement("button");
-        editButton.classList.add("task__options-edit");
-        editButton.addEventListener("click", () => {
-          this.closeOptionsMenu(task.id);
-          this.renderTaskEditWindow(task.id);
-        });
-        editButton.innerHTML = "Edit";
-
-        // Create a delete button
-        const deleteButton = document.createElement("button");
-        deleteButton.classList.add(`task__options-menu-item`);
-        deleteButton.innerHTML = "Delete";
-        deleteButton.addEventListener("click", () =>
-          this.deleteTaskById(task.id)
-        );
-
-        // Create a close button
-        const closeButton = document.createElement("button");
-        closeButton.classList.add("task__options-menu-item");
-        closeButton.addEventListener("click", () =>
-          this.closeOptionsMenu(task.id)
-        );
-        closeButton.innerHTML = "X";
-
-        // Append the buttons to the options menu
-        optionsMenu.appendChild(editButton);
-        optionsMenu.appendChild(deleteButton);
-        optionsMenu.appendChild(closeButton);
-
-        // Append the options menu to the task actions
-        taskActions.appendChild(optionsMenu);
-
-        // Append the task actions to the task item
-        taskItem.appendChild(taskActions);
-
-        // Append the task item to the task list
-        taskList.appendChild(taskItem);
-      });
-    } else {
-      // If there are no tasks, display a message
+    if(tasks.length <= 0) {
       taskList.innerHTML = "<p>No tasks yet</p>";
+      return;
     }
+
+    // If there are tasks, clear the task list
+    taskList.innerHTML = "";
+    tasks.forEach((task) => {
+      // Create a task item
+      const taskItem = document.createElement("div");
+      taskItem.setAttribute("data-completed", task.completed);
+      taskItem.setAttribute("data-task-id", task.id);
+
+      taskItem.classList.add("task");
+
+      // Create a task details node
+      const taskDetails = document.createElement("div");
+      taskDetails.classList.add("task__details");
+
+      // Create a task status node
+      const detailsStatus = document.createElement("div");
+      detailsStatus.classList.add("task__status");
+      detailsStatus.setAttribute("data-completed", task.completed);
+      detailsStatus.setAttribute("data-task-id", task.id);
+      detailsStatus.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+        <path
+          d="m34.52,9.87l-4.9-4.9c-.44-.44-1.16-.44-1.61,0l-12.57,12.57c-.44.44-1.16.44-1.61,0l-5.84-5.84c-.44-.44-1.16-.44-1.61,0l-4.9,4.9c-.44.44-.44,1.16,0,1.61l13.15,13.15h0s19.9-19.88,19.9-19.88c.44-.44.44-1.16,0-1.61Z"
+        />
+      </svg>
+    `;
+      detailsStatus.addEventListener("click", () =>
+        this.toggleCompleted(task.id)
+      );
+
+      // Create a task title node
+      const detailsInput = document.createElement("input");
+      detailsInput.setAttribute("type", "text");
+      detailsInput.setAttribute("value", task.name);
+      detailsInput.classList.add("task__title");
+      detailsInput.setAttribute("data-task-id", task.id);
+      detailsInput.addEventListener("change", (e) => {
+        this.updateTaskName(task.id, e.target.value);
+      });
+
+      // Build the task details
+      taskDetails.appendChild(detailsStatus);
+      taskDetails.appendChild(detailsInput);
+      taskItem.appendChild(taskDetails);
+
+      // Create a task actions
+      const taskActions = document.createElement("div");
+      taskActions.classList.add("task__actions");
+
+      // Create a task timer node
+      const taskTimer = document.createElement("div");
+      taskTimer.classList.add("task__timer");
+      taskTimer.setAttribute("data-task-timer", task.id);
+      taskTimer.innerHTML = app.utils.formatTime(task.timeSpent);
+      taskActions.appendChild(taskTimer);
+
+      // Create a start button
+      const startButton = document.createElement("button");
+      if (task.isRunning && task.startTime !== 0) {
+        startButton.classList.add(
+          "timer-toggle",
+          "timer-toggle--active",
+          "action-icon"
+        );
+      } else {
+        startButton.classList.add("timer-toggle", "action-icon");
+      }
+      startButton.innerHTML = `
+      <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="m31.79,16.33c1.21.74,1.21,2.6,0,3.34l-12.88,7.87-12.88,7.87c-1.21.74-2.73-.19-2.73-1.67V2.25C3.3.77,4.82-.16,6.03.58l12.88,7.87,12.88,7.87Z" /></svg>
+      <svg class="icon-stop" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="4.71" y="4.71" width="26.58" height="26.58" rx="2.03" ry="2.03"/></svg>`;
+      startButton.setAttribute("data-task-id", task.id);
+      startButton.addEventListener("click", (e) => app.timer.toggleTimer(e));
+      taskActions.appendChild(startButton);
+
+      // Create an options buttons
+      const optionsButton = document.createElement("button");
+      optionsButton.classList.add("task__options", "action-icon");
+      optionsButton.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+        <circle cx="4.21" cy="18.95" r="3.97" />
+        <circle cx="18.01" cy="18.95" r="3.97" />
+        <circle cx="31.81" cy="18.95" r="3.97" />
+      </svg>`;
+      optionsButton.addEventListener("click", () =>
+        this.openOptionsMenu(task.id)
+      );
+      taskActions.appendChild(optionsButton);
+
+      // Create an options menu
+      const optionsMenu = document.createElement("div");
+      optionsMenu.classList.add("task__options-menu");
+      optionsMenu.id = `options-menu-${task.id}`;
+
+      // Create an edit button
+      const editButton = document.createElement("button");
+      editButton.classList.add("task__options-edit");
+      editButton.setAttribute("data-task-id", task.id);
+      editButton.addEventListener("click", () => {
+        this.closeOptionsMenu(task.id);
+        this.renderTaskEditWindow(task.id);
+      });
+      editButton.innerHTML = "Edit";
+
+      // Create a delete button
+      const deleteButton = document.createElement("button");
+      deleteButton.classList.add(`task__options-menu-item`);
+      deleteButton.innerHTML = "Delete";
+      deleteButton.addEventListener("click", () =>
+        this.deleteTaskById(task.id)
+      );
+
+      // Create a close button
+      const closeButton = document.createElement("button");
+      closeButton.classList.add("task__options-menu-item");
+      closeButton.addEventListener("click", () =>
+        this.closeOptionsMenu(task.id)
+      );
+      closeButton.innerHTML = "X";
+
+      // Append the buttons to the options menu
+      optionsMenu.appendChild(editButton);
+      optionsMenu.appendChild(deleteButton);
+      optionsMenu.appendChild(closeButton);
+
+      // Append the options menu to the task actions
+      taskActions.appendChild(optionsMenu);
+
+      // Append the task actions to the task item
+      taskItem.appendChild(taskActions);
+
+      // Append the task item to the task list
+      taskList.appendChild(taskItem);
+    });
+    
   }
 
   updateTaskName(taskId, taskName) {
@@ -299,6 +480,7 @@ class Task {
 
   renderTaskEditWindow(taskId) {
     const task = this.getTaskDetails(taskId);
+    console.log(task);
 
     const app = document.getElementById("app");
     const editWindow = document.createElement("div");
@@ -307,12 +489,47 @@ class Task {
       <div class="edit-window__header">
         <h2>Edit Task</h2>
       </div>
-      <div class="edit-window__body">
-        <input type="text" id="edit-task-name" placeholder="Task Name" value="${task.name}" >
-        <input type="date" id="edit-task-due-date" placeholder="Due Date" value="${task.dueDate}">
-        <textarea id="edit-task-details" placeholder="Details">${task.details}</textarea>
-      </div>
     `;
+
+    const details = document.createElement("div");
+    details.classList.add("edit-window__body");
+
+    const taskName = document.createElement("input");
+    taskName.setAttribute("type", "text");
+    taskName.setAttribute("id", "edit-task-name");
+    taskName.setAttribute("value", task.name);
+
+    const dueDate = document.createElement("input");
+    dueDate.setAttribute("type", "date");
+    dueDate.setAttribute("id", "edit-task-due-date");
+    dueDate.setAttribute("value", task.dueDate);
+
+    const projects = JSON.parse(localStorage.getItem("projects")) || [];
+    const taskProject = projects.find((project) => project.id === task.projectId);
+    const projectSelect = document.createElement("select");
+    projectSelect.setAttribute("id", "edit-task-project");
+    projectSelect.setAttribute("value", task.projectId);
+    projectSelect.innerHTML = `
+      <option value="${task.projectId}">${taskProject.name}</option>
+    `;
+    
+    projects.forEach((project) => {
+      const projectItem = document.createElement("option");
+      projectItem.classList.add("projects-dropdown__item");
+      projectItem.setAttribute("value", project.id);
+      projectItem.innerHTML = project.name;
+      console.log(projectItem)
+      projectSelect.appendChild(projectItem);
+    });
+
+    const taskDetails = document.createElement("textarea");
+    taskDetails.setAttribute("id", "edit-task-details");
+    taskDetails.innerHTML = task.details;
+
+    details.appendChild(taskName);
+    details.appendChild(dueDate);
+    details.appendChild(projectSelect);
+    details.appendChild(taskDetails);
 
     const footer = document.createElement("div");
     footer.classList.add("edit-window__footer");
@@ -323,8 +540,9 @@ class Task {
     saveButton.addEventListener("click", () => {
       const taskName = document.getElementById("edit-task-name").value;
       const dueDate = document.getElementById("edit-task-due-date").value;
+      const projectId = document.getElementById("edit-task-project").value;
       const details = document.getElementById("edit-task-details").value;
-      this.updateTask(taskId, taskName, dueDate, details);
+      this.updateTask(taskId, taskName, dueDate, projectId, details);
     });
 
     const closeButton = document.createElement("button");
@@ -336,25 +554,43 @@ class Task {
 
     footer.appendChild(saveButton);
     footer.appendChild(closeButton);
+    editWindow.appendChild(details);
     editWindow.appendChild(footer);
 
     app.appendChild(editWindow);
   }
-  updateTask(taskId, taskName, dueDate, details) {
+
+  updateTask(taskId, taskName, dueDate, projectId, details) {
     const tasks = this.getTasks();
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
+    const menu = document.getElementById(`options-menu-${taskId}`);
+    console.log(taskName, dueDate, details);
     tasks[taskIndex].name = taskName;
     tasks[taskIndex].dueDate = dueDate;
-    tasks[taskIndex].details = details;
-    console.log(tasks[taskIndex]);
+    tasks[taskIndex].projectId = projectId;
+    tasks[taskIndex].details = details;    
+    console.log(tasks[taskIndex])
     localStorage.setItem("tasks", JSON.stringify(tasks));
     this.renderTasks();
+    if (menu) {
+      menu.style.display = "none";
+    }
   }
 
   getTaskDetails(taskId) {
     const tasks = this.getTasks();
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
     return tasks[taskIndex];
+  }
+  
+  setupEditButtonListener() {
+    const editButtons = document.querySelectorAll(".task__options-edit");
+    editButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const taskId = button.getAttribute("data-task-id");
+        this.renderTaskEditWindow(taskId);
+      });
+    });
   }
 }
 
@@ -553,187 +789,12 @@ class Timer {
   }
 }
 
-class Project {
-  constructor(id, name) {
-    this.id = id;
-    this.name = name;
-    this.color = "";
-  }
-
-  addProject() {
-    // Get the project name from the input
-    const projectInput = document.getElementById("project-name");
-    const projectName = projectInput.value.trim();
-
-    // Generate a unique id
-    const projectId = Utils.generateUniqueId();
-
-    // Check if the project name is empty
-    if (projectName === "" || !projectName) {
-      return;
-    }
-
-    // Get the projects from local storage
-    const projects = this.getProjects();
-
-    // Create a new project object
-    const newProject = new Project(projectId, projectName);
-
-    // Add the new project to the projects array
-    projects.push(newProject);
-    localStorage.setItem("projects", JSON.stringify(projects));
-
-    // Reset the form
-    projectInput.value = "";
-    this.renderProjects();
-
-    return projectId;
-  }
-
-  updateProjectColor(projectId, color) {
-    const projects = this.getProjects();
-    const projectIndex = projects.findIndex(
-      (project) => project.id === projectId
-    );
-    if (projectIndex !== -1) {
-      projects[projectIndex].color = color;
-      localStorage.setItem("projects", JSON.stringify(projects));
-      this.renderProjects();
-    }
-  }
-
-  updateProjectName(projectId, projectName) {
-    const projects = this.getProjects();
-    const projectIndex = projects.findIndex(
-      (project) => project.id === projectId
-    );
-    if (projectIndex !== -1) {
-      projects[projectIndex].name = projectName;
-      localStorage.setItem("projects", JSON.stringify(projects));
-      this.renderProjects();
-    }
-  }
-
-  renderProjects() {
-    // Get the projects from local storage
-    const projects = this.getProjects();
-    const projectList = document.querySelector(".projects-list");
-
-    const addProject = document.createElement("div");
-    addProject.classList.add("project", "project--add");
-    addProject.innerHTML = `
-    <div class="project__details">
-      <input type="text" class="project__title" id="project-name" placeholder="Project Name" />
-    </div>
-    `;
-
-    const projectActions = document.createElement("div");
-    projectActions.classList.add("project__actions");
-
-    const projectAdd = document.createElement("button");
-    projectAdd.classList.add("project__add");
-    projectAdd.innerHTML = `Add Project`;
-    projectAdd.addEventListener("click", () => this.addProject());
-
-    projectActions.appendChild(projectAdd);
-    addProject.appendChild(projectActions);
-
-    // Check if there are any projects
-    if (projects.length !== 0) {
-      // If there are projects, clear the project list
-      projectList.innerHTML = "";
-      projects.forEach((project) => {
-        console.log(project);
-        // Create a project item
-        const projectItem = document.createElement("div");
-        projectItem.setAttribute("data-project-id", project.id);
-        projectItem.classList.add("project");
-
-        // Create a project details node
-        const projectDetails = document.createElement("div");
-        projectDetails.classList.add("project__details");
-
-        // Create a project title node
-        const detailsInput = document.createElement("input");
-        detailsInput.setAttribute("type", "text");
-        detailsInput.setAttribute("value", project.name);
-        detailsInput.classList.add("project__title");
-        detailsInput.addEventListener("change", (e) => {
-          this.updateProjectName(project.id, e.target.value);
-        });
-
-        const colorPicker = document.createElement("input");
-        colorPicker.setAttribute("type", "color");
-        colorPicker.classList.add("project__color-picker");
-        colorPicker.value = project.color || "#ffffff"; // Default to white if no color is set
-        colorPicker.addEventListener("change", (e) => {
-          this.updateProjectColor(project.id, e.target.value);
-        });
-
-        const projectActions = document.createElement("div");
-        projectActions.classList.add("project__actions");
-
-        const projectDelete = document.createElement("button");
-        projectDelete.classList.add("project__delete");
-        projectDelete.innerHTML = `Delete`;
-        projectDelete.addEventListener("click", () => {
-          this.deleteProject(project.id);
-        });
-
-        projectActions.appendChild(colorPicker);
-        projectActions.appendChild(projectDelete);
-
-        // Build the project details
-        projectDetails.appendChild(detailsInput);
-        projectItem.appendChild(projectDetails);
-        projectItem.appendChild(projectActions);
-
-        projectList.appendChild(projectItem);
-      });
-    }
-
-    projectList.appendChild(addProject);
-  }
-
-  getProjects() {
-    return JSON.parse(localStorage.getItem("projects")) || [];  
-  }
-
-  renderProjectsDropdown() {
-    const projectsDropdown = document.querySelector(".projects-dropdown");
-    const projects = this.getProjects();
-
-    const defaultOption = document.createElement("option");
-    defaultOption.classList.add("projects-dropdown__item");
-    defaultOption.setAttribute("value", "");
-    defaultOption.innerHTML = "No Project";
-    projectsDropdown.appendChild(defaultOption);
-    
-    if (projects.length !== 0) {
-      projects.forEach((project) => {
-        const projectItem = document.createElement("option");
-        projectItem.classList.add("projects-dropdown__item");
-        projectItem.setAttribute("value", project.id);
-        projectItem.innerHTML = project.name;
-        projectsDropdown.appendChild(projectItem);
-      });
-    }
-  }
-
-  deleteProject(projectId) {
-    let projects = this.getProjects(); // Retrieve the current list of projects
-    projects = projects.filter((project) => project.id !== projectId); // Filter out the project with the given ID
-    localStorage.setItem("projects", JSON.stringify(projects)); // Update the projects in local storage
-    this.renderProjects(); // Refresh the displayed project list
-  }
-}
-
 class App {
   constructor() {
     this.utils = new Utils();
+    this.project = new Project();
     this.task = new Task();
     this.timer = new Timer();
-    this.project = new Project();
   }
   init() {
     if (window.location.href.toLowerCase().includes("projects.html")) {
@@ -763,5 +824,4 @@ let app;
 document.addEventListener("DOMContentLoaded", () => {
   app = new App();
   app.init();
-  console.log("App initialized");
 });

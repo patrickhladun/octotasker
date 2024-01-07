@@ -298,6 +298,9 @@ main {
 .project__actions {
   display: flex;
   justify-content: center;
-  align-items: center;
   gap: 8px;
+}
+.project__add {
+  display: flex;
+  white-space: nowrap;
 }
