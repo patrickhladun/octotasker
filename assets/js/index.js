@@ -519,7 +519,12 @@ class Task {
     dueDate.setAttribute("value", task.dueDate);
 
     const projects = JSON.parse(localStorage.getItem("projects")) || [];
-    const taskProject = projects.find((project) => project.id === task.projectId);
+
+    let taskProject = projects.find((project) => project.id === task.projectId);
+    if(taskProject === undefined) {
+      taskProject = {name: "No Project", id: ""};
+    }
+
     const projectSelect = document.createElement("select");
     projectSelect.setAttribute("id", "edit-task-project");
     projectSelect.setAttribute("value", task.projectId);
