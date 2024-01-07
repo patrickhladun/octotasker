@@ -114,6 +114,7 @@ main {
   align-items: center;
   padding: 8px;
   border-radius: 4px;
+  margin-bottom: 4px;
 }
 .task__status {
   display: flex;

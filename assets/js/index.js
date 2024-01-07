@@ -273,7 +273,12 @@ class Task {
     const runningTask = tasks.find((task) => task.isRunning === true);
 
     if(tasks.length <= 0) {
-      taskList.innerHTML = "<p>No tasks yet</p>";
+      const noTasks = document.createElement("p");
+      noTasks.classList.add("no-tasks");
+      noTasks.innerHTML = "No tasks yet. Add a task to get started.";
+      tasksUncompleted.appendChild(noTasks);
+      taskList.appendChild(tasksUncompleted);
+      taskList.appendChild(tasksCompleted);
       return;
     }
 
