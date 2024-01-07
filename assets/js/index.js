@@ -41,6 +41,7 @@ class Task {
     this.startTime = 0;
     this.isRunning = false;
     this.completed = false;
+    this.projectId = "";
   }
 
   addTask() {
@@ -545,9 +546,16 @@ class Project {
     this.color = "";
   }
   renderProjects() {
-    console.log("render projects");
     const projectsList = document.querySelector(".projects-list");
     projectsList.innerHTML = "Projects goe here";
+  }
+  renderProjectsDropdown() {
+    console.log("render projects dropdown")
+    const projectsDropdown = document.querySelector(".projects-dropdown");
+    const projectsItem = `
+      <option value="">Select Project</option>
+    `
+    projectsDropdown.innerHTML = projectsItem;
   }
 }
 
@@ -566,6 +574,7 @@ class App {
       this.task.renderTasks();
       this.timer.restartTimer();
       this.timer.updateWeeklyTime();
+      this.project.renderProjectsDropdown();
       document
         .querySelector('[data-action="task-timer"]')
         .addEventListener("click", (e) => this.timer.toggleTimer(e));
