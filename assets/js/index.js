@@ -62,7 +62,6 @@ class Task {
 
     // Create a new task object
     const newTask = new Task(taskName, taskId);
-    console.log(newTask);
 
     // Add the new task to the tasks array
     tasks.push(newTask);
@@ -124,6 +123,10 @@ class Task {
         detailsInput.setAttribute("type", "text");
         detailsInput.setAttribute("value", task.name);
         detailsInput.classList.add("task__title");
+        detailsInput.setAttribute("data-task-id", task.id);
+        detailsInput.addEventListener("change", (e) => {
+          this.updateTaskName(task.id, e.target.value);
+        });
 
         // Build the task details
         taskDetails.appendChild(detailsStatus);
@@ -221,6 +224,13 @@ class Task {
       // If there are no tasks, display a message
       taskList.innerHTML = "<p>No tasks yet</p>";
     }
+  }
+
+  updateTaskName(taskId, taskName) {
+    const tasks = this.getTasks();
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+    tasks[taskIndex].name = taskName;
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 
   /**

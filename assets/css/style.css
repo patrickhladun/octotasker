@@ -157,9 +157,11 @@ main {
   justify-content: center;
   align-items: center;
   gap: 8px;
+  width: 100%;
 }
 .task__title {
   margin-right: auto;
+  width: 100%;
 }
 .task__actions {
   display: flex;
