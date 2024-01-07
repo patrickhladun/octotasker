@@ -676,6 +676,9 @@ class Project {
         const projectDelete = document.createElement("button");
         projectDelete.classList.add("project__delete");
         projectDelete.innerHTML = `Delete`;
+        projectDelete.addEventListener("click", () => {
+          this.deleteProject(project.id);
+        });
 
         projectActions.appendChild(colorPicker);
         projectActions.appendChild(projectDelete);
@@ -715,6 +718,13 @@ class Project {
         projectsDropdown.appendChild(projectItem);
       });
     }
+  }
+
+  deleteProject(projectId) {
+    let projects = this.getProjects(); // Retrieve the current list of projects
+    projects = projects.filter((project) => project.id !== projectId); // Filter out the project with the given ID
+    localStorage.setItem("projects", JSON.stringify(projects)); // Update the projects in local storage
+    this.renderProjects(); // Refresh the displayed project list
   }
 }
 
