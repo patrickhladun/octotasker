@@ -549,8 +549,14 @@ class Project {
     const projectsList = document.querySelector(".projects-list");
     projectsList.innerHTML = "Projects goe here";
   }
+
+  getProjects() {
+    return JSON.parse(localStorage.getItem("projects")) || [];  
+  }
+
   renderProjectsDropdown() {
     console.log("render projects dropdown")
+    console.log(this.getProjects());
     const projectsDropdown = document.querySelector(".projects-dropdown");
     const projectsItem = `
       <option value="">Select Project</option>
