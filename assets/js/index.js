@@ -576,6 +576,18 @@ class Project {
     return projectId;
   }
 
+  updateProjectColor(projectId, color) {
+    const projects = this.getProjects();
+    const projectIndex = projects.findIndex(
+      (project) => project.id === projectId
+    );
+    if (projectIndex !== -1) {
+      projects[projectIndex].color = color;
+      localStorage.setItem("projects", JSON.stringify(projects));
+      this.renderProjects();
+    }
+  }
+
   renderProjects() {
     // Get the projects from local storage
     const projects = this.getProjects();
@@ -657,10 +669,23 @@ class Project {
 
   renderProjectsDropdown() {
     const projectsDropdown = document.querySelector(".projects-dropdown");
-    const projectsItem = `
-      <option value="">Select Project</option>
-    `
-    projectsDropdown.innerHTML = projectsItem;
+    const projects = this.getProjects();
+
+    const defaultOption = document.createElement("option");
+    defaultOption.classList.add("projects-dropdown__item");
+    defaultOption.setAttribute("data-project-id", "");
+    defaultOption.innerHTML = "No Project";
+    projectsDropdown.appendChild(defaultOption);
+    
+    if (projects.length !== 0) {
+      projects.forEach((project) => {
+        const projectItem = document.createElement("option");
+        projectItem.classList.add("projects-dropdown__item");
+        projectItem.setAttribute("data-project-id", project.id);
+        projectItem.innerHTML = project.name;
+        projectsDropdown.appendChild(projectItem);
+      });
+    }
   }
 }
 
