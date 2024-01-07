@@ -31,7 +31,7 @@ class Task {
    * @param {*} dueDate
    * @param {*} creationDate
    */
-  constructor(name, id) {
+  constructor(name, id, projectId) {
     this.id = id;
     this.name = name;
     this.dueDate = "";
@@ -41,13 +41,17 @@ class Task {
     this.startTime = 0;
     this.isRunning = false;
     this.completed = false;
-    this.projectId = "";
+    this.projectId = projectId;
   }
 
   addTask() {
     // Get the task name from the input
     const taskInput = document.getElementById("task-name");
     const taskName = taskInput.value.trim();
+
+    const taskProject = document.getElementById("task-project");
+    const projectId = taskProject.value;
+    console.log(projectId)
 
     // Generate a unique id
     const taskId = Utils.generateUniqueId();
@@ -61,8 +65,8 @@ class Task {
     const tasks = this.getTasks();
 
     // Create a new task object
-    const newTask = new Task(taskName, taskId);
-
+    const newTask = new Task(taskName, taskId, projectId);
+    console.log(newTask)
     // Add the new task to the tasks array
     tasks.push(newTask);
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -598,6 +602,18 @@ class Project {
     }
   }
 
+  updateProjectName(projectId, projectName) {
+    const projects = this.getProjects();
+    const projectIndex = projects.findIndex(
+      (project) => project.id === projectId
+    );
+    if (projectIndex !== -1) {
+      projects[projectIndex].name = projectName;
+      localStorage.setItem("projects", JSON.stringify(projects));
+      this.renderProjects();
+    }
+  }
+
   renderProjects() {
     // Get the projects from local storage
     const projects = this.getProjects();
@@ -642,6 +658,9 @@ class Project {
         detailsInput.setAttribute("type", "text");
         detailsInput.setAttribute("value", project.name);
         detailsInput.classList.add("project__title");
+        detailsInput.addEventListener("change", (e) => {
+          this.updateProjectName(project.id, e.target.value);
+        });
 
         const colorPicker = document.createElement("input");
         colorPicker.setAttribute("type", "color");
@@ -683,7 +702,7 @@ class Project {
 
     const defaultOption = document.createElement("option");
     defaultOption.classList.add("projects-dropdown__item");
-    defaultOption.setAttribute("data-project-id", "");
+    defaultOption.setAttribute("value", "");
     defaultOption.innerHTML = "No Project";
     projectsDropdown.appendChild(defaultOption);
     
@@ -691,7 +710,7 @@ class Project {
       projects.forEach((project) => {
         const projectItem = document.createElement("option");
         projectItem.classList.add("projects-dropdown__item");
-        projectItem.setAttribute("data-project-id", project.id);
+        projectItem.setAttribute("value", project.id);
         projectItem.innerHTML = project.name;
         projectsDropdown.appendChild(projectItem);
       });
