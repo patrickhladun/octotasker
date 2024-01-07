@@ -1,4 +1,4 @@
-# Octotasker - CI Project 2
+# Octotasker - CI Project 2 v.0.4.0
 
 ## User Stories
 
