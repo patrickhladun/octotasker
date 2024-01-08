@@ -70,8 +70,16 @@ main {
   border-radius: 6px;
 }
 .button--regular {
-  padding: 12px 16px;
+  padding: 10px 16px;
   border-radius: 10px;
+}
+
+.button--primary {
+  background-color: #4c79c1;
+  color: #ffffff;
+}
+.button--primary:hover {
+  background-color: #3a66b3;
 }
 
 .button--danger {
@@ -79,12 +87,15 @@ main {
   color: #ffffff;
 }
 
-.button--close svg 
-
-.button--danger-ghost {
+.button--danger-outline {
   background-color: transparent;
-  border: 2px solid #ff0000;
+  border: 1px solid #ff0000;
   color: #ff0000;
+  transition: all 0.2s ease-in-out;
+}
+.button--danger-outline:hover {
+  background-color: #ff0000;
+  color: #ffffff;
 }
 
 .button--clear-completed {
@@ -142,7 +153,7 @@ main {
   background-color: #f2f2f2;
 }
 .action-icon svg {
-  fill: lightgray;
+  fill: #7b9bda;
   width: 100%;
   height: 100%;
 }
@@ -319,6 +330,13 @@ main {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.edit-window__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 16px;
 }
 
 /*** Projects ***/

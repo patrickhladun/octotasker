@@ -417,7 +417,7 @@ class Task {
 
       // Create an edit button
       const editButton = document.createElement("button");
-      editButton.classList.add("button", "button--small", "button--edit");
+      editButton.classList.add("button", "button--small", "button--primary");
       editButton.setAttribute("data-task-id", task.id);
       editButton.addEventListener("click", () => {
         this.closeOptionsMenu(task.id);
@@ -427,7 +427,7 @@ class Task {
 
       // Create a delete button
       const deleteButton = document.createElement("button");
-      deleteButton.classList.add(`button`, "button--small", `button--delete`);
+      deleteButton.classList.add("button", "button--small", "button--danger-outline");
       deleteButton.innerHTML = "Delete";
       deleteButton.addEventListener("click", () =>
         this.deleteTaskById(task.id)
@@ -606,7 +606,7 @@ class Task {
     footer.classList.add("edit-window__footer");
 
     const saveButton = document.createElement("button");
-    saveButton.classList.add("button", "button--save");
+    saveButton.classList.add("button", "button--regular", "button--primary");
     saveButton.innerHTML = "Save";
     saveButton.addEventListener("click", () => {
       const taskName = document.getElementById("edit-task-name").value;
@@ -617,7 +617,7 @@ class Task {
     });
 
     const closeButton = document.createElement("button");
-    closeButton.classList.add("button", "button--close");
+    closeButton.classList.add("button", "button--regular", "button--danger-outline");
     closeButton.innerHTML = "Close";
     closeButton.addEventListener("click", () => {
       editWindow.remove();
