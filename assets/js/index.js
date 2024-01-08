@@ -270,7 +270,7 @@ class Task {
     tasksCompleted.innerHTML = "<h2>Completed</h2>";
 
     const clearCompleted = document.createElement("button");
-    clearCompleted.classList.add("clear-completed");
+    clearCompleted.classList.add("button", "button--clear");
     clearCompleted.innerHTML = "Clear Completed Tasks";
     clearCompleted.addEventListener("click", () => this.clearCompleted());
 
@@ -318,6 +318,20 @@ class Task {
         this.toggleCompleted(task.id)
       );
 
+      // Task Project
+      const projects = JSON.parse(localStorage.getItem("projects")) || [];
+      const taskProject = projects.find((project) => project.id === task.projectId);
+
+      const taskProjectDot = document.createElement("div");
+      taskProjectDot.classList.add("task__project");
+      if(taskProject !== undefined) {
+        taskProjectDot.setAttribute("title", taskProject.name);
+        taskProjectDot.style.backgroundColor = taskProject.color;
+      } else {
+        taskProjectDot.setAttribute("title", "No Project");
+        taskProjectDot.style.backgroundColor = "#ffffff";
+      }
+
       // Create a task title node
       const detailsInput = document.createElement("input");
       detailsInput.setAttribute("type", "text");
@@ -330,6 +344,7 @@ class Task {
 
       // Build the task details
       taskDetails.appendChild(detailsStatus);
+      taskDetails.appendChild(taskProjectDot);
       taskDetails.appendChild(detailsInput);
       taskItem.appendChild(taskDetails);
 
@@ -383,7 +398,7 @@ class Task {
 
       // Create an edit button
       const editButton = document.createElement("button");
-      editButton.classList.add("task__options-edit");
+      editButton.classList.add("button", "button--edit");
       editButton.setAttribute("data-task-id", task.id);
       editButton.addEventListener("click", () => {
         this.closeOptionsMenu(task.id);
@@ -393,7 +408,7 @@ class Task {
 
       // Create a delete button
       const deleteButton = document.createElement("button");
-      deleteButton.classList.add(`task__options-menu-item`);
+      deleteButton.classList.add(`button`, `button--delete`);
       deleteButton.innerHTML = "Delete";
       deleteButton.addEventListener("click", () =>
         this.deleteTaskById(task.id)
@@ -401,7 +416,7 @@ class Task {
 
       // Create a close button
       const closeButton = document.createElement("button");
-      closeButton.classList.add("task__options-menu-item");
+      closeButton.classList.add("button", "button--close");
       closeButton.addEventListener("click", () =>
         this.closeOptionsMenu(task.id)
       );
@@ -571,7 +586,7 @@ class Task {
     footer.classList.add("edit-window__footer");
 
     const saveButton = document.createElement("button");
-    saveButton.classList.add("edit-window__save");
+    saveButton.classList.add("button", "button--save");
     saveButton.innerHTML = "Save";
     saveButton.addEventListener("click", () => {
       const taskName = document.getElementById("edit-task-name").value;
@@ -582,7 +597,7 @@ class Task {
     });
 
     const closeButton = document.createElement("button");
-    closeButton.classList.add("edit-window__close");
+    closeButton.classList.add("button", "button--close");
     closeButton.innerHTML = "Close";
     closeButton.addEventListener("click", () => {
       editWindow.remove();
