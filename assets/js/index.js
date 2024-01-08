@@ -89,6 +89,7 @@ class Project {
     // Get the projects from local storage
     const projects = this.getProjects();
     const projectList = document.querySelector(".projects-list");
+    projectList.innerHTML = "";
 
     const addProject = document.createElement("div");
     addProject.classList.add("project", "project--add");
@@ -112,7 +113,6 @@ class Project {
     // Check if there are any projects
     if (projects.length !== 0) {
       // If there are projects, clear the project list
-      projectList.innerHTML = "";
       projects.forEach((project) => {
         console.log(project);
         // Create a project item
