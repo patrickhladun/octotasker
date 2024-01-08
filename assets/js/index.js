@@ -278,7 +278,7 @@ class Task {
     clearCompleted.classList.add(
       "button",
       "button--regular",
-      "button--danger-ghost",
+      "button--danger-outline",
       "button--clear-completed"
     );
     clearCompleted.innerHTML = "Clear Completed Tasks";
@@ -393,7 +393,12 @@ class Task {
       ry="2.03"
     /></svg>`;
       startButton.setAttribute("data-task-id", task.id);
-      startButton.addEventListener("click", (e) => app.timer.toggleTimer(e));
+      // If the task is completed, disable the start button
+      if (task.completed) {
+        startButton.setAttribute("disabled", true);
+      } else {
+        startButton.addEventListener("click", (e) => app.timer.toggleTimer(e));
+      }      
       taskActions.appendChild(startButton);
 
       // Create an options buttons
