@@ -272,10 +272,15 @@ class Task {
     tasksCompleted.innerHTML = "<h2>Completed</h2>";
 
     const clearCompleted = document.createElement("button");
-    if (tasks.filter(task => task.completed === true).length === 0) {
+    if (tasks.filter((task) => task.completed === true).length === 0) {
       clearCompleted.style.display = "none";
     }
-    clearCompleted.classList.add("button", "button--regular", "button--danger-ghost", "button--clear-completed");
+    clearCompleted.classList.add(
+      "button",
+      "button--regular",
+      "button--danger-ghost",
+      "button--clear-completed"
+    );
     clearCompleted.innerHTML = "Clear Completed Tasks";
     clearCompleted.addEventListener("click", () => this.clearCompleted());
 
@@ -377,8 +382,16 @@ class Task {
         startButton.classList.add("timer-toggle", "action-icon");
       }
       startButton.innerHTML = `
-      <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="m31.79,16.33c1.21.74,1.21,2.6,0,3.34l-12.88,7.87-12.88,7.87c-1.21.74-2.73-.19-2.73-1.67V2.25C3.3.77,4.82-.16,6.03.58l12.88,7.87,12.88,7.87Z" /></svg>
-      <svg class="icon-stop" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="4.71" y="4.71" width="26.58" height="26.58" rx="2.03" ry="2.03"/></svg>`;
+      <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="m29.8,16.04c1.51.87,1.51,3.06,0,3.93l-8.43,4.87-8.43,4.87c-1.51.87-3.4-.22-3.4-1.96V8.26c0-1.75,1.89-2.84,3.4-1.96l8.43,4.87,8.43,4.87Z"
+    /></svg>
+      <svg class="icon-stop" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect
+      x="6.23"
+      y="6.23"
+      width="23.54"
+      height="23.54"
+      rx="2.03"
+      ry="2.03"
+    /></svg>`;
       startButton.setAttribute("data-task-id", task.id);
       startButton.addEventListener("click", (e) => app.timer.toggleTimer(e));
       taskActions.appendChild(startButton);
@@ -422,11 +435,13 @@ class Task {
 
       // Create a close button
       const closeButton = document.createElement("button");
-      closeButton.classList.add("button", "button--close");
+      closeButton.classList.add("action-icon", "action-icon--danger");
       closeButton.addEventListener("click", () =>
         this.closeOptionsMenu(task.id)
       );
-      closeButton.innerHTML = "X";
+      closeButton.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path class="cls-1" d="m27.87,23.47l-5.48-5.48,5.48-5.48c.6-.6.61-1.59,0-2.19l-2.19-2.19c-.6-.6-1.59-.61-2.19,0l-5.48,5.48-5.47-5.47c-.6-.6-1.59-.61-2.19,0l-2.19,2.19c-.6.6-.61,1.59,0,2.19l5.48,5.48-5.48,5.48c-.6.6-.61,1.59,0,2.19l2.19,2.19c.6.6,1.59.61,2.19,0l5.48-5.48,5.48,5.48c.6.6,1.59.61,2.19,0l2.19-2.19c.6-.6.61-1.59,0-2.19h0Z"/></svg>
+      `;
 
       // Append the buttons to the options menu
       optionsMenu.appendChild(editButton);
