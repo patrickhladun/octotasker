@@ -261,6 +261,8 @@ class Task {
     const tasks = this.getTasks();
     const taskList = document.getElementById("tasks");
 
+    const projects = JSON.parse(localStorage.getItem("projects")) || [];
+
     const tasksUncompleted = document.createElement("div");
     tasksUncompleted.classList.add("tasks__uncompleted");
     tasksUncompleted.innerHTML = "<h2>Tasks</h2>";
@@ -270,14 +272,17 @@ class Task {
     tasksCompleted.innerHTML = "<h2>Completed</h2>";
 
     const clearCompleted = document.createElement("button");
-    clearCompleted.classList.add("button", "button--clear");
+    if (tasks.filter(task => task.completed === true).length === 0) {
+      clearCompleted.style.display = "none";
+    }
+    clearCompleted.classList.add("button", "button--regular", "button--danger-ghost", "button--clear-completed");
     clearCompleted.innerHTML = "Clear Completed Tasks";
     clearCompleted.addEventListener("click", () => this.clearCompleted());
 
     // Get running task
     const runningTask = tasks.find((task) => task.isRunning === true);
 
-    if(tasks.length <= 0) {
+    if (tasks.length <= 0) {
       taskList.innerHTML = "";
       const noTasks = document.createElement("p");
       noTasks.classList.add("no-tasks");
@@ -319,12 +324,13 @@ class Task {
       );
 
       // Task Project
-      const projects = JSON.parse(localStorage.getItem("projects")) || [];
-      const taskProject = projects.find((project) => project.id === task.projectId);
+      const taskProject = projects.find(
+        (project) => project.id === task.projectId
+      );
 
       const taskProjectDot = document.createElement("div");
       taskProjectDot.classList.add("task__project");
-      if(taskProject !== undefined) {
+      if (taskProject !== undefined) {
         taskProjectDot.setAttribute("title", taskProject.name);
         taskProjectDot.style.backgroundColor = taskProject.color;
       } else {
@@ -398,7 +404,7 @@ class Task {
 
       // Create an edit button
       const editButton = document.createElement("button");
-      editButton.classList.add("button", "button--edit");
+      editButton.classList.add("button", "button--small", "button--edit");
       editButton.setAttribute("data-task-id", task.id);
       editButton.addEventListener("click", () => {
         this.closeOptionsMenu(task.id);
@@ -408,7 +414,7 @@ class Task {
 
       // Create a delete button
       const deleteButton = document.createElement("button");
-      deleteButton.classList.add(`button`, `button--delete`);
+      deleteButton.classList.add(`button`, "button--small", `button--delete`);
       deleteButton.innerHTML = "Delete";
       deleteButton.addEventListener("click", () =>
         this.deleteTaskById(task.id)
@@ -444,7 +450,6 @@ class Task {
       taskList.appendChild(tasksCompleted);
       tasksCompleted.appendChild(clearCompleted);
     });
-    
   }
 
   updateTaskName(taskId, taskName) {
@@ -553,8 +558,8 @@ class Task {
     const projects = JSON.parse(localStorage.getItem("projects")) || [];
 
     let taskProject = projects.find((project) => project.id === task.projectId);
-    if(taskProject === undefined) {
-      taskProject = {name: "No Project", id: ""};
+    if (taskProject === undefined) {
+      taskProject = { name: "No Project", id: "" };
     }
 
     const projectSelect = document.createElement("select");
@@ -563,13 +568,13 @@ class Task {
     projectSelect.innerHTML = `
       <option value="${task.projectId}">${taskProject.name}</option>
     `;
-    
+
     projects.forEach((project) => {
       const projectItem = document.createElement("option");
       projectItem.classList.add("projects-dropdown__item");
       projectItem.setAttribute("value", project.id);
       projectItem.innerHTML = project.name;
-      console.log(projectItem)
+      console.log(projectItem);
       projectSelect.appendChild(projectItem);
     });
 
@@ -619,8 +624,8 @@ class Task {
     tasks[taskIndex].name = taskName;
     tasks[taskIndex].dueDate = dueDate;
     tasks[taskIndex].projectId = projectId;
-    tasks[taskIndex].details = details;    
-    console.log(tasks[taskIndex])
+    tasks[taskIndex].details = details;
+    console.log(tasks[taskIndex]);
     localStorage.setItem("tasks", JSON.stringify(tasks));
     this.renderTasks();
     if (menu) {
@@ -633,7 +638,7 @@ class Task {
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
     return tasks[taskIndex];
   }
-  
+
   setupEditButtonListener() {
     const editButtons = document.querySelectorAll(".task__options-edit");
     editButtons.forEach((button) => {
