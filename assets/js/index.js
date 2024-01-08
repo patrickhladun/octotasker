@@ -103,7 +103,7 @@ class Project {
     projectActions.classList.add("project__actions");
 
     const projectAdd = document.createElement("button");
-    projectAdd.classList.add("project__add");
+    projectAdd.classList.add("project__add", "button", "button--regular", "button--primary");
     projectAdd.innerHTML = `Add Project`;
     projectAdd.addEventListener("click", () => this.addProject());
 
@@ -145,16 +145,16 @@ class Project {
         projectActions.classList.add("project__actions");
 
         const projectDelete = document.createElement("button");
-        projectDelete.classList.add("project__delete");
+        projectDelete.classList.add("project__delete", "button", "button--small", "button--danger-outline");
         projectDelete.innerHTML = `Delete`;
         projectDelete.addEventListener("click", () => {
           this.deleteProject(project.id);
         });
 
-        projectActions.appendChild(colorPicker);
         projectActions.appendChild(projectDelete);
 
         // Build the project details
+        projectDetails.appendChild(colorPicker);
         projectDetails.appendChild(detailsInput);
         projectItem.appendChild(projectDetails);
         projectItem.appendChild(projectActions);
