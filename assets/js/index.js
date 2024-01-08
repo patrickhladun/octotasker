@@ -565,22 +565,58 @@ class Task {
     const details = document.createElement("div");
     details.classList.add("edit-window__body");
 
+    // Build Task Name Field
+    const nameField = document.createElement("div");
+    nameField.classList.add("field");
+
+    const nameLabel = document.createElement("label");
+    nameLabel.classList.add("field__label");
+    nameLabel.setAttribute("for", "edit-task-name");
+    nameLabel.innerHTML = "Task Name";
+
     const taskName = document.createElement("input");
     taskName.setAttribute("type", "text");
     taskName.setAttribute("id", "edit-task-name");
     taskName.setAttribute("value", task.name);
+
+    nameField.appendChild(nameLabel);
+    nameField.appendChild(taskName);
+
+    // Build Due Date Field
+    const dueDateField = document.createElement("div");
+    dueDateField.classList.add("field");
+
+    const dueDateLabel = document.createElement("label");
+    dueDateLabel.classList.add("field__label");
+    dueDateLabel.setAttribute("for", "edit-task-due-date");
+    dueDateLabel.innerHTML = "Due Date";
 
     const dueDate = document.createElement("input");
     dueDate.setAttribute("type", "date");
     dueDate.setAttribute("id", "edit-task-due-date");
     dueDate.setAttribute("value", task.dueDate);
 
+    dueDateField.appendChild(dueDateLabel);
+    dueDateField.appendChild(dueDate);
+    
+    // Get Projects from Local Storage
     const projects = JSON.parse(localStorage.getItem("projects")) || [];
 
+    // If there are no projects, create a default project
     let taskProject = projects.find((project) => project.id === task.projectId);
     if (taskProject === undefined) {
       taskProject = { name: "No Project", id: "" };
     }
+
+    // Build Project Field
+
+    const projectsField = document.createElement("div");
+    projectsField.classList.add("field");
+
+    const projectLabel = document.createElement("label");
+    projectLabel.classList.add("field__label");
+    projectLabel.setAttribute("for", "edit-task-project");
+    projectLabel.innerHTML = "Project";
 
     const projectSelect = document.createElement("select");
     projectSelect.setAttribute("id", "edit-task-project");
@@ -594,18 +630,34 @@ class Task {
       projectItem.classList.add("projects-dropdown__item");
       projectItem.setAttribute("value", project.id);
       projectItem.innerHTML = project.name;
-      console.log(projectItem);
       projectSelect.appendChild(projectItem);
     });
+
+    projectsField.appendChild(projectLabel);
+    projectsField.appendChild(projectSelect);
+
+
+    // Build Details Field
+
+    const detailsField = document.createElement("div");
+    detailsField.classList.add("field");
+
+    const detailsLabel = document.createElement("label");
+    detailsLabel.classList.add("field__label");
+    detailsLabel.setAttribute("for", "edit-task-details");
+    detailsLabel.innerHTML = "Details";
 
     const taskDetails = document.createElement("textarea");
     taskDetails.setAttribute("id", "edit-task-details");
     taskDetails.innerHTML = task.details;
 
-    details.appendChild(taskName);
-    details.appendChild(dueDate);
-    details.appendChild(projectSelect);
-    details.appendChild(taskDetails);
+    detailsField.appendChild(detailsLabel);
+    detailsField.appendChild(taskDetails);
+
+    details.appendChild(nameField);
+    details.appendChild(dueDateField);
+    details.appendChild(projectsField);
+    details.appendChild(detailsField);
 
     const footer = document.createElement("div");
     footer.classList.add("edit-window__footer");
