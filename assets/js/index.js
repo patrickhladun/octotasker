@@ -269,6 +269,11 @@ class Task {
     tasksCompleted.classList.add("tasks__completed");
     tasksCompleted.innerHTML = "<h2>Completed</h2>";
 
+    const clearCompleted = document.createElement("button");
+    clearCompleted.classList.add("clear-completed");
+    clearCompleted.innerHTML = "Clear Completed Tasks";
+    clearCompleted.addEventListener("click", () => this.clearCompleted());
+
     // Get running task
     const runningTask = tasks.find((task) => task.isRunning === true);
 
@@ -422,6 +427,7 @@ class Task {
 
       taskList.appendChild(tasksUncompleted);
       taskList.appendChild(tasksCompleted);
+      tasksCompleted.appendChild(clearCompleted);
     });
     
   }
@@ -450,6 +456,16 @@ class Task {
     tasks = tasks.filter((task) => task.id !== taskId); // Filter out the task with the given ID
     localStorage.setItem("tasks", JSON.stringify(tasks)); // Update the tasks in local storage
     this.renderTasks(); // Refresh the displayed task list
+  }
+
+  /**
+   * Delete all completed tasks
+   */
+  clearCompleted() {
+    let tasks = this.getTasks();
+    tasks = tasks.filter((task) => task.completed !== true);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    this.renderTasks();
   }
 
   /**
