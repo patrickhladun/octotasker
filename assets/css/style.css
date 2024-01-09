@@ -3,9 +3,11 @@
 /* ================================================== */
 
 :root {
+  --color-primary-400: #7094cd;
   --color-primary-500: #4c79c1;
   --color-primary-600: #3d619a;
   --color-primary-700: #2e4974;
+  --color-primary-800: #1e304d;
 
   --color-neutral-50: #f9f9f9;
   --color-neutral-100: #f0f0f0;
@@ -57,9 +59,12 @@ a {
 }
 
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: var(--color-neutral-50);
+  padding: 8px 16px;
   width: 100%;
-  height: auto;
 }
 
 main {
@@ -69,15 +74,13 @@ main {
 
 .branding {
   display: flex;
-  justify-content: center;
-  margin-top: 16px;
-  width: 100%;
+  width: 100px;
 }
 
 .logo {
   flex: 1 0 auto;
   height: 100%;
-  max-width: 72px;
+  max-width: 64px;
 }
 
 .logo .cls-1 {
@@ -86,6 +89,35 @@ main {
 
 .logo .cls-2 {
   fill: var(--color-primary-500);
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  gap: 16px;
+}
+
+nav ul li a {
+  background-color: var(--color-neutral-150);
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+nav ul li a:hover {
+  background-color: var(--color-neutral-200);
+}
+
+nav ul li a.active {
+  background-color: var(--color-primary-600);
+  color: var(--color-text-light);
+}
+
+nav ul li a.active:hover {
+  background-color: var(--color-primary-700);
+  color: var(--color-text-light);
 }
 
 /* ================================================== */
@@ -198,9 +230,9 @@ textarea {
 .field input,
 .field select,
 .field textarea {
+  padding: 6px;
   border: 1px solid var(--color-neutral-300);
   width: 100%;
-  padding: 6px;
 }
 
 .field .field__label {
@@ -508,6 +540,38 @@ textarea {
   }
 
   main {
+    width: 100%;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: var(--color-neutral-50);
+    padding: 8px 16px;
+    width: 120px;
+  }
+
+  .branding {
+    justify-content: center;
+    margin-bottom: 36px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+    gap: 8px;
+  }
+
+  nav ul li {
+    width: 100%;
+  }
+
+  nav ul li a {
+    display: inline-block;
     width: 100%;
   }
 }
