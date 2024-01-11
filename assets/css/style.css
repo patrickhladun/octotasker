@@ -535,6 +535,21 @@ textarea {
   min-width: 200px;
 }
 
+.alert {
+  background-color: var(--color-neutral-50);
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+.alert--success {
+  background-color: var(--color-green-150);
+}
+
+.alert--danger {
+  background-color: var(--color-red-500);
+}
+
 .task-timer-stared {
   animation: fadeBackground 2s ease forwards;
 }

@@ -54,21 +54,22 @@ class Utils {
     const alertContainer = document.getElementById("alert-container");
     const alertDiv = document.createElement("div");
 
-    // Customize your alertDiv based on the 'type' (e.g., error, success)
-    alertDiv.style.backgroundColor = type === "error" ? "#ffdddd" : "#ddffdd";
-    alertDiv.style.border =
-      type === "error" ? "1px solid #ff0000" : "1px solid #00ff00";
-    alertDiv.style.marginBottom = "10px";
-    alertDiv.style.padding = "10px";
-    alertDiv.style.borderRadius = "5px";
+    if(type === "danger") {
+      alertDiv.classList.add("alert", "alert--danger");
+    } else if(type === "success") {
+      alertDiv.classList.add("alert", "alert--success");
+    } else {
+      alertDiv.classList.add("alert", "alert--info");
+    }
+
     alertDiv.innerText = message;
 
     alertContainer.appendChild(alertDiv);
 
-    // Remove the alert after 3 seconds
+    // Remove the alert after 2 seconds
     setTimeout(() => {
       alertContainer.removeChild(alertDiv);
-    }, 3000);
+    }, 2000);
   }
 }
 
@@ -132,6 +133,8 @@ class Project {
     projectInput.value = "";
     this.renderProjects();
 
+    Utils.showAlert("Project added successfully", "success");
+
     return projectId;
   }
 
@@ -152,6 +155,7 @@ class Project {
       projects[projectIndex].color = color;
       localStorage.setItem("projects", JSON.stringify(projects));
       this.renderProjects();
+      Utils.showAlert("Project color updated successfully", "success");
     }
   }
 
@@ -171,6 +175,7 @@ class Project {
       projects[projectIndex].name = projectName;
       localStorage.setItem("projects", JSON.stringify(projects));
       this.renderProjects();
+      Utils.showAlert("Project name updated successfully", "success");
     }
   }
 
@@ -323,6 +328,7 @@ class Project {
     localStorage.setItem("projects", JSON.stringify(projects));
     // Refresh the displayed project list
     this.renderProjects();
+    Utils.showAlert("Project deleted successfully", "success");
   }
 }
 
@@ -401,12 +407,12 @@ class Task {
     tasks.push(newTask);
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
-    Utils.showAlert("Task added successfully", "success");
-
     // Reset the form
     taskInput.value = "";
     taskProject.value = "";
     this.renderTasks();
+
+    Utils.showAlert("Task added successfully", "success");
 
     return taskId;
   }
@@ -654,6 +660,7 @@ class Task {
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
     tasks[taskIndex].name = taskName;
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    Utils.showAlert("Task name updated successfully", "success");
   }
 
   /**
@@ -676,6 +683,7 @@ class Task {
     tasks = tasks.filter((task) => task.id !== taskId); // Filter out the task with the given ID
     localStorage.setItem("tasks", JSON.stringify(tasks)); // Update the tasks in local storage
     this.renderTasks(); // Refresh the displayed task list
+    Utils.showAlert("Task deleted successfully", "success")
   }
 
   /**
@@ -687,6 +695,7 @@ class Task {
     let tasks = this.getTasks();
     tasks = tasks.filter((task) => task.completed !== true);
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    Utils.showAlert("Completed tasks cleared successfully", "success");
     this.renderTasks();
   }
 
@@ -948,6 +957,8 @@ class Task {
     if (menu) {
       menu.style.display = "none";
     }
+
+    Utils.showAlert("Task updated successfully", "success");
   }
 
   /**
@@ -1070,6 +1081,8 @@ class Timer {
 
     localStorage.setItem("tasks", JSON.stringify(tasks));
     this.updateRunningTimer();
+
+    Utils.showAlert("Timer started for the task", "success");
   }
 
   restartTimer() {
@@ -1137,6 +1150,8 @@ class Timer {
 
     this.updateRunningTaskTimeUI(taskId);
     this.updateRunningTimer();
+
+    Utils.showAlert("Timer stopped for the task", "success");
   }
 
   updateRunningTaskTimeUI(taskId) {
