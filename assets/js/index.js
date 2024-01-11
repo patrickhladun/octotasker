@@ -1,7 +1,17 @@
+/**
+ * The Utils class provides a collection of utility methods for general purposes.
+ * 
+ * Methods:
+ * - generateUniqueId: Generates a unique string ID
+ * - padZero: Adds a leading zero to single-digit numbers
+ * - formatTime: Converts a time into a human-readable string 
+ */
 class Utils {
   /**
-   * Generate unique id using random numbers and the date
-   * @returns string
+   * Generates a unique ID by combining random numbers with the current 
+   * timestamp.
+   * 
+   * @returns {string}
    */
   static generateUniqueId() {
     const random = Math.random().toString().slice(2, 5);
@@ -9,10 +19,27 @@ class Utils {
     return random + date;
   }
 
-  padZero(number) {
-    return number < 10 ? "0" + number : number;
+  /**
+   * Prepends a zero to a single-digit digit (less than 10) and returns 
+   * it as a string. If the digit is 10 or greater, it returns the digit 
+   * as-is.
+   * 
+   * @param {int}
+   * @returns {string}
+   */
+  padZero(digit) {
+    const doubleDigit = digit < 10 ? "0" + digit : digit;
+    return str(doubleDigit)
   }
 
+  /**
+   * Formats a time value given in seconds into a human-readable string of 
+   * hours, minutes, and seconds.Each component (hours, minutes, seconds) 
+   * is padded with a leading zero if it's a single digit.
+   * 
+   * @param {int} time
+   * @returns {string}
+   */
   formatTime(time) {
     let hours = Math.floor(time / 3600);
     hours = app.utils.padZero(hours);
@@ -24,6 +51,25 @@ class Utils {
   }
 }
 
+/**
+ * Represents a project with operations to manage it in local storage.
+ * This class provides methods to add, update, delete, and render projects,
+ * as well as to get project details from local storage.
+ *
+ * Constructor:
+ * @param {string} id
+ * @param {string} name
+ * @param {string} [color=""]
+ *
+ * Key Methods:
+ * - addProject: Adds a new project and returns its ID.
+ * - updateProjectColor: Updates the color of a project.
+ * - updateProjectName: Updates the name of a project.
+ * - deleteProject: Deletes a project by its ID.
+ * - getProjects: Retrieves projects from local storage.
+ * - renderProjects: Renders the list of projects on the UI.
+ * - renderProjectsDropdown: Renders projects in a dropdown menu.
+ */
 class Project {
   constructor(id, name) {
     this.id = id;
@@ -31,6 +77,13 @@ class Project {
     this.color = "";
   }
 
+  /**
+   * Adds a new project to local storage and returns its unique ID.
+   * If the project name is empty, the method will not add it and
+   * returns nothing.
+   *
+   * @returns {string|void}
+   */
   addProject() {
     // Get the project name from the input
     const projectInput = document.getElementById("project-name");
@@ -61,6 +114,14 @@ class Project {
     return projectId;
   }
 
+  /**
+   * Updates the color of a project with a given ID in local storage.
+   * It finds the project by its ID, then changes its color.
+   *
+   * @param {string} projectId
+   * @param {string} color
+   * @returns {void}
+   */
   updateProjectColor(projectId, color) {
     const projects = this.getProjects();
     const projectIndex = projects.findIndex(
@@ -73,6 +134,13 @@ class Project {
     }
   }
 
+  /**
+   * Updates the name of a project with a given ID in local storage.
+   *
+   * @param {string} projectId
+   * @param {string} projectName
+   * @returns {void}
+   */
   updateProjectName(projectId, projectName) {
     const projects = this.getProjects();
     const projectIndex = projects.findIndex(
@@ -85,6 +153,13 @@ class Project {
     }
   }
 
+  /**
+   * Renders the list of projects in the DOM.
+   * It gets the projects from local storage, then iterates through
+   * them and renders them in the DOM.
+   *
+   * @returns {void}
+   */
   renderProjects() {
     // Get the projects from local storage
     const projects = this.getProjects();
@@ -103,7 +178,12 @@ class Project {
     projectActions.classList.add("project__actions");
 
     const projectAdd = document.createElement("button");
-    projectAdd.classList.add("project__add", "button", "button--regular", "button--primary");
+    projectAdd.classList.add(
+      "project__add",
+      "button",
+      "button--regular",
+      "button--primary"
+    );
     projectAdd.innerHTML = `Add Project`;
     projectAdd.addEventListener("click", () => this.addProject());
 
@@ -145,7 +225,12 @@ class Project {
         projectActions.classList.add("project__actions");
 
         const projectDelete = document.createElement("button");
-        projectDelete.classList.add("project__delete", "button", "button--small", "button--danger-outline");
+        projectDelete.classList.add(
+          "project__delete",
+          "button",
+          "button--small",
+          "button--danger-outline"
+        );
         projectDelete.innerHTML = `Delete`;
         projectDelete.addEventListener("click", () => {
           this.deleteProject(project.id);
@@ -166,10 +251,21 @@ class Project {
     projectList.appendChild(addProject);
   }
 
+  /**
+   * Retrieves the projects from local storage and returns them as
+   * an array.
+   *
+   * @returns {Array}
+   */
   getProjects() {
     return JSON.parse(localStorage.getItem("projects")) || [];
   }
 
+  /**
+   * Renders the projects in a dropdown menu.
+   *
+   * @returns {void}
+   */
   renderProjectsDropdown() {
     const projectsDropdown = document.querySelector(".projects-dropdown");
     const projects = this.getProjects();
@@ -191,11 +287,21 @@ class Project {
     }
   }
 
+  /**
+   * Deletes a project from local storage based on its ID.
+   * It removes the project from the stored list and updates the
+   * display.
+   *
+   * @param {string} projectId
+   */
   deleteProject(projectId) {
-    let projects = this.getProjects(); // Retrieve the current list of projects
-    projects = projects.filter((project) => project.id !== projectId); // Filter out the project with the given ID
-    localStorage.setItem("projects", JSON.stringify(projects)); // Update the projects in local storage
-    this.renderProjects(); // Refresh the displayed project list
+    let projects = this.getProjects();
+    // Filter out the project with the given ID
+    projects = projects.filter((project) => project.id !== projectId);
+    // Update the projects in local storage
+    localStorage.setItem("projects", JSON.stringify(projects));
+    // Refresh the displayed project list
+    this.renderProjects();
   }
 }
 
@@ -398,7 +504,7 @@ class Task {
         startButton.setAttribute("disabled", true);
       } else {
         startButton.addEventListener("click", (e) => app.timer.toggleTimer(e));
-      }      
+      }
       taskActions.appendChild(startButton);
 
       // Create an options buttons
@@ -432,7 +538,11 @@ class Task {
 
       // Create a delete button
       const deleteButton = document.createElement("button");
-      deleteButton.classList.add("button", "button--small", "button--danger-outline");
+      deleteButton.classList.add(
+        "button",
+        "button--small",
+        "button--danger-outline"
+      );
       deleteButton.innerHTML = "Delete";
       deleteButton.addEventListener("click", () =>
         this.deleteTaskById(task.id)
@@ -598,7 +708,7 @@ class Task {
 
     dueDateField.appendChild(dueDateLabel);
     dueDateField.appendChild(dueDate);
-    
+
     // Get Projects from Local Storage
     const projects = JSON.parse(localStorage.getItem("projects")) || [];
 
@@ -635,7 +745,6 @@ class Task {
 
     projectsField.appendChild(projectLabel);
     projectsField.appendChild(projectSelect);
-
 
     // Build Details Field
 
@@ -674,7 +783,11 @@ class Task {
     });
 
     const closeButton = document.createElement("button");
-    closeButton.classList.add("button", "button--regular", "button--danger-outline");
+    closeButton.classList.add(
+      "button",
+      "button--regular",
+      "button--danger-outline"
+    );
     closeButton.innerHTML = "Close";
     closeButton.addEventListener("click", () => {
       editWindow.remove();
