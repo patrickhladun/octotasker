@@ -1,16 +1,16 @@
 /**
  * The Utils class provides a collection of utility methods for general purposes.
- * 
+ *
  * Methods:
  * - generateUniqueId: Generates a unique string ID
  * - padZero: Adds a leading zero to single-digit numbers
- * - formatTime: Converts a time into a human-readable string 
+ * - formatTime: Converts a time into a human-readable string
  */
 class Utils {
   /**
-   * Generates a unique ID by combining random numbers with the current 
+   * Generates a unique ID by combining random numbers with the current
    * timestamp.
-   * 
+   *
    * @returns {string}
    */
   static generateUniqueId() {
@@ -20,23 +20,23 @@ class Utils {
   }
 
   /**
-   * Prepends a zero to a single-digit digit (less than 10) and returns 
-   * it as a string. If the digit is 10 or greater, it returns the digit 
+   * Prepends a zero to a single-digit digit (less than 10) and returns
+   * it as a string. If the digit is 10 or greater, it returns the digit
    * as-is.
-   * 
+   *
    * @param {int}
    * @returns {string}
    */
   padZero(digit) {
     const doubleDigit = digit < 10 ? "0" + digit : digit;
-    return str(doubleDigit)
+    return String(doubleDigit);
   }
 
   /**
-   * Formats a time value given in seconds into a human-readable string of 
-   * hours, minutes, and seconds.Each component (hours, minutes, seconds) 
+   * Formats a time value given in seconds into a human-readable string of
+   * hours, minutes, and seconds.Each component (hours, minutes, seconds)
    * is padded with a leading zero if it's a single digit.
-   * 
+   *
    * @param {int} time
    * @returns {string}
    */
@@ -305,6 +305,29 @@ class Project {
   }
 }
 
+/**
+ * Represents a task with various properties and methods to manage tasks in an application.
+ * This class includes functionalities to create, update, delete, and render tasks,
+ * as well as to interact with local storage for persistence.
+ *
+ * Constructor:
+ * - Initializes a new task object with properties like name, due date, creation date, details, etc.
+ *
+ * Methods:
+ * - addTask: Adds a new task to local storage and returns its unique ID.
+ * - renderTasks: Renders the list of tasks in the DOM.
+ * - updateTask: Updates a task's details and saves it to local storage.
+ * - getTasks: Retrieves an array of tasks from local storage.
+ * - deleteTaskById: Deletes a task by its ID.
+ * - clearCompleted: Deletes all completed tasks.
+ * - openOptionsMenu: Opens the options menu for a task.
+ * - closeOptionsMenu: Closes the options menu for a task.
+ * - toggleCompleted: Toggles the 'completed' status of a task.
+ * - renderTaskEditWindow: Renders an edit window for a specific task.
+ * - updateTaskName: Updates the name of a task.
+ * - getTaskDetails: Retrieves the details of a specific task.
+ * - setupEditButtonListener: Sets up event listeners for task edit buttons.
+ */
 class Task {
   /**
    * Task constructor function to create a new task object with the following properties: name, dueDate, timeSpent, id
@@ -325,11 +348,17 @@ class Task {
     this.projectId = projectId;
   }
 
+  /**
+   * Adds a new task to local storage and returns its unique ID.
+   *
+   * @returns {string|void}
+   */
   addTask() {
     // Get the task name from the input
     const taskInput = document.getElementById("task-name");
     const taskName = taskInput.value.trim();
 
+    // Get the project id from the input
     const taskProject = document.getElementById("task-project");
     const projectId = taskProject.value;
 
@@ -359,24 +388,30 @@ class Task {
   }
 
   /**
-   * Render the tasks in the DOM
-   * @returns void
+   * Renders the list of tasks in the DOM. It gets the tasks from local
+   * storage, then iterates through them and renders them in the DOM.
+   *
+   * @returns {void}
    */
   renderTasks() {
     // Get the tasks from local storage
     const tasks = this.getTasks();
     const taskList = document.getElementById("tasks");
 
+    // Get projects from local storage
     const projects = JSON.parse(localStorage.getItem("projects")) || [];
 
+    // Create uncompleted task list container with heading
     const tasksUncompleted = document.createElement("div");
     tasksUncompleted.classList.add("tasks__uncompleted");
     tasksUncompleted.innerHTML = "<h2>Tasks</h2>";
 
+    // Create completed task list container with heading
     const tasksCompleted = document.createElement("div");
     tasksCompleted.classList.add("tasks__completed");
     tasksCompleted.innerHTML = "<h2>Completed</h2>";
 
+    // Create clear completed button
     const clearCompleted = document.createElement("button");
     if (tasks.filter((task) => task.completed === true).length === 0) {
       clearCompleted.style.display = "none";
@@ -393,6 +428,7 @@ class Task {
     // Get running task
     const runningTask = tasks.find((task) => task.isRunning === true);
 
+    // If there is a running task, render it
     if (tasks.length <= 0) {
       taskList.innerHTML = "";
       const noTasks = document.createElement("p");
@@ -434,7 +470,7 @@ class Task {
         this.toggleCompleted(task.id)
       );
 
-      // Task Project
+      // Add a project dot to indicate the project
       const taskProject = projects.find(
         (project) => project.id === task.projectId
       );
@@ -582,6 +618,13 @@ class Task {
     });
   }
 
+  /**
+   * Updates the task name and saves it to local storage.
+   *
+   * @param {string} taskId
+   * @param {string} taskName
+   * @returns {void}
+   */
   updateTaskName(taskId, taskName) {
     const tasks = this.getTasks();
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
@@ -591,6 +634,7 @@ class Task {
 
   /**
    * Returns an array of tasks from local storage
+   *
    * @returns {Array}
    */
   getTasks() {
@@ -599,7 +643,9 @@ class Task {
 
   /**
    * Delete a task by id
-   * @param {*} taskId
+   *
+   * @param {string} taskId
+   * @returns {void}
    */
   deleteTaskById(taskId) {
     let tasks = this.getTasks(); // Retrieve the current list of tasks
@@ -610,6 +656,8 @@ class Task {
 
   /**
    * Delete all completed tasks
+   *
+   * @returns {void}
    */
   clearCompleted() {
     let tasks = this.getTasks();
@@ -620,7 +668,9 @@ class Task {
 
   /**
    * Open the options menu for a task
+   *
    * @param {*} taskId
+   * @returns {void}
    */
   openOptionsMenu(taskId) {
     const menu = document.getElementById(`options-menu-${taskId}`);
@@ -630,8 +680,11 @@ class Task {
   }
 
   /**
-   * Close the options menu for a task
-   * @param {*} taskId
+   * Closes the options menu for a given task by setting its display
+   * style to 'none'.
+   *
+   * @param {string} taskId
+   * @returns {void}
    */
   closeOptionsMenu(taskId) {
     const menu = document.getElementById(`options-menu-${taskId}`);
@@ -641,8 +694,11 @@ class Task {
   }
 
   /**
-   * Toggle the completed status of a task
-   * @param {*} taskId
+   * Toggles the 'completed' status of a task identified by taskId.
+   * If the task is found, it inverts its 'completed' status (true to false or vice versa),
+   *
+   * @param {string} taskId
+   * @returns {void}
    */
   toggleCompleted(taskId) {
     const tasks = this.getTasks();
@@ -652,6 +708,12 @@ class Task {
     this.renderTasks();
   }
 
+  /**
+   * Closes the options menu for a given task by setting its display style to 'none'.
+   *
+   * @param {string} taskId
+   * @returns {void}
+   */
   closeOptionsMenu(taskId) {
     const menu = document.getElementById(`options-menu-${taskId}`);
     if (menu) {
@@ -659,11 +721,19 @@ class Task {
     }
   }
 
+  /**
+   * Renders an edit window for a specific task, allowing the user to modify task details.
+   * It creates a form with fields for task name, due date, project, and additional details.
+   * The form also includes 'Save' and 'Close' buttons for submitting changes or closing the window.
+   *
+   * @param {string} taskId - The ID of the task to be edited.
+   * @returns {void}
+   */
   renderTaskEditWindow(taskId) {
     const task = this.getTaskDetails(taskId);
-    console.log(task);
-
     const app = document.getElementById("app");
+
+    // Create the edit window container and give it a class and heading
     const editWindow = document.createElement("div");
     editWindow.classList.add("edit-window");
     editWindow.innerHTML = `
@@ -672,23 +742,27 @@ class Task {
       </div>
     `;
 
+    // Create the edit window body
     const details = document.createElement("div");
     details.classList.add("edit-window__body");
 
-    // Build Task Name Field
+    // Build Task Name Field element
     const nameField = document.createElement("div");
     nameField.classList.add("field");
 
+    // Build Name Label element
     const nameLabel = document.createElement("label");
     nameLabel.classList.add("field__label");
     nameLabel.setAttribute("for", "edit-task-name");
     nameLabel.innerHTML = "Task Name";
 
+    // Build Name Input element
     const taskName = document.createElement("input");
     taskName.setAttribute("type", "text");
     taskName.setAttribute("id", "edit-task-name");
     taskName.setAttribute("value", task.name);
 
+    // Append Name Label and Input to Name Field
     nameField.appendChild(nameLabel);
     nameField.appendChild(taskName);
 
@@ -696,16 +770,19 @@ class Task {
     const dueDateField = document.createElement("div");
     dueDateField.classList.add("field");
 
+    // Build Due Date Label element
     const dueDateLabel = document.createElement("label");
     dueDateLabel.classList.add("field__label");
     dueDateLabel.setAttribute("for", "edit-task-due-date");
     dueDateLabel.innerHTML = "Due Date";
 
+    // Build Due Date Input element
     const dueDate = document.createElement("input");
     dueDate.setAttribute("type", "date");
     dueDate.setAttribute("id", "edit-task-due-date");
     dueDate.setAttribute("value", task.dueDate);
 
+    // Append Due Date Label and Input to Due Date Field
     dueDateField.appendChild(dueDateLabel);
     dueDateField.appendChild(dueDate);
 
@@ -719,15 +796,16 @@ class Task {
     }
 
     // Build Project Field
-
     const projectsField = document.createElement("div");
     projectsField.classList.add("field");
 
+    // Build Project Label element
     const projectLabel = document.createElement("label");
     projectLabel.classList.add("field__label");
     projectLabel.setAttribute("for", "edit-task-project");
     projectLabel.innerHTML = "Project";
 
+    // Build Project Select element
     const projectSelect = document.createElement("select");
     projectSelect.setAttribute("id", "edit-task-project");
     projectSelect.setAttribute("value", task.projectId);
@@ -735,6 +813,7 @@ class Task {
       <option value="${task.projectId}">${taskProject.name}</option>
     `;
 
+    // For each project, create an option and append it to the select element
     projects.forEach((project) => {
       const projectItem = document.createElement("option");
       projectItem.classList.add("projects-dropdown__item");
@@ -743,34 +822,40 @@ class Task {
       projectSelect.appendChild(projectItem);
     });
 
+    // Append Project Label and Select to Project Field
     projectsField.appendChild(projectLabel);
     projectsField.appendChild(projectSelect);
 
     // Build Details Field
-
     const detailsField = document.createElement("div");
     detailsField.classList.add("field");
 
+    // Build Details Label element
     const detailsLabel = document.createElement("label");
     detailsLabel.classList.add("field__label");
     detailsLabel.setAttribute("for", "edit-task-details");
     detailsLabel.innerHTML = "Details";
 
+    // Build Details Textarea element
     const taskDetails = document.createElement("textarea");
     taskDetails.setAttribute("id", "edit-task-details");
     taskDetails.innerHTML = task.details;
 
+    // Append Details Label and Textarea to Details Field
     detailsField.appendChild(detailsLabel);
     detailsField.appendChild(taskDetails);
 
+    // Appent all fields to the details container
     details.appendChild(nameField);
     details.appendChild(dueDateField);
     details.appendChild(projectsField);
     details.appendChild(detailsField);
 
+    // Build the edit window footer
     const footer = document.createElement("div");
     footer.classList.add("edit-window__footer");
 
+    // Build the Save button
     const saveButton = document.createElement("button");
     saveButton.classList.add("button", "button--regular", "button--primary");
     saveButton.innerHTML = "Save";
@@ -782,6 +867,7 @@ class Task {
       this.updateTask(taskId, taskName, dueDate, projectId, details);
     });
 
+    // Build the Close button
     const closeButton = document.createElement("button");
     closeButton.classList.add(
       "button",
@@ -793,37 +879,71 @@ class Task {
       editWindow.remove();
     });
 
+    // Append the buttons to the footer
     footer.appendChild(saveButton);
     footer.appendChild(closeButton);
+
+    // Append the details and footer to the edit window
     editWindow.appendChild(details);
     editWindow.appendChild(footer);
 
+    // Append the edit window to the app
     app.appendChild(editWindow);
   }
 
+  /**
+   * Updates the details of a specific task in local storage.
+   * This method modifies the task's name, due date, project association, and additional details
+   * based on the provided parameters. It then updates the task list in local storage and re-renders
+   * the tasks. Additionally, it hides the task's options menu if it is open.
+   *
+   * @param {string} taskId
+   * @param {string} taskName
+   * @param {string} dueDate
+   * @param {string} projectId
+   * @param {string} details
+   * @returns {void}
+   */
   updateTask(taskId, taskName, dueDate, projectId, details) {
     const tasks = this.getTasks();
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
     const menu = document.getElementById(`options-menu-${taskId}`);
-    console.log(taskName, dueDate, details);
+
+    // Update the task details
     tasks[taskIndex].name = taskName;
     tasks[taskIndex].dueDate = dueDate;
     tasks[taskIndex].projectId = projectId;
     tasks[taskIndex].details = details;
-    console.log(tasks[taskIndex]);
+
+    // Update the task in local storage
     localStorage.setItem("tasks", JSON.stringify(tasks));
     this.renderTasks();
+
+    // Close the options menu if it is open
     if (menu) {
       menu.style.display = "none";
     }
   }
 
+  /**
+   * Retrieves the details of a specific task by its ID.
+   * It fetches the task list from local storage and returns the task object
+   * matching the provided task ID.
+   *
+   * @param {string} taskId
+   * @returns {Object}
+   */
   getTaskDetails(taskId) {
     const tasks = this.getTasks();
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
     return tasks[taskIndex];
   }
 
+  /**
+   * Sets up click event listeners for all edit buttons in the task list.
+   * When an edit button is clicked, it triggers the rendering of the task edit window
+   * for the associated task.
+   */
   setupEditButtonListener() {
     const editButtons = document.querySelectorAll(".task__options-edit");
     editButtons.forEach((button) => {
