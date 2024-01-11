@@ -51,24 +51,25 @@ class Utils {
   }
 
   static showAlert(message, type) {
-    const alertContainer = document.getElementById('alert-container');
-    const alertDiv = document.createElement('div');
+    const alertContainer = document.getElementById("alert-container");
+    const alertDiv = document.createElement("div");
 
     // Customize your alertDiv based on the 'type' (e.g., error, success)
-    alertDiv.style.backgroundColor = type === 'error' ? '#ffdddd' : '#ddffdd';
-    alertDiv.style.border = type === 'error' ? '1px solid #ff0000' : '1px solid #00ff00';
-    alertDiv.style.marginBottom = '10px';
-    alertDiv.style.padding = '10px';
-    alertDiv.style.borderRadius = '5px';
+    alertDiv.style.backgroundColor = type === "error" ? "#ffdddd" : "#ddffdd";
+    alertDiv.style.border =
+      type === "error" ? "1px solid #ff0000" : "1px solid #00ff00";
+    alertDiv.style.marginBottom = "10px";
+    alertDiv.style.padding = "10px";
+    alertDiv.style.borderRadius = "5px";
     alertDiv.innerText = message;
 
     alertContainer.appendChild(alertDiv);
 
     // Remove the alert after 3 seconds
     setTimeout(() => {
-        alertContainer.removeChild(alertDiv);
+      alertContainer.removeChild(alertDiv);
     }, 3000);
-}
+  }
 }
 
 /**
@@ -400,7 +401,7 @@ class Task {
     tasks.push(newTask);
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
-    Utils.showAlert('Task added successfully', 'success');
+    Utils.showAlert("Task added successfully", "success");
 
     // Reset the form
     taskInput.value = "";
@@ -1039,6 +1040,9 @@ class Timer {
       return;
     }
 
+    const newTaskForm = document.querySelector(".new-task");
+    newTaskForm.classList.add("task-timer-stared");
+
     const now = new Date();
     const taskId = this.runningTaskId;
     const tasks = app.task.getTasks();
@@ -1047,9 +1051,12 @@ class Timer {
     const timer = document.querySelector("#timer");
     const time = Utils.formatTime(tasks[taskIndex].timeSpent);
     timer.innerHTML = `${time}`;
-    
+
     const taskEl = document.querySelector(`[data-task-id="${taskId}"]`);
     taskEl.classList.add("timer-toggle--active");
+
+    const project = document.getElementById("task-project");
+    project.value = tasks[taskIndex].projectId;
 
     tasks[taskIndex].isRunning = true;
     tasks[taskIndex].startTime = now.getTime();
@@ -1100,6 +1107,9 @@ class Timer {
     if (!this.runningTaskId) return;
     const taskId = this.runningTaskId;
 
+    const newTaskForm = document.querySelector(".new-task");
+    newTaskForm.classList.remove("task-timer-stared");
+
     const taskName = document.getElementById("task-name");
     taskName.value = "";
 
@@ -1108,6 +1118,9 @@ class Timer {
 
     const tasks = app.task.getTasks();
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
+
+    const project = document.getElementById("task-project");
+    project.value = "";
 
     const taskEl = document.querySelector(`[data-task-id="${taskId}"]`);
     taskEl.classList.remove("timer-toggle--active");
@@ -1129,7 +1142,7 @@ class Timer {
   updateRunningTaskTimeUI(taskId) {
     const tasks = app.task.getTasks();
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
-    
+
     const taskEl = document.querySelector(`#timer`);
     const totalSeconds = tasks[taskIndex].timeSpent;
     const time = Utils.formatTime(totalSeconds);
@@ -1157,18 +1170,18 @@ class Timer {
 }
 
 /**
- * The App class serves as the main entry point for the application, 
- * initializing and managing core components like Project, Task, 
- * and Timer. It handles the initialization and orchestration of these 
+ * The App class serves as the main entry point for the application,
+ * initializing and managing core components like Project, Task,
+ * and Timer. It handles the initialization and orchestration of these
  * components to ensure the application functions as intended.
  *
  * Constructor:
  * - Initializes instances of Project, Task, and Timer classes.
  *
  * Method:
- * - init: Sets up the application based on the current page. It renders 
- *   projects and tasks, sets up timers, and attaches event listeners to 
- *   various UI elements for interaction. This method differentiates 
+ * - init: Sets up the application based on the current page. It renders
+ *   projects and tasks, sets up timers, and attaches event listeners to
+ *   various UI elements for interaction. This method differentiates
  *   behavior based on whether the current page is 'projects.html' or not.
  */
 class App {

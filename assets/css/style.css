@@ -24,8 +24,9 @@
 
   --color-light: #ffffff;
 
-  --color-danger-500: #ee455b;
-  --color-done-500: #60d496;
+  --color-red-500: #ee455b;
+  --color-green-150: #cff2e0;
+  --color-green-500: #60d496;
 
   --color-text: var(--color-neutral-500);
   --color-text-light: var(--color-light);
@@ -156,19 +157,19 @@ nav ul li a.active:hover {
 }
 
 .button--danger {
-  background-color: var(--color-danger-500);
+  background-color: var(--color-red-500);
   color: var(--color-text-light);
 }
 
 .button--danger-outline {
   background-color: transparent;
-  border: 1px solid var(--color-danger-500);
-  color: var(--color-danger-500);
+  border: 1px solid var(--color-red-500);
+  color: var(--color-red-500);
   transition: all 0.2s ease-in-out;
 }
 
 .button--danger-outline:hover {
-  background-color: var(--color-danger-500);
+  background-color: var(--color-red-500);
   color: var(--color-text-light);
 }
 
@@ -210,7 +211,7 @@ nav ul li a.active:hover {
 }
 
 .action-icon--danger svg {
-  fill: var(--color-danger-500);
+  fill: var(--color-red-500);
 }
 
 .action-icon--danger:hover {
@@ -363,12 +364,12 @@ textarea {
 
 /* Completed Tasks */
 .task[data-completed="true"] .task__status {
-  border-color: var(--color-done-500);
+  border-color: var(--color-green-500);
 }
 
 .task[data-completed="true"] .task__status svg {
   opacity: 1;
-  fill: var(--color-done-500);
+  fill: var(--color-green-500);
 }
 
 .task[data-completed="true"] input {
@@ -411,7 +412,7 @@ textarea {
 
 .timer-toggle--active .icon-stop {
   display: block;
-  fill: var(--color-danger-500);
+  fill: var(--color-red-500);
 }
 
 /* Task Menu Options */
@@ -436,8 +437,8 @@ textarea {
 }
 
 .task--done .task__status {
-  background-color: var(--color-done-500);
-  border-color: var(--color-done-500);
+  background-color: var(--color-green-500);
+  border-color: var(--color-green-500);
 }
 
 .task--done .task__status svg {
@@ -532,6 +533,15 @@ textarea {
   left: 16px;
   min-height: 10px;
   min-width: 200px;
+}
+
+.task-timer-stared {
+  animation: fadeBackground 2s ease forwards;
+}
+
+@keyframes fadeBackground {
+  0% { background-color: var(--color-green-150); }
+  100% { background-color: var(--color-neutral-50); }
 }
 
 /* ======================================================================== */
