@@ -188,7 +188,6 @@ nav ul li a.active:hover {
   width: 32px;
   height: 32px;
   transition: background-color 0.2s ease-in-out;
-  padding: 0; /* Remove padding to display icons correctly on iphone */
 }
 
 .action-icon:hover {
@@ -662,3 +661,12 @@ textarea {
     flex-direction: row;
   }
 }
+
+/* Select a device that supports webkit-touch-callout like iOS, safari
+and apply the styles */
+@supports (-webkit-touch-callout: none) {
+  .action-icon {
+    padding: 5px; /* Remove padding to display icons correctly on iphone */
+  }
+}
+
