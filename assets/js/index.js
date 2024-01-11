@@ -27,7 +27,7 @@ class Utils {
    * @param {int}
    * @returns {string}
    */
-  padZero(digit) {
+  static padZero(digit) {
     const doubleDigit = digit < 10 ? "0" + digit : digit;
     return String(doubleDigit);
   }
@@ -40,15 +40,35 @@ class Utils {
    * @param {int} time
    * @returns {string}
    */
-  formatTime(time) {
+  static formatTime(time) {
     let hours = Math.floor(time / 3600);
-    hours = app.utils.padZero(hours);
+    hours = Utils.padZero(hours);
     let minutes = Math.floor((time % 3600) / 60);
-    minutes = app.utils.padZero(minutes);
+    minutes = Utils.padZero(minutes);
     let seconds = time % 60;
-    seconds = app.utils.padZero(seconds);
+    seconds = Utils.padZero(seconds);
     return `${hours}:${minutes}:${seconds}`;
   }
+
+  static showAlert(message, type) {
+    const alertContainer = document.getElementById('alert-container');
+    const alertDiv = document.createElement('div');
+
+    // Customize your alertDiv based on the 'type' (e.g., error, success)
+    alertDiv.style.backgroundColor = type === 'error' ? '#ffdddd' : '#ddffdd';
+    alertDiv.style.border = type === 'error' ? '1px solid #ff0000' : '1px solid #00ff00';
+    alertDiv.style.marginBottom = '10px';
+    alertDiv.style.padding = '10px';
+    alertDiv.style.borderRadius = '5px';
+    alertDiv.innerText = message;
+
+    alertContainer.appendChild(alertDiv);
+
+    // Remove the alert after 3 seconds
+    setTimeout(() => {
+        alertContainer.removeChild(alertDiv);
+    }, 3000);
+}
 }
 
 /**
@@ -380,6 +400,8 @@ class Task {
     tasks.push(newTask);
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
+    Utils.showAlert('Task added successfully', 'success');
+
     // Reset the form
     taskInput.value = "";
     this.renderTasks();
@@ -509,7 +531,7 @@ class Task {
       const taskTimer = document.createElement("div");
       taskTimer.classList.add("task__timer");
       taskTimer.setAttribute("data-task-timer", task.id);
-      taskTimer.innerHTML = app.utils.formatTime(task.timeSpent);
+      taskTimer.innerHTML = Utils.formatTime(task.timeSpent);
       taskActions.appendChild(taskTimer);
 
       // Create a start button
@@ -1149,12 +1171,12 @@ class Timer {
 
 /**
  * The App class serves as the main entry point for the application, 
- * initializing and managing core components like Utils, Project, Task, 
+ * initializing and managing core components like Project, Task, 
  * and Timer. It handles the initialization and orchestration of these 
  * components to ensure the application functions as intended.
  *
  * Constructor:
- * - Initializes instances of Utils, Project, Task, and Timer classes.
+ * - Initializes instances of Project, Task, and Timer classes.
  *
  * Method:
  * - init: Sets up the application based on the current page. It renders 
@@ -1164,7 +1186,6 @@ class Timer {
  */
 class App {
   constructor() {
-    this.utils = new Utils();
     this.project = new Project();
     this.task = new Task();
     this.timer = new Timer();
