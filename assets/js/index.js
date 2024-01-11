@@ -983,30 +983,6 @@ class Timer {
     this.runningTaskId = "";
   }
 
-  updateWeeklyTime() {
-    const tasks = app.task.getTasks();
-    const weeklyTime = document.querySelector(".weekly-time");
-
-    const now = new Date();
-
-    // Calculate the start and end of the week
-    const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay() + 1));
-    startOfWeek.setHours(0, 0, 0, 0); // Set to Monday 00:00
-    const endOfWeek = new Date(now.setDate(now.getDate() - now.getDay() + 7));
-    endOfWeek.setHours(23, 59, 59, 999); // Set to Sunday 23:59
-
-    // Filter tasks within this week and sum their time
-    const weeklyTotal = tasks.reduce((total, task) => {
-      const taskDate = new Date(task.creationDate);
-      if (taskDate >= startOfWeek && taskDate <= endOfWeek) {
-        return total + task.timeSpent;
-      }
-      return total;
-    }, 0);
-
-    weeklyTime.innerHTML = app.utils.formatTime(weeklyTotal);
-  }
-
   updateRunningTimer() {
     const timer = document.querySelector("#timer");
     const timerButton = document.querySelector("[data-action='task-timer']");
