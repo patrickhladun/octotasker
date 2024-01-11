@@ -1147,6 +1147,21 @@ class Timer {
   }
 }
 
+/**
+ * The App class serves as the main entry point for the application, 
+ * initializing and managing core components like Utils, Project, Task, 
+ * and Timer. It handles the initialization and orchestration of these 
+ * components to ensure the application functions as intended.
+ *
+ * Constructor:
+ * - Initializes instances of Utils, Project, Task, and Timer classes.
+ *
+ * Method:
+ * - init: Sets up the application based on the current page. It renders 
+ *   projects and tasks, sets up timers, and attaches event listeners to 
+ *   various UI elements for interaction. This method differentiates 
+ *   behavior based on whether the current page is 'projects.html' or not.
+ */
 class App {
   constructor() {
     this.utils = new Utils();
