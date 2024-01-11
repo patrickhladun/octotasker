@@ -188,6 +188,7 @@ nav ul li a.active:hover {
   width: 32px;
   height: 32px;
   transition: background-color 0.2s ease-in-out;
+  padding: 0; /* Remove padding to display icons correctly on iphone */
 }
 
 .action-icon:hover {
