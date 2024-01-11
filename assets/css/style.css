@@ -533,6 +533,22 @@ textarea {
   white-space: nowrap;
 }
 
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  height: 100vh;
+}
+.error-page__image {
+  width: 100%;
+  max-width: 400px;
+}
+.error-page__image img {
+  width: 100%;
+  height: auto;
+}
+
 /* ================================================== */
 /* Alerts =========================================== */
 /* ================================================== */
@@ -640,5 +656,9 @@ textarea {
 
   .task__options {
     margin-left: 0;
+  }
+
+  .error-page {
+    flex-direction: row;
   }
 }
