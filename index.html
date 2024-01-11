@@ -19,7 +19,7 @@
     <div id="app" class="app">
       <header>
         <div class="branding">
-          <div class="logo">
+          <a class="logo" href="/index.html">
             <svg
               id="Layer_1"
               xmlns="http://www.w3.org/2000/svg"
@@ -38,11 +38,11 @@
                 d="m256,234.02c-34.53,0-62.52,27.99-62.52,62.52s27.99,62.52,62.52,62.52,62.52-27.99,62.52-62.52-27.99-62.52-62.52-62.52Zm0,111.24c-25.84,0-46.96-20.12-48.6-45.54h4.51c1.24,0,2.24-1,2.24-2.24v-1.88c0-1.24-1-2.24-2.24-2.24h-4.51c1.56-24.24,20.84-43.64,45.03-45.39v4.72c0,1.24,1,2.24,2.24,2.24h1.88c1.24,0,2.24-1,2.24-2.24v-4.78c25.61,1.44,45.93,22.66,45.93,48.63s-21.81,48.72-48.72,48.72Z"
               />
             </svg>
-          </div>
+          </a>
         </div>
         <nav>
           <ul>
-            <li><a href="./">Tasks</a></li>
+            <li><a class="active" href="./index.html">Tasks</a></li>
             <li><a href="./projects.html">Projects</a></li>
           </ul>
         </nav>
@@ -56,8 +56,7 @@
             placeholder="Add task ..."
           />
           <div class="new-task__actions">
-            <select id="task-project" class="projects-dropdown">
-            </select>
+            <select id="task-project" class="projects-dropdown"></select>
             <div id="timer">00:00:00</div>
             <button class="timer-toggle action-icon" data-action="task-timer">
               <svg
@@ -66,7 +65,8 @@
                 viewBox="0 0 36 36"
               >
                 <path
-                  d="m31.79,16.33c1.21.74,1.21,2.6,0,3.34l-12.88,7.87-12.88,7.87c-1.21.74-2.73-.19-2.73-1.67V2.25C3.3.77,4.82-.16,6.03.58l12.88,7.87,12.88,7.87Z"
+                  class="cls-1"
+                  d="m29.8,16.04c1.51.87,1.51,3.06,0,3.93l-8.43,4.87-8.43,4.87c-1.51.87-3.4-.22-3.4-1.96V8.26c0-1.75,1.89-2.84,3.4-1.96l8.43,4.87,8.43,4.87Z"
                 />
               </svg>
               <svg
@@ -75,10 +75,10 @@
                 viewBox="0 0 36 36"
               >
                 <rect
-                  x="4.71"
-                  y="4.71"
-                  width="26.58"
-                  height="26.58"
+                  x="6.23"
+                  y="6.23"
+                  width="23.54"
+                  height="23.54"
                   rx="2.03"
                   ry="2.03"
                 />
@@ -87,22 +87,16 @@
             <button class="action-icon" data-action="task-add">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
                 <path
-                  d="m33.52,13.56h-11.09V2.48c0-1.22-.99-2.22-2.22-2.22h-4.44c-1.22,0-2.22.99-2.22,2.22v11.09H2.48c-1.22,0-2.22.99-2.22,2.22v4.44c0,1.22.99,2.22,2.22,2.22h11.09v11.09c0,1.22.99,2.22,2.22,2.22h4.44c1.22,0,2.22-.99,2.22-2.22v-11.09h11.09c1.22,0,2.22-.99,2.22-2.22v-4.44c0-1.22-.99-2.22-2.22-2.22Z"
+                  d="m28.84,14.89h-7.75v-7.75c0-.85-.69-1.55-1.55-1.55h-3.1c-.85,0-1.55.69-1.55,1.55v7.75h-7.74c-.85,0-1.55.69-1.55,1.55v3.1c0,.85.69,1.55,1.55,1.55h7.75v7.75c0,.85.69,1.55,1.55,1.55h3.1c.85,0,1.55-.69,1.55-1.55v-7.75h7.75c.85,0,1.55-.69,1.55-1.55v-3.1c0-.85-.69-1.55-1.55-1.55h-.01Z"
                 />
               </svg>
             </button>
           </div>
         </section>
-
-        <!-- <section class="daily-stats">
-          <p>This week: <span class="weekly-time">00:00:00</span></p>
-        </section> -->
-
-        <section id="tasks" class="tasks">
-        </section>
+        <section id="tasks" class="tasks"></section>
       </main>
     </div>
-
+    <div id="alert-container"></div>
     <script src="./assets/js/index.js"></script>
   </body>
 </html>

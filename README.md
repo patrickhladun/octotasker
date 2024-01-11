@@ -1,4 +1,4 @@
-# Octotasker - CI Project 2 v.0.4.2
+# Octotasker - CI Project 2 v.0.5.0
 
 ## User Stories
 
@@ -17,11 +17,14 @@
 ## Development Roadmap
 
 ### Tasks functionality
+
 1. Initialize the App
+
    - Load existing tasks from local storage
    - Update the task list display
 
 2. Add a New Task
+
    - When the user press enter or click add button:
      - Get the task name from the input field
      - Generate a unique ID for the new task
@@ -34,6 +37,7 @@
      - Update the task list display
 
 3. Start a Timer
+
    - When the 'Start' button is clicked:
      - Stop any currently running timer
      - Start a new timer for the clicked task
@@ -42,6 +46,7 @@
      - Update the task list display in real-time
 
 4. Stop a Timer
+
    - When the 'Stop' button is clicked:
      - Stop the timer for the clicked task
      - Update the task's 'isRunning' status to false
@@ -50,22 +55,25 @@
      - Update the task list display
 
 5. Update Task List Display
+
    - Clear the current display
    - For each task in the task list:
      - Create a task element
      - Add the task name, due date, project name, and time spent to the task item
      - Add 'Start' and 'Stop' buttons to the task item
      - Attach event listeners to the buttons for timer functionality
-     - Append the task item to the task list display 
+     - Append the task item to the task list display
 
 6. Filter Tasks by Project
+
    - On the main tasks page, allow tasks to be filtered by projects, due date, creation date
    - When a project is selected from the filter:
      - Display only the tasks that are assigned to the selected project
-    - When due date filter is clicked reorder tasks starting from the closest upcoming due date
-    - When creation date is clicked reorder the tasks by creation date starting with the newest one
+   - When due date filter is clicked reorder tasks starting from the closest upcoming due date
+   - When creation date is clicked reorder the tasks by creation date starting with the newest one
 
 7. Assign Tasks to Projects
+
    - When adding or editing a task:
      - Allow the user to select a project from available projects
      - Update the task's project assignment
@@ -78,13 +86,16 @@
      - Update the task list display
 
 ### Project functionality
+
 1. Initialize the Projects
+
    - Load existing projects from local storage
    - Update the projects list display on the project page
    - Populate project options in the tasks filter on the main tasks page
    - Populate each project with the tasks details (how many tasks, completed tasks etc)
 
 2. Add a Project
+
    - When the user submits the project form:
      - generate a unique ID for the project
      - Create a project object with:
@@ -94,6 +105,7 @@
      - Update the project list display
 
 3. Display Project List
+
    - For each project in the projects list:
      - Create a project container element
      - Add the project name and highlight color to the container
@@ -104,20 +116,26 @@
        - Number of not started tasks
      - Append the project container to the project list display
 
-6. Update Project Stats
+4. Update Project Stats
+
    - Whenever tasks are added, completed, or their status changes:
      - Update the relevant project's stats
      - Reflect these updates in the project display
 
-7. Delete a Project
+5. Delete a Project
    - Provide an option to delete a project
    - When deleted, remove the project from the local storage
    - Update the project list display
    - Optionally, handle reassignment or deletion of tasks linked to the deleted project
 
 ## Planning
+
 ## Design
+
 ## Deployment
+
 ## Technology used
+
 ## Bugs
+
 ## Credits
