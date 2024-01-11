@@ -404,6 +404,7 @@ class Task {
 
     // Reset the form
     taskInput.value = "";
+    taskProject.value = "";
     this.renderTasks();
 
     return taskId;
