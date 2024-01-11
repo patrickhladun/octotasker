@@ -727,6 +727,7 @@ class Task {
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
     tasks[taskIndex].completed = !tasks[taskIndex].completed;
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    app.timer.stopTimer();
     this.renderTasks();
   }
 
