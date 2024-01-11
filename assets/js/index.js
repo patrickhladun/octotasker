@@ -1042,6 +1042,10 @@ class Timer {
     const tasks = app.task.getTasks();
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
 
+    const timer = document.querySelector("#timer");
+    const time = Utils.formatTime(tasks[taskIndex].timeSpent);
+    timer.innerHTML = `${time}`;
+    
     const taskEl = document.querySelector(`[data-task-id="${taskId}"]`);
     taskEl.classList.add("timer-toggle--active");
 
@@ -1107,7 +1111,7 @@ class Timer {
     taskEl.classList.remove("timer-toggle--active");
 
     const taskTimer = document.querySelector(`[data-task-timer="${taskId}"]`);
-    const time = app.utils.formatTime(tasks[taskIndex].timeSpent);
+    const time = Utils.formatTime(tasks[taskIndex].timeSpent);
     taskTimer.innerHTML = `${time}`;
 
     tasks[taskIndex].isRunning = false;
@@ -1123,9 +1127,14 @@ class Timer {
   updateRunningTaskTimeUI(taskId) {
     const tasks = app.task.getTasks();
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
+    
     const taskEl = document.querySelector(`#timer`);
     const totalSeconds = tasks[taskIndex].timeSpent;
-    const time = app.utils.formatTime(totalSeconds);
+    const time = Utils.formatTime(totalSeconds);
+
+    const taskTimer = document.querySelector(`[data-task-timer="${taskId}"]`);
+    taskTimer.innerHTML = `${time}`;
+
     taskEl.innerHTML = `${time}`;
   }
 
