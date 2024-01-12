@@ -1,3 +1,4 @@
+/* jshint esversion: 8 */
 /**
  * The Utils class provides a collection of utility methods for general purposes.
  *
@@ -461,9 +462,6 @@ class Task {
     clearCompleted.innerHTML = "Clear Completed Tasks";
     clearCompleted.addEventListener("click", () => this.clearCompleted());
 
-    // Get running task
-    const runningTask = tasks.find((task) => task.isRunning === true);
-
     // If there is a running task, render it
     if (tasks.length <= 0) {
       taskList.innerHTML = "";
@@ -750,19 +748,6 @@ class Task {
     localStorage.setItem("tasks", JSON.stringify(tasks));
     app.timer.stopTimer();
     this.renderTasks();
-  }
-
-  /**
-   * Closes the options menu for a given task by setting its display style to 'none'.
-   *
-   * @param {string} taskId
-   * @returns {void}
-   */
-  closeOptionsMenu(taskId) {
-    const menu = document.getElementById(`options-menu-${taskId}`);
-    if (menu) {
-      menu.style.display = "none";
-    }
   }
 
   /**
