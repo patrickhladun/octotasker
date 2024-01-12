@@ -25,6 +25,8 @@
   --color-light: #ffffff;
 
   --color-red-500: #ee455b;
+  --color-red-600: #be3749;
+  --color-red-700: #8f2937;
   --color-green-150: #cff2e0;
   --color-green-500: #60d496;
 
@@ -105,6 +107,7 @@ nav ul li a {
   padding: 8px 16px;
   border-radius: 8px;
   transition: background-color 0.2s ease-in-out;
+  color: var(--color-neutral-800)
 }
 
 nav ul li a:hover {
@@ -148,12 +151,12 @@ nav ul li a.active:hover {
 }
 
 .button--primary {
-  background-color: var(--color-primary-500);
+  background-color: var(--color-primary-600);
   color: var(--color-text-light);
 }
 
 .button--primary:hover {
-  background-color: var(--color-primary-600);
+  background-color: var(--color-primary-700);
 }
 
 .button--danger {
@@ -163,8 +166,8 @@ nav ul li a.active:hover {
 
 .button--danger-outline {
   background-color: transparent;
-  border: 1px solid var(--color-red-500);
-  color: var(--color-red-500);
+  border: 1px solid var(--color-red-600);
+  color: var(--color-red-600);
   transition: all 0.2s ease-in-out;
 }
 

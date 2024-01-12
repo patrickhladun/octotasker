@@ -54,9 +54,9 @@ class Utils {
     const alertContainer = document.getElementById("alert-container");
     const alertDiv = document.createElement("div");
 
-    if(type === "danger") {
+    if (type === "danger") {
       alertDiv.classList.add("alert", "alert--danger");
-    } else if(type === "success") {
+    } else if (type === "success") {
       alertDiv.classList.add("alert", "alert--success");
     } else {
       alertDiv.classList.add("alert", "alert--info");
@@ -196,7 +196,7 @@ class Project {
     addProject.classList.add("project", "project--add");
     addProject.innerHTML = `
     <div class="project__details">
-      <input type="text" class="project__title" id="project-name" placeholder="Project Name" />
+      <input type="text" aria-label="Project Title" class="project__title" id="project-name" placeholder="Project Name" />
     </div>
     `;
 
@@ -204,6 +204,7 @@ class Project {
     projectActions.classList.add("project__actions");
 
     const projectAdd = document.createElement("button");
+    projectAdd.setAttribute("aria-label", "Add Project");
     projectAdd.classList.add(
       "project__add",
       "button",
@@ -232,6 +233,10 @@ class Project {
 
         // Create a project title node
         const detailsInput = document.createElement("input");
+        detailsInput.setAttribute(
+          "aria-label",
+          `Project name: ${project.name}`
+        );
         detailsInput.setAttribute("type", "text");
         detailsInput.setAttribute("value", project.name);
         detailsInput.classList.add("project__title");
@@ -240,6 +245,7 @@ class Project {
         });
 
         const colorPicker = document.createElement("input");
+        colorPicker.setAttribute("aria-label", `Project color: ${project.name}`);
         colorPicker.setAttribute("type", "color");
         colorPicker.classList.add("project__color-picker");
         colorPicker.value = project.color || "#ffffff"; // Default to white if no color is set
@@ -517,6 +523,7 @@ class Task {
 
       // Create a task title node
       const detailsInput = document.createElement("input");
+      detailsInput.setAttribute("aria-label", `Task name: ${task.name}`);
       detailsInput.setAttribute("type", "text");
       detailsInput.setAttribute("value", task.name);
       detailsInput.classList.add("task__title");
@@ -544,6 +551,7 @@ class Task {
 
       // Create a start button
       const startButton = document.createElement("button");
+      startButton.setAttribute("aria-label", "Start Stop timer");
       if (task.isRunning && task.startTime !== 0) {
         startButton.classList.add(
           "timer-toggle",
@@ -575,6 +583,7 @@ class Task {
 
       // Create an options buttons
       const optionsButton = document.createElement("button");
+      optionsButton.setAttribute("aria-label", "Open Option Menu");
       optionsButton.classList.add("task__options", "action-icon");
       optionsButton.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
@@ -616,6 +625,7 @@ class Task {
 
       // Create a close button
       const closeButton = document.createElement("button");
+      closeButton.setAttribute("aria-label", "Close Option Menu");
       closeButton.classList.add("action-icon", "action-icon--danger");
       closeButton.addEventListener("click", () =>
         this.closeOptionsMenu(task.id)
@@ -683,7 +693,7 @@ class Task {
     tasks = tasks.filter((task) => task.id !== taskId); // Filter out the task with the given ID
     localStorage.setItem("tasks", JSON.stringify(tasks)); // Update the tasks in local storage
     this.renderTasks(); // Refresh the displayed task list
-    Utils.showAlert("Task deleted successfully", "success")
+    Utils.showAlert("Task deleted successfully", "success");
   }
 
   /**
