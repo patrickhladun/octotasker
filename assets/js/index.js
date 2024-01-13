@@ -1,3 +1,4 @@
+/* jshint esversion: 8 */
 /**
  * The Utils class provides a collection of utility methods for general purposes.
  *
@@ -116,6 +117,7 @@ class Project {
 
     // Check if the project name is empty
     if (projectName === "" || !projectName) {
+      Utils.showAlert("Project name cannot be empty", "danger");
       return;
     }
 
@@ -194,11 +196,24 @@ class Project {
 
     const addProject = document.createElement("div");
     addProject.classList.add("project", "project--add");
-    addProject.innerHTML = `
-    <div class="project__details">
-      <input type="text" aria-label="Project Title" class="project__title" id="project-name" placeholder="Project Name" />
-    </div>
-    `;
+
+    const projectDetails = document.createElement("div");
+    projectDetails.classList.add("project__details");
+
+    const projectInput = document.createElement("input");
+    projectInput.setAttribute("type", "text");
+    projectInput.setAttribute("id", "project-name");
+    projectInput.setAttribute("placeholder", "Project Name");
+    projectInput.setAttribute("aria-label", "Project Name");
+    projectInput.classList.add("project__title");
+    projectInput.addEventListener("keypress", (e) => {
+      if (e.key == "Enter") {
+        this.addProject();
+      }
+    });
+
+    projectDetails.appendChild(projectInput);
+    addProject.appendChild(projectDetails);
 
     const projectActions = document.createElement("div");
     projectActions.classList.add("project__actions");
@@ -400,6 +415,7 @@ class Task {
 
     // Check if the task name is empty
     if (taskName === "" || !taskName) {
+      Utils.showAlert("Task name cannot be empty", "danger");
       return;
     }
 
@@ -460,9 +476,6 @@ class Task {
     );
     clearCompleted.innerHTML = "Clear Completed Tasks";
     clearCompleted.addEventListener("click", () => this.clearCompleted());
-
-    // Get running task
-    const runningTask = tasks.find((task) => task.isRunning === true);
 
     // If there is a running task, render it
     if (tasks.length <= 0) {
@@ -750,19 +763,6 @@ class Task {
     localStorage.setItem("tasks", JSON.stringify(tasks));
     app.timer.stopTimer();
     this.renderTasks();
-  }
-
-  /**
-   * Closes the options menu for a given task by setting its display style to 'none'.
-   *
-   * @param {string} taskId
-   * @returns {void}
-   */
-  closeOptionsMenu(taskId) {
-    const menu = document.getElementById(`options-menu-${taskId}`);
-    if (menu) {
-      menu.style.display = "none";
-    }
   }
 
   /**
