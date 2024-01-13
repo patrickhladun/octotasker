@@ -46,8 +46,9 @@
   - [Typography](#typography)
   - [Icons](#icons)
 - [Testing and Validation](#testing-and-validation)
-    - [Website Header Navigation](#website-header-navigation)
-    - [Tasks Page Functionality Testing](#tasks-page-functionality-testing)
+  - [Website Header Navigation](#website-header-navigation)
+  - [Tasks Page Testing](#tasks-page-testing)
+    - [Adding a task](#adding-a-task)
 - [Setup and installation](#setup-and-installation)
 - [Usage and Examples](#usage-and-examples)
 - [Projects Structure](#projects-structure)
@@ -268,7 +269,7 @@ Custom icons created in Illustrator adorn the app, lending a unique and cohesive
 
 ## Testing and Validation
 
-#### Website Header Navigation
+### Website Header Navigation
 [Back to Top](#table-of-contents)
 
 |Test scenario|Steps to Reproduce|Observation|Outcome|
@@ -278,7 +279,18 @@ Custom icons created in Illustrator adorn the app, lending a unique and cohesive
 |Projects menu link|Click on the 'Projects' menu link.|The 'Projects' menu link should navigate the user to the projects page.|Navigates to projects page as expected.|
 |Logo link|Click on the website logo.|The logo link should navigate the user to the main page, which is the tasks page.|Navigates to the main tasks page as expected.|
 
-#### Tasks Page Functionality Testing
+### Tasks Page Testing
+
+#### Adding a task
+[Back to Top](#table-of-contents)
+
+|Test scenario|Steps to Reproduce|Observation|Outcome|
+|-------------|------------------|-----------|-------|
+|Add task by adding task title and pressing enter|Add task name and press enter on the keyboard.|The task should be added to the tasks list.|The task is added as expected.|
+|Add task by pressing Plus icon|Add task name and click on plus icon.|The task should be added to the tasks list.|The task is added as expected.|
+|Add task and start the timer|Add task name and press Start icon.|The task should be added to the tasks list and the task timer should start immediately.|The task is added as expected and timer is started.|
+|Add the task with selecting the project|Add task name and select the project from the list and press enter, click start or plus button to add the task.|The task should be added and if the start buttons would be clicked task timer also should be started.|The task is added with the project and also task time started when start have been clicked.|
+|Try to add task without providing task title|Press enter, click on Start or Plus button to try to add the task without providing name.|The task should not be added and alert should be displayed.|The task was not added and alert was displayed to inform that the task can't be added without the name.|
 
 
 
