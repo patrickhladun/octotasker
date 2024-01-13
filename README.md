@@ -1,4 +1,4 @@
-# Octotasker - CI Project 2 v.0.5.0 <!-- omit from toc -->
+# Octotasker - CI Project 2 v.0.5.3 <!-- omit from toc -->
 
 "Octotasker is my second portfolio project for the Code Institute Diploma in Full-Stack Software Development. This MVP task manager app is meticulously designed to optimize workflow and boost productivity. It allows users to add tasks effortlessly, track the time spent on each task, and organize tasks under specific projects for enhanced clarity. Octotasker stands out with its intuitive interface, making task management straightforward for both personal and professional contexts. In addition to these features, the app offers the convenience of marking tasks as complete and supports the bulk deletion of finished tasks. This keeps the workspace organized and efficient, ensuring users can focus on what matters most. Designed with simplicity and effectiveness in mind, Octotasker is a tool that transforms task management into a seamless and productive experience."
 
@@ -48,6 +48,7 @@
     - [Adding a task](#adding-a-task)
     - [Task Management Testing](#task-management-testing)
   - [Project page testing](#project-page-testing)
+  - [HTML Validation](#html-validation)
 - [Setup and installation](#setup-and-installation)
 - [Usage and Examples](#usage-and-examples)
 - [Projects Structure](#projects-structure)
@@ -340,6 +341,16 @@ Custom icons created in Illustrator adorn the app, lending a unique and cohesive
 | Change the project name | Click on the project name and change the text. Click away or press enter to update the project name. | The project name should be saved, and the notification should appear confirming the change. | The project name was successfully changed. |
 | Change the project color | Click on the color picker to select the colour. Click away to save the changes | The color should update, and a notification should appear. | The project color was successfully changed. |
 | Project color on the task item | Change project color to be different from the default white colour. Navigate to the task page and assign the project to any of the active tasks. The project color should appear as a dot just before the task name. | When the project is added to the task, the dot shows the project color. | Project color successfully displayed. |
+
+### HTML Validation
+
+[Back to Top](#table-of-contents)
+
+I conducted HTML validation using the W3C Markup Validation Service for all the pages of the app. There were no errors or warnings found on any of the pages.
+
+- [Tasks Page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpatrickhladun.github.io%2Foctotasker%2Findex.html)
+- [Projects Page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpatrickhladun.github.io%2Foctotasker%2Fprojects.html)
+- [404 Page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpatrickhladun.github.io%2Foctotasker%2F404.html)
 
 ## Setup and installation
 
