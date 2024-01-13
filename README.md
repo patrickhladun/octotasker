@@ -49,6 +49,7 @@
   - [Website Header Navigation](#website-header-navigation)
   - [Tasks Page Testing](#tasks-page-testing)
     - [Adding a task](#adding-a-task)
+    - [Task Management Testing](#task-management-testing)
 - [Setup and installation](#setup-and-installation)
 - [Usage and Examples](#usage-and-examples)
 - [Projects Structure](#projects-structure)
@@ -286,12 +287,28 @@ Custom icons created in Illustrator adorn the app, lending a unique and cohesive
 
 |Test scenario|Steps to Reproduce|Observation|Outcome|
 |-------------|------------------|-----------|-------|
+|||||
 |Add task by adding task title and pressing enter|Add task name and press enter on the keyboard.|The task should be added to the tasks list.|The task is added as expected.|
 |Add task by pressing Plus icon|Add task name and click on plus icon.|The task should be added to the tasks list.|The task is added as expected.|
 |Add task and start the timer|Add task name and press Start icon.|The task should be added to the tasks list and the task timer should start immediately.|The task is added as expected and timer is started.|
 |Add the task with selecting the project|Add task name and select the project from the list and press enter, click start or plus button to add the task.|The task should be added and if the start buttons would be clicked task timer also should be started.|The task is added with the project and also task time started when start have been clicked.|
 |Try to add task without providing task title|Press enter, click on Start or Plus button to try to add the task without providing name.|The task should not be added and alert should be displayed.|The task was not added and alert was displayed to inform that the task can't be added without the name.|
 
+#### Task Management Testing
+
+|Test scenario|Steps to Reproduce|Observation|Outcome|
+|-------------|------------------|-----------|-------|
+|||||
+| Stating task timer | Click on the task timer start button for selected task | The task timer should start running, the start button should change to stop button, the top task section should update with the running task name, project name, the task time should also run and stop button be present. Also, the task top section should highlight with light green and the background should fade away and notification should appear on the bottom of the screen. | All items from observation were fulfilled. |
+| Stoping task timer | Click on the task timer stop button on the task itself or on the top section. | The task timer should stop. On the task, the timer should display elapsed time for the task. Stop Buttons should change to start button. The top section should reset to the default state and be ready to add a new task. Then notification should appear confirming the task timer is stopped. | All items from observation were fulfilled. |
+| Update task name on the task lists. | Click on the selected task name and change the name of the task. Press enter or click away to save the changes. | The task name should update when clicking away or pressing enter. The notification should appear confirming the update. | The task name was changed, and the notification appeared confirming the update. |
+| Complete the task | Click on the complete the task icon. | The task should be moved to Completed section. The task complete button should change to green, and the title, time, and start button should grey out to indicate they are inactive. If the task was running, the timer should be stopped. | All items from observation were fulfilled. |
+| Uncheck the completed task | Click on the green completed icon. | The task should be moved back to the tasks section, the complete icon should be greyed out, and name, time, and start icons should return to a normal state. | All items from observation were fulfilled. |
+| Clear completed tasks | Click on Clear Completed Tasks button | When the button is clicked, all completed tasks should be deleted, and a notification should appear confirming the tasks were cleared. | All items from observation were fulfilled. |
+| Delete the task | Click on the three-dot icon, then on the delete button. | By clicking on the three dots button, options are displayed with a delete button and edit button. When the delete button is clicked, the task should be deleted, and a notification should appear confirming the action. | All items from observation were fulfilled. |
+| Open edit window | Click on the three dots button, then on the edit button. | By clicking on the edit button, a window should appear with the task details. | The edit window successfully opened. |
+| Update task details | Change the task details of task title, date, details, or project, and click save. | The task details should be saved, and a notification should appear confirming the update. | All items from observation were fulfilled. |
+| Close edit window | Click on the close button. | Edit window should close. | Edit window successfully closed. |
 
 
 ## Setup and installation
