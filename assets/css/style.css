@@ -573,7 +573,8 @@ textarea {
 }
 
 .alert--danger {
-  background-color: var(--color-red-500);
+  background-color: var(--color-red-600);
+  color: var(--color-text-light)
 }
 
 .task-timer-stared {

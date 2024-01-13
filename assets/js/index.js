@@ -117,6 +117,7 @@ class Project {
 
     // Check if the project name is empty
     if (projectName === "" || !projectName) {
+      Utils.showAlert("Project name cannot be empty", "danger");
       return;
     }
 
@@ -401,6 +402,7 @@ class Task {
 
     // Check if the task name is empty
     if (taskName === "" || !taskName) {
+      Utils.showAlert("Task name cannot be empty", "danger");
       return;
     }
 
