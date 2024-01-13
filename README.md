@@ -17,7 +17,7 @@
     - [Psychographics:](#psychographics)
     - [Behavioral Traits:](#behavioral-traits)
   - [Online Habits:](#online-habits)
-  - [How Octotasker Meets Emily's Needs:](#how-octotasker-meets-emilys-needs)
+    - [How Octotasker Meets Emily's Needs:](#how-octotasker-meets-emilys-needs)
   - [User Goals for Octotasker](#user-goals-for-octotasker)
   - [User Stories](#user-stories)
   - [Five Planes of UX for Octotasker](#five-planes-of-ux-for-octotasker)
@@ -26,6 +26,7 @@
     - [3. Structure Plane](#3-structure-plane)
     - [4. Skeleton Plane](#4-skeleton-plane)
     - [5. Surface Plane](#5-surface-plane)
+  - [Wireframes](#wireframes)
 - [Features](#features)
   - [Task Management:](#task-management)
   - [Time Tracking:](#time-tracking)
@@ -82,7 +83,7 @@
 - **Research-Oriented**: Spends time researching best tools for task and project management.
 - **Community Engagement**: Participates in forums and groups related to productivity and management.
 
-### How Octotasker Meets Emily's Needs:
+#### How Octotasker Meets Emily's Needs:
 [Back to Top](#table-of-contents)
 
 - **Task Organization**: Allows Emily to categorize and prioritize tasks efficiently.
@@ -164,6 +165,14 @@
 **Visual Design:**
 - Aesthetic consistency with the Octotasker brand.
 - Custom icons and imagery that align with the overall design language.
+
+### Wireframes
+
+**Tasks Page**
+![Tasks](./docs/wireframes-tasks.jpg)
+**Projects Page**
+![Projects](./docs/wireframes-projects.jpg)
+
 
 ## Features
 [Back to Top](#table-of-contents)
