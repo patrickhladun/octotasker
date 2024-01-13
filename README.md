@@ -45,6 +45,8 @@
   - [404 Image](#404-image)
   - [Typography](#typography)
   - [Icons](#icons)
+- [Testing and Validation](#testing-and-validation)
+    - [Website Header Navigation](#website-header-navigation)
 - [Setup and installation](#setup-and-installation)
 - [Usage and Examples](#usage-and-examples)
 - [Projects Structure](#projects-structure)
@@ -262,6 +264,19 @@ The app uses the Montserrat font, known for its clean lines and modern feel. Thi
 Custom icons created in Illustrator adorn the app, lending a unique and cohesive look. These simple yet effective icons are designed for clarity and ease of use, enhancing the overall user experience.
 
 ![Icons](./docs/octotasker-icons.jpg)
+
+## Testing and Validation
+
+#### Website Header Navigation
+[Back to Top](#table-of-contents)
+
+|Test scenario|Steps to Reproduce|Observation|Outcome|
+|-------------|------------------|-----------|-------|
+|||||
+|Tasks menu link|Click on the 'Tasks' menu link.|The 'Tasks' menu link should navigate the user to the tasks page.|Navigates to tasks page as expected.|
+|Projects menu link|Click on the 'Projects' menu link.|The 'Projects' menu link should navigate the user to the projects page.|Navigates to projects page as expected.|
+|Logo link|Click on the website logo.|The logo link should navigate the user to the main page, which is the tasks page.|Navigates to the main tasks page as expected.|
+
 
 ## Setup and installation
 
