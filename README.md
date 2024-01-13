@@ -20,6 +20,12 @@
   - [How Octotasker Meets Emily's Needs:](#how-octotasker-meets-emilys-needs)
   - [User Goals for Octotasker](#user-goals-for-octotasker)
   - [User Stories](#user-stories)
+  - [Five Planes of UX for Octotasker](#five-planes-of-ux-for-octotasker)
+    - [1. Strategy Plane](#1-strategy-plane)
+    - [2. Scope Plane](#2-scope-plane)
+    - [3. Structure Plane](#3-structure-plane)
+    - [4. Skeleton Plane](#4-skeleton-plane)
+    - [5. Surface Plane](#5-surface-plane)
 - [Features](#features)
   - [Task Management:](#task-management)
   - [Time Tracking:](#time-tracking)
@@ -106,7 +112,61 @@
 - As a user, I want to see a visual indication (like a highlight color) for each task, so that I can easily distinguish between different projects.
 - As a user, I want a simple and intuitive user interface, so that I can use the application easily without a steep learning curve.
 
+### Five Planes of UX for Octotasker
+[Back to Top](#table-of-contents)
+
+#### 1. Strategy Plane
+
+**User Needs:**
+- Efficient and easy management of tasks.
+- Accurate time tracking for tasks.
+- Simple and intuitive user interface.
+
+  **Business Objectives:**
+- Provide a user-friendly task management tool.
+- Increase user base through intuitive design and functionality.
+- Build a foundation for future enhancements like collaboration tools.
+
+#### 2. Scope Plane
+
+**Functional Requirements:**
+- Add, edit, and delete tasks.
+- Start and stop task timers.
+- Categorize tasks under projects.
+- View completed and pending tasks.
+
+#### 3. Structure Plane
+
+**Interaction Design:**
+- Straightforward navigation between task list, timer, and projects.
+- Interactive elements like buttons for adding tasks and toggling timers.
+
+**Information Architecture:**
+- Clear categorization of tasks and projects.
+- Easy-to-find controls for task and project management.
+
+#### 4. Skeleton Plane
+
+**Interface Design:**
+- Clean layout with prominent task and timer sections.
+- Visually distinct areas for not-completed and completed tasks.
+
+**Navigation Design:**
+- Simple menu for accessing main features.
+- Clear labels and icons for intuitive navigation.
+
+**Information Design:**
+- Task lists displayed with necessary details like deadlines and time spent.
+- Visual cues for overdue tasks or active timers.
+
+#### 5. Surface Plane
+
+**Visual Design:**
+- Aesthetic consistency with the Octotasker brand.
+- Custom icons and imagery that align with the overall design language.
+
 ## Features
+[Back to Top](#table-of-contents)
 
 ### Task Management:
 
