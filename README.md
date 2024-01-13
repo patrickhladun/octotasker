@@ -11,7 +11,15 @@
 
 ## Table of Contents<!-- omit from toc -->
 
-- [User Stories](#user-stories)
+- [User Experience](#user-experience)
+  - [Audience Persona: Emily O'Sullivan](#audience-persona-emily-osullivan)
+    - [Demographics:](#demographics)
+    - [Psychographics:](#psychographics)
+    - [Behavioral Traits:](#behavioral-traits)
+  - [Online Habits:](#online-habits)
+  - [How Octotasker Meets Emily's Needs:](#how-octotasker-meets-emilys-needs)
+  - [User Goals for Octotasker](#user-goals-for-octotasker)
+  - [User Stories](#user-stories)
 - [Features](#features)
   - [Task Management:](#task-management)
   - [Time Tracking:](#time-tracking)
@@ -33,7 +41,61 @@
 - [Credits](#credits)
 
 
-## User Stories
+## User Experience
+[Back to Top](#table-of-contents)
+
+### Audience Persona: Emily O'Sullivan
+
+#### Demographics:
+[Back to Top](#table-of-contents)
+- **Age**: 35
+- **Gender**: Female
+- **Location**: Near Dublin, Ireland
+- **Occupation**: Middle-level Manager in a Tech Company
+- **Education**: Bachelor's Degree in Business Management
+- **Marital Status**: Married with two children
+
+#### Psychographics:
+[Back to Top](#table-of-contents)
+
+- **Interests**: Emily enjoys optimizing work processes, loves technology that simplifies life, and seeks tools to balance work and family life.
+- **Goals**: Aims to enhance productivity at work and home, efficiently manage her team, and keep track of family-related tasks.
+- **Challenges**: Struggles to balance a demanding career with her roles as a mother and wife, often finding it hard to track various tasks and deadlines.
+
+#### Behavioral Traits:
+[Back to Top](#table-of-contents)
+
+- **Tech-Savvy**: Comfortable using digital tools and apps for task management.
+- **Organizational Needs**: Prefers structured approach in managing professional and personal tasks.
+- **Time Management**: Looks for ways to manage time more effectively.
+
+### Online Habits:
+[Back to Top](#table-of-contents)
+
+- **App Usage**: Relies on productivity apps for daily activity organization.
+- **Research-Oriented**: Spends time researching best tools for task and project management.
+- **Community Engagement**: Participates in forums and groups related to productivity and management.
+
+### How Octotasker Meets Emily's Needs:
+[Back to Top](#table-of-contents)
+
+- **Task Organization**: Allows Emily to categorize and prioritize tasks efficiently.
+- **Time Tracking**: Helps monitor time spent on individual tasks, aiding better time management.
+- **Project Categorization**: Enables creating different projects for her varied roles and responsibilities.
+- **Intuitive Interface**: Easy to navigate and use.
+- **Mobile Accessibility**: Manages tasks on-the-go, suitable for her busy lifestyle.
+
+### User Goals for Octotasker
+[Back to Top](#table-of-contents)
+
+1. **Efficient Task Management**: Users aim to efficiently manage and organize their daily tasks, ensuring a clear understanding of priorities and deadlines.
+2. **Time Tracking**: Users seek to track the amount of time spent on individual tasks, facilitating better time management and productivity.
+3. **Project Organization**: The ability to categorize tasks under specific projects, allowing users to separate personal tasks from professional ones and manage them accordingly.
+4. **Ease of Use**: A simple and intuitive interface that doesn't require a steep learning curve, making the app accessible to users of all technical skill levels.
+5. **Data Persistence**: Users need their tasks and projects to be saved and accessible across sessions, ensuring no loss of data when they return to the app.
+
+### User Stories
+[Back to Top](#table-of-contents)
 
 - As a user, I want to add new tasks, so that I can keep track of the things I need to do.
 - As a user, I want to set due dates for tasks, so that I can manage my deadlines and ensure timely completion.
