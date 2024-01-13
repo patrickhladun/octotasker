@@ -105,7 +105,7 @@ nav ul li a {
   padding: 8px 16px;
   border-radius: 8px;
   transition: background-color 0.2s ease-in-out;
-  color: var(--color-neutral-800)
+  color: var(--color-neutral-800);
 }
 
 nav ul li a:hover {
@@ -186,8 +186,8 @@ nav ul li a.active:hover {
   background-color: transparent;
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
   transition: background-color 0.2s ease-in-out;
 }
 
@@ -320,8 +320,8 @@ textarea {
   align-items: center;
   border: 2px solid var(--color-neutral-300);
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
+  width: 48px;
+  height: 48px;
 }
 
 .task__status svg {
@@ -465,7 +465,7 @@ textarea {
   right: 0;
   background-color: var(--color-neutral-50);
   padding: 36px;
-  width: 40%;
+  width: 100%;
   height: 100vh;
   z-index: 100;
 }
@@ -559,6 +559,7 @@ textarea {
   left: 16px;
   min-height: 10px;
   min-width: 200px;
+  z-index: 99999;
 }
 
 .alert {
@@ -574,7 +575,7 @@ textarea {
 
 .alert--danger {
   background-color: var(--color-red-600);
-  color: var(--color-text-light)
+  color: var(--color-text-light);
 }
 
 .task-timer-stared {
@@ -643,6 +644,11 @@ textarea {
     width: 100%;
   }
 
+  .action-icon {
+    width: 32px;
+    height: 32px;
+  }
+
   .new-task {
     flex-direction: row;
   }
@@ -659,6 +665,11 @@ textarea {
     margin-left: 0;
   }
 
+  .task__status {
+    width: 24px;
+    height: 24px;
+  }
+
   .error-page {
     flex-direction: row;
   }
@@ -671,4 +682,3 @@ and apply the styles */
     padding: 5px; /* Remove padding to display icons correctly on iphone */
   }
 }
-
