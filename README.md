@@ -47,6 +47,7 @@
   - [Icons](#icons)
 - [Testing and Validation](#testing-and-validation)
     - [Website Header Navigation](#website-header-navigation)
+    - [Tasks Page Functionality Testing](#tasks-page-functionality-testing)
 - [Setup and installation](#setup-and-installation)
 - [Usage and Examples](#usage-and-examples)
 - [Projects Structure](#projects-structure)
@@ -276,6 +277,9 @@ Custom icons created in Illustrator adorn the app, lending a unique and cohesive
 |Tasks menu link|Click on the 'Tasks' menu link.|The 'Tasks' menu link should navigate the user to the tasks page.|Navigates to tasks page as expected.|
 |Projects menu link|Click on the 'Projects' menu link.|The 'Projects' menu link should navigate the user to the projects page.|Navigates to projects page as expected.|
 |Logo link|Click on the website logo.|The logo link should navigate the user to the main page, which is the tasks page.|Navigates to the main tasks page as expected.|
+
+#### Tasks Page Functionality Testing
+
 
 
 ## Setup and installation
