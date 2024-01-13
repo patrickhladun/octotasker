@@ -37,6 +37,10 @@
   - [Alert System:](#alert-system)
 - [Technology used](#technology-used)
 - [Design](#design)
+  - [Color Scheme](#color-scheme)
+- [Primary Colors](#primary-colors)
+- [Neutral Tones](#neutral-tones)
+- [Accent Colors](#accent-colors)
   - [Logo](#logo)
   - [404 Image](#404-image)
   - [Typography](#typography)
@@ -223,17 +227,41 @@
 
 ## Design
 
+### Color Scheme
+
+Choosing the right colors for my app is very important. Colors can affect how users feel and interact with the app. They also help make the app's design clear and easy to use.
+
+## Primary Colors
+I use blue as the main color for action buttons and important parts of the interface. Blue is a trustworthy and reliable color.
+
+## Neutral Tones
+Whites and grays are the colors I choose for backgrounds and inactive elements. They make the app look clean and easy to read.
+
+## Accent Colors
+Red is the color for delete buttons and alerts. It grabs attention and signals caution. Green is for success messages and completed tasks. It gives a feeling of accomplishment and positivity.
+
+![Color Scheme](./docs/colours.jpg)
+
 ### Logo
 The custom-designed logo features an octopus holding a timer, symbolizing the app's multifaceted task management capabilities and efficient time tracking.
+
+![Octotasker Logo](./docs/octotasker-logo.jpg)
 
 ### 404 Image
 For the 404 error page, a fun and engaging image of an octopus is generated using DALL-E, adding a unique and playful touch to the app.
 
+![404 Image](./docs/octotasker-404.jpg)
+
 ### Typography
 The app uses the Montserrat font, known for its clean lines and modern feel. This sans-serif typeface offers excellent readability and a contemporary aesthetic, aligning well with the app's minimalist design philosophy.
 
+![Montserrat light](./docs/montserrat-light.jpg)
+![Montserrat medium](./docs/montserrat-medium.jpg)
+
 ### Icons
 Custom icons created in Illustrator adorn the app, lending a unique and cohesive look. These simple yet effective icons are designed for clarity and ease of use, enhancing the overall user experience.
+
+![Icons](./docs/octotasker-icons.jpg)
 
 ## Setup and installation
 
