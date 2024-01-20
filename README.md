@@ -28,6 +28,10 @@
     - [4. Skeleton Plane](#4-skeleton-plane)
     - [5. Surface Plane](#5-surface-plane)
   - [Wireframes](#wireframes)
+- [Responsive Pages Overview](#responsive-pages-overview)
+  - [Tasks Page](#tasks-page)
+  - [Projects Page](#projects-page)
+  - [Custom 404 Page](#custom-404-page)
 - [Features](#features)
   - [Task Management:](#task-management)
   - [Time Tracking:](#time-tracking)
@@ -55,7 +59,7 @@
   - [CSS Validation](#css-validation)
 - [Page Speed Insights](#page-speed-insights)
   - [Index (Tasks) Page](#index-tasks-page)
-  - [Projects Page](#projects-page)
+  - [Projects Page](#projects-page-1)
   - [404 Error Page](#404-error-page)
 - [Deployment \& Local Development](#deployment--local-development)
   - [App Deployment](#app-deployment)
@@ -63,6 +67,7 @@
 - [Issues](#issues)
   - [Unresolved Issues](#unresolved-issues)
 - [Credits](#credits)
+- [Acknowledgments](#acknowledgments)
 
 
 ## Project Scope and Objectives
@@ -236,6 +241,22 @@ The goal of Octotasker is not just to provide a digital checklist but to enhance
 ### Wireframes
 
 **Tasks Page** ![Tasks](./docs/wireframes-tasks.jpg) **Projects Page** ![Projects](./docs/wireframes-projects.jpg)
+
+## Responsive Pages Overview
+
+Octotasker consists of two main pages: the Task Management page and the Project Management page, as well as a custom 404 error page. I designed all these pages with responsiveness in mind, ensuring they adapt and function seamlessly across various devices, from desktops to tablets and smartphones. This responsive design enhances the user experience, making Octotasker accessible and efficient regardless of the device used. The custom 404 page adds a unique touch, improving user engagement even when they encounter a missing page.
+
+### Tasks Page
+
+![Tasks Page](./docs/octotasker-task-page.jpg)
+
+### Projects Page
+
+![Projects Page](./docs/octotasker-projects-page.jpg)
+
+### Custom 404 Page
+
+![Custom 404 Page](./docs/octotasker-404-page.jpg)
 
 ## Features
 
@@ -472,3 +493,6 @@ _Note: Make sure to replace `https://github.com/my-username/octotasker.git` with
 - Safari browser mockup by [sashalazar](https://sashalazar.gumroad.com/l/mqxFJ)
 - Mobile Phone Mockup by [Antony Boyd](https://www.anthonyboyd.graphics/mockups/iphone-14-pro-max-mockup/)
   
+## Acknowledgments
+
+[Back to Top](#table-of-contents)
