@@ -61,6 +61,7 @@
   - [Index (Tasks) Page](#index-tasks-page)
   - [Projects Page](#projects-page-1)
   - [404 Error Page](#404-error-page)
+- [Technologies Used](#technologies-used)
 - [Deployment \& Local Development](#deployment--local-development)
   - [App Deployment](#app-deployment)
   - [Setting Up Local Development](#setting-up-local-development)
@@ -438,6 +439,19 @@ I tested the app for performance, accessibility, best practices, and SEO using G
 
 ### [404 Error Page](https://pagespeed.web.dev/analysis/https-patrickhladun-github-io-octotasker-404-html/sh3bo84bdj?form_factor=mobile)
 ![404 Error Page](./docs/pages-speed-insights-404.jpg)
+
+## Technologies Used
+
+In developing Octotasker, I have used a range of technologies to ensure efficient performance and a user-friendly experience. Here's an overview of the main technologies used:
+
+- HTML5: For structuring the content of the web application.
+- CSS3: Used for styling the content and ensuring responsive design across different devices.
+- JavaScript (ES6): For creating interactive elements and managing the application's logic, such as task and project management functionalities.
+- Local Storage: To persist data like tasks and projects, ensuring that user data remains intact between sessions.
+- GitHub Pages: For hosting the application, allowing easy access and seamless updates.
+- Visual Studio Code with Live Server Plugin: Utilized during development for real-time page reloading and efficient coding.
+- Google PageSpeed Insights: Used for testing the performance, accessibility, best practices, and SEO of the web pages.
+- CSS Validator: To ensure that the CSS code adheres to the standards and is free from errors.
 
 ## Deployment & Local Development
 
