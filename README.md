@@ -17,7 +17,7 @@
     - [Demographics:](#demographics)
     - [Psychographics:](#psychographics)
     - [Behavioral Traits:](#behavioral-traits)
-  - [Online Habits:](#online-habits)
+    - [Online Habits:](#online-habits)
     - [How Octotasker Meets Emily's Needs:](#how-octotasker-meets-emilys-needs)
   - [User Goals for Octotasker](#user-goals-for-octotasker)
   - [User Stories](#user-stories)
@@ -36,12 +36,11 @@
   - [User Interface:](#user-interface)
   - [Data Persistence:](#data-persistence)
   - [Alert System:](#alert-system)
-- [Technology used](#technology-used)
 - [Design](#design)
   - [Color Scheme](#color-scheme)
-- [Primary Colors](#primary-colors)
-- [Neutral Tones](#neutral-tones)
-- [Accent Colors](#accent-colors)
+    - [Primary Colors](#primary-colors)
+    - [Neutral Tones](#neutral-tones)
+    - [Accent Colors](#accent-colors)
   - [Logo](#logo)
   - [404 Image](#404-image)
   - [Typography](#typography)
@@ -130,7 +129,7 @@ The goal of Octotasker is not just to provide a digital checklist but to enhance
 - **Organizational Needs**: Prefers structured approach in managing professional and personal tasks.
 - **Time Management**: Looks for ways to manage time more effectively.
 
-### Online Habits:
+#### Online Habits:
 
 [Back to Top](#table-of-contents)
 
@@ -284,23 +283,21 @@ The goal of Octotasker is not just to provide a digital checklist but to enhance
 
 - Customizable alerts for various actions like task addition, updates, or deletions.
 
-## Technology used
-
 ## Design
 
 ### Color Scheme
 
 Choosing the right colors for my app is very important. Colors can affect how users feel and interact with the app. They also help make the app's design clear and easy to use.
 
-## Primary Colors
+#### Primary Colors
 
 I use blue as the main color for action buttons and important parts of the interface. Blue is a trustworthy and reliable color.
 
-## Neutral Tones
+#### Neutral Tones
 
 Whites and grays are the colors I choose for backgrounds and inactive elements. They make the app look clean and easy to read.
 
-## Accent Colors
+#### Accent Colors
 
 Red is the color for delete buttons and alerts. It grabs attention and signals caution. Green is for success messages and completed tasks. It gives a feeling of accomplishment and positivity.
 
@@ -322,7 +319,8 @@ For the 404 error page, a fun and engaging image of an octopus is generated usin
 
 The app uses the Montserrat font, known for its clean lines and modern feel. This sans-serif typeface offers excellent readability and a contemporary aesthetic, aligning well with the app's minimalist design philosophy.
 
-![Montserrat light](./docs/montserrat-light.jpg) ![Montserrat medium](./docs/montserrat-medium.jpg)
+![Montserrat regular](./docs/montserrat-regular.jpg) 
+![Montserrat bold](./docs/montserrat-bold.jpg)
 
 ### Icons
 
