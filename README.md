@@ -52,6 +52,7 @@
     - [Task Management Testing](#task-management-testing)
   - [Project page testing](#project-page-testing)
   - [HTML Validation](#html-validation)
+  - [CSS Validation](#css-validation)
 - [Page Speed Insights](#page-speed-insights)
   - [Index (Tasks) Page](#index-tasks-page)
   - [Projects Page](#projects-page)
@@ -59,9 +60,8 @@
 - [Deployment \& Local Development](#deployment--local-development)
   - [App Deployment](#app-deployment)
   - [Setting Up Local Development](#setting-up-local-development)
-- [Usage and Examples](#usage-and-examples)
-- [Projects Structure](#projects-structure)
-- [Known Issues](#known-issues)
+- [Issues](#issues)
+  - [Unresolved Issues](#unresolved-issues)
 - [Credits](#credits)
 
 
@@ -394,6 +394,12 @@ I conducted HTML validation using the W3C Markup Validation Service for all the 
 - [Projects Page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpatrickhladun.github.io%2Foctotasker%2Fprojects.html)
 - [404 Page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpatrickhladun.github.io%2Foctotasker%2F404.html)
 
+### CSS Validation
+
+[Back to Top](#table-of-contents)
+
+![CSS Validation](https://jigsaw.w3.org/css-validator/images/vcss-blue "CSS Validation")
+
 ## Page Speed Insights
 
 I tested the app for performance, accessibility, best practices, and SEO using Google's Page Speed Insights. By following its recommendations, I optimized the website to ensure quick loading times, high accessibility standards, adherence to web best practices, and effective SEO.
@@ -445,14 +451,12 @@ This local development process allows me to develop and test new features in iso
 
 _Note: Make sure to replace `https://github.com/my-username/octotasker.git` with the actual URL of your own GitHub repository if you're setting this up for yourself._
 
+## Issues
 
+### Unresolved Issues
 
-
-## Usage and Examples
-
-## Projects Structure
-
-## Known Issues
+- [Issue #1 - Missing highlight when switching timer tracking between tasks](https://github.com/patrickhladun/octotasker/issues/1)
+- [Issue #2 - Task time stop button not changing](https://github.com/patrickhladun/octotasker/issues/2)
 
 ## Credits
 
