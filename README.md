@@ -10,6 +10,8 @@
 
 ## Table of Contents<!-- omit from toc -->
 
+- [Project Scope and Objectives](#project-scope-and-objectives)
+  - [Objectives](#objectives)
 - [User Experience](#user-experience)
   - [Audience Persona: Emily O'Sullivan](#audience-persona-emily-osullivan)
     - [Demographics:](#demographics)
@@ -62,6 +64,38 @@
 - [Projects Structure](#projects-structure)
 - [Known Issues](#known-issues)
 - [Credits](#credits)
+
+
+## Project Scope and Objectives
+
+[Back to Top](#table-of-contents)
+
+Octotasker is a straightforward and efficient task management web application designed to cater to everyday needs for personal and professional task tracking. The scope of this project was to create a user-friendly platform that provides essential functionalities to manage tasks efficiently, track time spent on individual tasks, and organize tasks under different projects.
+
+### Objectives
+
+1. **User-Friendly Task Management:** 
+   To develop an intuitive interface where users can easily add, manage, and track tasks without a steep learning curve.
+
+2. **Time Tracking for Each Task:** 
+   Implement a timer feature to measure the time spent on individual tasks, fostering productivity and effective time management.
+
+3. **Enhanced Task Organization:**
+   Offer the ability to categorize tasks under different projects, allowing users to segregate and prioritize tasks more efficiently.
+
+4. **Responsive Design:**
+   Ensure that the application is accessible and functional across various devices and screen sizes, providing a consistent user experience.
+
+5. **Data Persistence:**
+   Utilize browser local storage to save tasks and projects, ensuring that user data remains intact between sessions.
+
+6. **Performance and Accessibility:**
+   Optimize the web application for performance and accessibility, making it fast and accessible to a broader audience.
+
+7. **Simplicity and Minimalism:**
+   Focus on a minimalist design to prevent user overwhelm, making task management more approachable and less daunting.
+
+The goal of Octotasker is not just to provide a digital checklist but to enhance the overall task management process, making it more structured, time-efficient, and user-centric.
 
 ## User Experience
 
