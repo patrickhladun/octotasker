@@ -260,7 +260,10 @@ class Project {
         });
 
         const colorPicker = document.createElement("input");
-        colorPicker.setAttribute("aria-label", `Project color: ${project.name}`);
+        colorPicker.setAttribute(
+          "aria-label",
+          `Project color: ${project.name}`
+        );
         colorPicker.setAttribute("type", "color");
         colorPicker.classList.add("project__color-picker");
         colorPicker.value = project.color || "#ffffff"; // Default to white if no color is set
@@ -536,7 +539,13 @@ class Task {
 
       // Create a task title node
       const detailsInput = document.createElement("input");
-      detailsInput.setAttribute("aria-label", `Task name: ${task.name}`);
+      if (task.completed) {
+        detailsInput.setAttribute("aria-label", `Completed Task: ${task.name}`);
+        detailsInput.setAttribute("aria-disabled", true);
+        detailsInput.setAttribute("disabled", true);
+      } else {
+        detailsInput.setAttribute("aria-label", `Task: ${task.name}`);
+      }
       detailsInput.setAttribute("type", "text");
       detailsInput.setAttribute("value", task.name);
       detailsInput.classList.add("task__title");
@@ -559,6 +568,9 @@ class Task {
       const taskTimer = document.createElement("div");
       taskTimer.classList.add("task__timer");
       taskTimer.setAttribute("data-task-timer", task.id);
+      if (task.completed) {
+        taskTimer.setAttribute("aria-disabled", true);
+      }
       taskTimer.innerHTML = Utils.formatTime(task.timeSpent);
       taskActions.appendChild(taskTimer);
 
@@ -589,6 +601,7 @@ class Task {
       // If the task is completed, disable the start button
       if (task.completed) {
         startButton.setAttribute("disabled", true);
+        startButton.setAttribute("aria-disabled", true);
       } else {
         startButton.addEventListener("click", (e) => app.timer.toggleTimer(e));
       }

@@ -498,6 +498,7 @@ _Note: Make sure to replace `https://github.com/my-username/octotasker.git` with
 
 - [Issue #1 - Missing highlight when switching timer tracking between tasks](https://github.com/patrickhladun/octotasker/issues/1)
 - [Issue #2 - Task time stop button not changing](https://github.com/patrickhladun/octotasker/issues/2)
+- [Issue #3 - Low contrast issue with completed task text](https://github.com/patrickhladun/octotasker/issues/3)
 
 ## Credits
 
