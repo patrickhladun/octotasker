@@ -55,6 +55,7 @@
     - [Adding a task](#adding-a-task)
     - [Task Management Testing](#task-management-testing)
   - [Project page testing](#project-page-testing)
+  - [JavaScript Code Validation](#javascript-code-validation)
   - [HTML Validation](#html-validation)
   - [CSS Validation](#css-validation)
 - [Page Speed Insights](#page-speed-insights)
@@ -67,9 +68,9 @@
   - [Setting Up Local Development](#setting-up-local-development)
 - [Issues](#issues)
   - [Unresolved Issues](#unresolved-issues)
+- [Future Improvements for Octotasker MVP](#future-improvements-for-octotasker-mvp)
 - [Credits](#credits)
 - [Acknowledgments](#acknowledgments)
-
 
 ## Project Scope and Objectives
 
@@ -79,26 +80,19 @@ Octotasker is a straightforward and efficient task management web application de
 
 ### Objectives
 
-1. **User-Friendly Task Management:** 
-   To develop an intuitive interface where users can easily add, manage, and track tasks without a steep learning curve.
+1. **User-Friendly Task Management:** To develop an intuitive interface where users can easily add, manage, and track tasks without a steep learning curve.
 
-2. **Time Tracking for Each Task:** 
-   Implement a timer feature to measure the time spent on individual tasks, fostering productivity and effective time management.
+2. **Time Tracking for Each Task:** Implement a timer feature to measure the time spent on individual tasks, fostering productivity and effective time management.
 
-3. **Enhanced Task Organization:**
-   Offer the ability to categorize tasks under different projects, allowing users to segregate and prioritize tasks more efficiently.
+3. **Enhanced Task Organization:** Offer the ability to categorize tasks under different projects, allowing users to segregate and prioritize tasks more efficiently.
 
-4. **Responsive Design:**
-   Ensure that the application is accessible and functional across various devices and screen sizes, providing a consistent user experience.
+4. **Responsive Design:** Ensure that the application is accessible and functional across various devices and screen sizes, providing a consistent user experience.
 
-5. **Data Persistence:**
-   Utilize browser local storage to save tasks and projects, ensuring that user data remains intact between sessions.
+5. **Data Persistence:** Utilize browser local storage to save tasks and projects, ensuring that user data remains intact between sessions.
 
-6. **Performance and Accessibility:**
-   Optimize the web application for performance and accessibility, making it fast and accessible to a broader audience.
+6. **Performance and Accessibility:** Optimize the web application for performance and accessibility, making it fast and accessible to a broader audience.
 
-7. **Simplicity and Minimalism:**
-   Focus on a minimalist design to prevent user overwhelm, making task management more approachable and less daunting.
+7. **Simplicity and Minimalism:** Focus on a minimalist design to prevent user overwhelm, making task management more approachable and less daunting.
 
 The goal of Octotasker is not just to provide a digital checklist but to enhance the overall task management process, making it more structured, time-efficient, and user-centric.
 
@@ -341,8 +335,7 @@ For the 404 error page, a fun and engaging image of an octopus is generated usin
 
 The app uses the Montserrat font, known for its clean lines and modern feel. This sans-serif typeface offers excellent readability and a contemporary aesthetic, aligning well with the app's minimalist design philosophy.
 
-![Montserrat regular](./docs/montserrat-regular.jpg) 
-![Montserrat bold](./docs/montserrat-bold.jpg)
+![Montserrat regular](./docs/montserrat-regular.jpg) ![Montserrat bold](./docs/montserrat-bold.jpg)
 
 ### Icons
 
@@ -406,6 +399,12 @@ I've thoroughly tested task management and project features by hand. I made sure
 | Change the project color | Click on the color picker to select the colour. Click away to save the changes | The color should update, and a notification should appear. | The project color was successfully changed. |
 | Project color on the task item | Change project color to be different from the default white colour. Navigate to the task page and assign the project to any of the active tasks. The project color should appear as a dot just before the task name. | When the project is added to the task, the dot shows the project color. | Project color successfully displayed. |
 
+### JavaScript Code Validation
+
+[Back to Top](#table-of-contents)
+
+I used JSHint online tool for validating the JavaScript code of Octotasker. My code passed the validation with no errors. This ensures that the JavaScript in Octotasker adheres to standard coding practices, contributing to its overall reliability and performance.
+
 ### HTML Validation
 
 [Back to Top](#table-of-contents)
@@ -431,13 +430,15 @@ I validated Octotasker's CSS using the W3C CSS Validation Service. This ensured 
 I tested the app for performance, accessibility, best practices, and SEO using Google's Page Speed Insights. By following its recommendations, I optimized the website to ensure quick loading times, high accessibility standards, adherence to web best practices, and effective SEO.
 
 ### [Index (Tasks) Page](https://pagespeed.web.dev/analysis/https-patrickhladun-github-io-octotasker-index-html/1ley1ojq1a?form_factor=mobile)
+
 ![Index (Tasks) Page](./docs/pages-speed-insights-index.jpg)
 
 ### [Projects Page](https://pagespeed.web.dev/analysis/https-patrickhladun-github-io-octotasker-projects-html/mbe9e41t1p?form_factor=mobile)
+
 ![Projects Page](./docs/pages-speed-insights-projects.jpg)
 
-
 ### [404 Error Page](https://pagespeed.web.dev/analysis/https-patrickhladun-github-io-octotasker-404-html/sh3bo84bdj?form_factor=mobile)
+
 ![404 Error Page](./docs/pages-speed-insights-404.jpg)
 
 ## Technologies Used
@@ -461,30 +462,23 @@ In this section, I outline how I've deployed Octotasker to GitHub Pages and how 
 
 My app, Octotasker, is currently hosted and live on GitHub Pages. Here's how I managed the deployment:
 
-1. **Repository Configuration:**
-   I have set up my project's GitHub repository to automatically deploy from the `main` branch to GitHub Pages.
+1. **Repository Configuration:** I have set up my project's GitHub repository to automatically deploy from the `main` branch to GitHub Pages.
 
-2. **Push to Deploy:**
-   Every time I push new changes to the `main` branch, GitHub Pages automatically deploys the new version, making it immediately available online.
+2. **Push to Deploy:** Every time I push new changes to the `main` branch, GitHub Pages automatically deploys the new version, making it immediately available online.
 
-3. **Accessing the Live App:**
-   You can visit the live app here: [Octotasker](https://patrickhladun.github.io/octotasker/).
+3. **Accessing the Live App:** You can visit the live app here: [Octotasker](https://patrickhladun.github.io/octotasker/).
 
 ### Setting Up Local Development
 
 For local development, here's how I proceed:
 
-1. **Clone the Repository:**
-   I clone my repository using `git clone https://github.com/my-username/octotasker.git` to get a local copy of the project on my machine.
+1. **Clone the Repository:** I clone my repository using `git clone https://github.com/my-username/octotasker.git` to get a local copy of the project on my machine.
 
-2. **Using Visual Studio Code:**
-   I open the project folder in Visual Studio Code to start making changes.
+2. **Using Visual Studio Code:** I open the project folder in Visual Studio Code to start making changes.
 
-3. **Starting Live Server:**
-   With the Live Server VSCode extension, I right-click on the `index.html` file and choose 'Open with Live Server' to run the app locally.
+3. **Starting Live Server:** With the Live Server VSCode extension, I right-click on the `index.html` file and choose 'Open with Live Server' to run the app locally.
 
-4. **Local Server Access:**
-   The app then opens in my default web browser, or I navigate to `http://127.0.0.1:5500` to view the app.
+4. **Local Server Access:** The app then opens in my default web browser, or I navigate to `http://127.0.0.1:5500` to view the app.
 
 This local development process allows me to develop and test new features in isolation. Only when I'm satisfied with the changes do I push them to the live site.
 
@@ -500,6 +494,16 @@ _Note: Make sure to replace `https://github.com/my-username/octotasker.git` with
 - [Issue #2 - Task time stop button not changing](https://github.com/patrickhladun/octotasker/issues/2)
 - [Issue #3 - Low contrast issue with completed task text](https://github.com/patrickhladun/octotasker/issues/3)
 
+## Future Improvements for Octotasker MVP
+
+[Back to Top](#table-of-contents)
+
+1. Project Details Enhancement: In future updates, I plan to incorporate more detailed information for each project. This could include descriptions or notes associated with a project, giving users a better understanding of the project's scope and objectives.
+
+2. Enhanced Project Stats View: A significant improvement would be the addition of a statistics section for each project. This feature would allow users to view essential stats related to a project, such as the number of tasks, the number of completed tasks, and the total time spent on all tasks within that project. This enhancement aims to provide users with a comprehensive overview of their project progress and time allocation.
+
+3. Time Tracking and Analytics: Expanding on the time tracking capabilities, I intend to add a feature that shows weekly time spent on tasks, alongside other time-related statistics. This would offer users insights into their productivity patterns and help them make informed decisions about managing their time more effectively.
+
 ## Credits
 
 [Back to Top](#table-of-contents)
@@ -507,7 +511,7 @@ _Note: Make sure to replace `https://github.com/my-username/octotasker.git` with
 - Used part of normalize.css v8.0.1 by [Nicolas Gallagher](github.com/necolas/normalize.css)
 - Safari browser mockup by [sashalazar](https://sashalazar.gumroad.com/l/mqxFJ)
 - Mobile Phone Mockup by [Antony Boyd](https://www.anthonyboyd.graphics/mockups/iphone-14-pro-max-mockup/)
-  
+
 ## Acknowledgments
 
 [Back to Top](#table-of-contents)
