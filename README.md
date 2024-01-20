@@ -398,7 +398,11 @@ I conducted HTML validation using the W3C Markup Validation Service for all the 
 
 [Back to Top](#table-of-contents)
 
-![CSS Validation](https://jigsaw.w3.org/css-validator/images/vcss-blue "CSS Validation")
+I validated Octotasker's CSS using the W3C CSS Validation Service. This ensured the CSS met web standards and best practices. The CSS passed without any issues, confirming the app's well-structured and compliant styling.
+
+[W3C CSS Validation Results](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fpatrickhladun.github.io%2Foctotasker%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
+
+[![CSS Validation](https://jigsaw.w3.org/css-validator/images/vcss-blue "CSS Validation")](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fpatrickhladun.github.io%2Foctotasker%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
 
 ## Page Speed Insights
 
@@ -453,6 +457,8 @@ _Note: Make sure to replace `https://github.com/my-username/octotasker.git` with
 
 ## Issues
 
+[Back to Top](#table-of-contents)
+
 ### Unresolved Issues
 
 - [Issue #1 - Missing highlight when switching timer tracking between tasks](https://github.com/patrickhladun/octotasker/issues/1)
@@ -460,4 +466,9 @@ _Note: Make sure to replace `https://github.com/my-username/octotasker.git` with
 
 ## Credits
 
-Used part of normalize.css v8.0.1 by Nicolas Gallagher github.com/necolas/normalize.css
+[Back to Top](#table-of-contents)
+
+- Used part of normalize.css v8.0.1 by [Nicolas Gallagher](github.com/necolas/normalize.css)
+- Safari browser mockup by [sashalazar](https://sashalazar.gumroad.com/l/mqxFJ)
+- Mobile Phone Mockup by [Antony Boyd](https://www.anthonyboyd.graphics/mockups/iphone-14-pro-max-mockup/)
+  
