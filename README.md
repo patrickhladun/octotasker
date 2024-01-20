@@ -1,6 +1,8 @@
-# Octotasker - CI Project 2 v.0.5.3 <!-- omit from toc -->
+# Octotasker - CI Project 2 v.0.5.5 <!-- omit from toc -->
 
 "Octotasker is my second portfolio project for the Code Institute Diploma in Full-Stack Software Development. This MVP task manager app is meticulously designed to optimize workflow and boost productivity. It allows users to add tasks effortlessly, track the time spent on each task, and organize tasks under specific projects for enhanced clarity. Octotasker stands out with its intuitive interface, making task management straightforward for both personal and professional contexts. In addition to these features, the app offers the convenience of marking tasks as complete and supports the bulk deletion of finished tasks. This keeps the workspace organized and efficient, ensuring users can focus on what matters most. Designed with simplicity and effectiveness in mind, Octotasker is a tool that transforms task management into a seamless and productive experience."
+
+![Octotasker](./docs/octotasker-presentation.webp)
 
 ![GitHub contributors](https://img.shields.io/github/issues/patrickhladun/octotasker?style=flat) ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/patrickhladun/octotasker/main?style=flat) ![GitHub language count](https://img.shields.io/github/languages/count/patrickhladun/octotasker?style=flat) ![GitHub top language](https://img.shields.io/github/languages/top/patrickhladun/octotasker?style=flat)
 
@@ -8,12 +10,14 @@
 
 ## Table of Contents<!-- omit from toc -->
 
+- [Project Scope and Objectives](#project-scope-and-objectives)
+  - [Objectives](#objectives)
 - [User Experience](#user-experience)
   - [Audience Persona: Emily O'Sullivan](#audience-persona-emily-osullivan)
     - [Demographics:](#demographics)
     - [Psychographics:](#psychographics)
     - [Behavioral Traits:](#behavioral-traits)
-  - [Online Habits:](#online-habits)
+    - [Online Habits:](#online-habits)
     - [How Octotasker Meets Emily's Needs:](#how-octotasker-meets-emilys-needs)
   - [User Goals for Octotasker](#user-goals-for-octotasker)
   - [User Stories](#user-stories)
@@ -32,12 +36,11 @@
   - [User Interface:](#user-interface)
   - [Data Persistence:](#data-persistence)
   - [Alert System:](#alert-system)
-- [Technology used](#technology-used)
 - [Design](#design)
   - [Color Scheme](#color-scheme)
-- [Primary Colors](#primary-colors)
-- [Neutral Tones](#neutral-tones)
-- [Accent Colors](#accent-colors)
+    - [Primary Colors](#primary-colors)
+    - [Neutral Tones](#neutral-tones)
+    - [Accent Colors](#accent-colors)
   - [Logo](#logo)
   - [404 Image](#404-image)
   - [Typography](#typography)
@@ -49,11 +52,49 @@
     - [Task Management Testing](#task-management-testing)
   - [Project page testing](#project-page-testing)
   - [HTML Validation](#html-validation)
-- [Setup and installation](#setup-and-installation)
-- [Usage and Examples](#usage-and-examples)
-- [Projects Structure](#projects-structure)
-- [Known Issues](#known-issues)
+  - [CSS Validation](#css-validation)
+- [Page Speed Insights](#page-speed-insights)
+  - [Index (Tasks) Page](#index-tasks-page)
+  - [Projects Page](#projects-page)
+  - [404 Error Page](#404-error-page)
+- [Deployment \& Local Development](#deployment--local-development)
+  - [App Deployment](#app-deployment)
+  - [Setting Up Local Development](#setting-up-local-development)
+- [Issues](#issues)
+  - [Unresolved Issues](#unresolved-issues)
 - [Credits](#credits)
+
+
+## Project Scope and Objectives
+
+[Back to Top](#table-of-contents)
+
+Octotasker is a straightforward and efficient task management web application designed to cater to everyday needs for personal and professional task tracking. The scope of this project was to create a user-friendly platform that provides essential functionalities to manage tasks efficiently, track time spent on individual tasks, and organize tasks under different projects.
+
+### Objectives
+
+1. **User-Friendly Task Management:** 
+   To develop an intuitive interface where users can easily add, manage, and track tasks without a steep learning curve.
+
+2. **Time Tracking for Each Task:** 
+   Implement a timer feature to measure the time spent on individual tasks, fostering productivity and effective time management.
+
+3. **Enhanced Task Organization:**
+   Offer the ability to categorize tasks under different projects, allowing users to segregate and prioritize tasks more efficiently.
+
+4. **Responsive Design:**
+   Ensure that the application is accessible and functional across various devices and screen sizes, providing a consistent user experience.
+
+5. **Data Persistence:**
+   Utilize browser local storage to save tasks and projects, ensuring that user data remains intact between sessions.
+
+6. **Performance and Accessibility:**
+   Optimize the web application for performance and accessibility, making it fast and accessible to a broader audience.
+
+7. **Simplicity and Minimalism:**
+   Focus on a minimalist design to prevent user overwhelm, making task management more approachable and less daunting.
+
+The goal of Octotasker is not just to provide a digital checklist but to enhance the overall task management process, making it more structured, time-efficient, and user-centric.
 
 ## User Experience
 
@@ -88,7 +129,7 @@
 - **Organizational Needs**: Prefers structured approach in managing professional and personal tasks.
 - **Time Management**: Looks for ways to manage time more effectively.
 
-### Online Habits:
+#### Online Habits:
 
 [Back to Top](#table-of-contents)
 
@@ -242,23 +283,21 @@
 
 - Customizable alerts for various actions like task addition, updates, or deletions.
 
-## Technology used
-
 ## Design
 
 ### Color Scheme
 
 Choosing the right colors for my app is very important. Colors can affect how users feel and interact with the app. They also help make the app's design clear and easy to use.
 
-## Primary Colors
+#### Primary Colors
 
 I use blue as the main color for action buttons and important parts of the interface. Blue is a trustworthy and reliable color.
 
-## Neutral Tones
+#### Neutral Tones
 
 Whites and grays are the colors I choose for backgrounds and inactive elements. They make the app look clean and easy to read.
 
-## Accent Colors
+#### Accent Colors
 
 Red is the color for delete buttons and alerts. It grabs attention and signals caution. Green is for success messages and completed tasks. It gives a feeling of accomplishment and positivity.
 
@@ -280,7 +319,8 @@ For the 404 error page, a fun and engaging image of an octopus is generated usin
 
 The app uses the Montserrat font, known for its clean lines and modern feel. This sans-serif typeface offers excellent readability and a contemporary aesthetic, aligning well with the app's minimalist design philosophy.
 
-![Montserrat light](./docs/montserrat-light.jpg) ![Montserrat medium](./docs/montserrat-medium.jpg)
+![Montserrat regular](./docs/montserrat-regular.jpg) 
+![Montserrat bold](./docs/montserrat-bold.jpg)
 
 ### Icons
 
@@ -289,6 +329,8 @@ Custom icons created in Illustrator adorn the app, lending a unique and cohesive
 ![Icons](./docs/octotasker-icons.jpg)
 
 ## Testing and Validation
+
+I've thoroughly tested task management and project features by hand. I made sure that adding, updating, and deleting tasks and projects works perfectly. I tried every button and link to check they do what they should. I also checked that the time tracking for tasks is accurate. I used different browsers and devices to test. This makes sure the app is reliable and easy to use for everyone.
 
 ### Website Header Navigation
 
@@ -348,16 +390,74 @@ Custom icons created in Illustrator adorn the app, lending a unique and cohesive
 
 I conducted HTML validation using the W3C Markup Validation Service for all the pages of the app. There were no errors or warnings found on any of the pages.
 
-- [Tasks Page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpatrickhladun.github.io%2Foctotasker%2Findex.html)
+- [Index (Tasks) Page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpatrickhladun.github.io%2Foctotasker%2Findex.html)
 - [Projects Page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpatrickhladun.github.io%2Foctotasker%2Fprojects.html)
 - [404 Page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpatrickhladun.github.io%2Foctotasker%2F404.html)
 
-## Setup and installation
+### CSS Validation
 
-## Usage and Examples
+[Back to Top](#table-of-contents)
 
-## Projects Structure
+![CSS Validation](https://jigsaw.w3.org/css-validator/images/vcss-blue "CSS Validation")
 
-## Known Issues
+## Page Speed Insights
+
+I tested the app for performance, accessibility, best practices, and SEO using Google's Page Speed Insights. By following its recommendations, I optimized the website to ensure quick loading times, high accessibility standards, adherence to web best practices, and effective SEO.
+
+### [Index (Tasks) Page](https://pagespeed.web.dev/analysis/https-patrickhladun-github-io-octotasker-index-html/1ley1ojq1a?form_factor=mobile)
+![Index (Tasks) Page](./docs/pages-speed-insights-index.jpg)
+
+### [Projects Page](https://pagespeed.web.dev/analysis/https-patrickhladun-github-io-octotasker-projects-html/mbe9e41t1p?form_factor=mobile)
+![Projects Page](./docs/pages-speed-insights-projects.jpg)
+
+
+### [404 Error Page](https://pagespeed.web.dev/analysis/https-patrickhladun-github-io-octotasker-404-html/sh3bo84bdj?form_factor=mobile)
+![404 Error Page](./docs/pages-speed-insights-404.jpg)
+
+## Deployment & Local Development
+
+In this section, I outline how I've deployed Octotasker to GitHub Pages and how you can set up a similar environment using the Live Server extension in Visual Studio Code for local development.
+
+### App Deployment
+
+My app, Octotasker, is currently hosted and live on GitHub Pages. Here's how I managed the deployment:
+
+1. **Repository Configuration:**
+   I have set up my project's GitHub repository to automatically deploy from the `main` branch to GitHub Pages.
+
+2. **Push to Deploy:**
+   Every time I push new changes to the `main` branch, GitHub Pages automatically deploys the new version, making it immediately available online.
+
+3. **Accessing the Live App:**
+   You can visit the live app here: [Octotasker](https://patrickhladun.github.io/octotasker/).
+
+### Setting Up Local Development
+
+For local development, here's how I proceed:
+
+1. **Clone the Repository:**
+   I clone my repository using `git clone https://github.com/my-username/octotasker.git` to get a local copy of the project on my machine.
+
+2. **Using Visual Studio Code:**
+   I open the project folder in Visual Studio Code to start making changes.
+
+3. **Starting Live Server:**
+   With the Live Server VSCode extension, I right-click on the `index.html` file and choose 'Open with Live Server' to run the app locally.
+
+4. **Local Server Access:**
+   The app then opens in my default web browser, or I navigate to `http://127.0.0.1:5500` to view the app.
+
+This local development process allows me to develop and test new features in isolation. Only when I'm satisfied with the changes do I push them to the live site.
+
+_Note: Make sure to replace `https://github.com/my-username/octotasker.git` with the actual URL of your own GitHub repository if you're setting this up for yourself._
+
+## Issues
+
+### Unresolved Issues
+
+- [Issue #1 - Missing highlight when switching timer tracking between tasks](https://github.com/patrickhladun/octotasker/issues/1)
+- [Issue #2 - Task time stop button not changing](https://github.com/patrickhladun/octotasker/issues/2)
 
 ## Credits
+
+Used part of normalize.css v8.0.1 by Nicolas Gallagher github.com/necolas/normalize.css
