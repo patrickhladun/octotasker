@@ -13,6 +13,7 @@ class Utils {
    * timestamp.
    *
    * @returns {string}
+   * @static
    */
   static generateUniqueId() {
     const random = Math.random().toString().slice(2, 5);
@@ -27,6 +28,7 @@ class Utils {
    *
    * @param {int}
    * @returns {string}
+   * @static
    */
   static padZero(digit) {
     const doubleDigit = digit < 10 ? "0" + digit : digit;
@@ -40,6 +42,7 @@ class Utils {
    *
    * @param {int} time
    * @returns {string}
+   * @static
    */
   static formatTime(time) {
     let hours = Math.floor(time / 3600);
@@ -51,6 +54,15 @@ class Utils {
     return `${hours}:${minutes}:${seconds}`;
   }
 
+  /**
+   * Shows an alert message on the UI.
+   * The method creates a new alert element, appends it to the alert container,
+   * and removes it after 2 seconds.
+   * @param {string} message
+   * @param {string} type
+   * @returns {void}
+   * @static
+   */
   static showAlert(message, type) {
     const alertContainer = document.getElementById("alert-container");
     const alertDiv = document.createElement("div");
@@ -94,6 +106,14 @@ class Utils {
  * - renderProjectsDropdown: Renders projects in a dropdown menu.
  */
 class Project {
+
+  /**
+   * Project constructor function to create a new project object with the following 
+   * properties: id, name, color
+   * @param {string} id
+   * @param {string} name
+   * @param {string} color
+   */
   constructor(id, name) {
     this.id = id;
     this.name = name;
@@ -236,7 +256,6 @@ class Project {
     if (projects.length !== 0) {
       // If there are projects, clear the project list
       projects.forEach((project) => {
-        console.log(project);
         // Create a project item
         const projectItem = document.createElement("div");
         projectItem.setAttribute("data-project-id", project.id);
@@ -260,7 +279,10 @@ class Project {
         });
 
         const colorPicker = document.createElement("input");
-        colorPicker.setAttribute("aria-label", `Project color: ${project.name}`);
+        colorPicker.setAttribute(
+          "aria-label",
+          `Project color: ${project.name}`
+        );
         colorPicker.setAttribute("type", "color");
         colorPicker.classList.add("project__color-picker");
         colorPicker.value = project.color || "#ffffff"; // Default to white if no color is set
@@ -377,6 +399,7 @@ class Project {
  * - setupEditButtonListener: Sets up event listeners for task edit buttons.
  */
 class Task {
+
   /**
    * Task constructor function to create a new task object with the following properties: name, dueDate, timeSpent, id
    * @param {*} name
@@ -536,7 +559,13 @@ class Task {
 
       // Create a task title node
       const detailsInput = document.createElement("input");
-      detailsInput.setAttribute("aria-label", `Task name: ${task.name}`);
+      if (task.completed) {
+        detailsInput.setAttribute("aria-label", `Completed Task: ${task.name}`);
+        detailsInput.setAttribute("aria-disabled", true);
+        detailsInput.setAttribute("disabled", true);
+      } else {
+        detailsInput.setAttribute("aria-label", `Task: ${task.name}`);
+      }
       detailsInput.setAttribute("type", "text");
       detailsInput.setAttribute("value", task.name);
       detailsInput.classList.add("task__title");
@@ -559,6 +588,9 @@ class Task {
       const taskTimer = document.createElement("div");
       taskTimer.classList.add("task__timer");
       taskTimer.setAttribute("data-task-timer", task.id);
+      if (task.completed) {
+        taskTimer.setAttribute("aria-disabled", true);
+      }
       taskTimer.innerHTML = Utils.formatTime(task.timeSpent);
       taskActions.appendChild(taskTimer);
 
@@ -589,6 +621,7 @@ class Task {
       // If the task is completed, disable the start button
       if (task.completed) {
         startButton.setAttribute("disabled", true);
+        startButton.setAttribute("aria-disabled", true);
       } else {
         startButton.addEventListener("click", (e) => app.timer.toggleTimer(e));
       }
@@ -1001,12 +1034,41 @@ class Task {
   }
 }
 
+/**
+ * Manages time tracking for tasks in the application. The Timer class handles starting,
+ * stopping, and updating timers for tasks, along with synchronizing these changes with the UI.
+ * It also maintains the state of the currently active timer.
+ *
+ * Constructor:
+ * - Initializes an empty object for active timers and a string for the currently running task ID.
+ *
+ * Methods:
+ * - updateRunningTimer: Updates the UI based on the current state of the running timer.
+ * - toggleTimer: Toggles the timer for a task based on user interaction.
+ * - startTimer: Starts the timer for a task and updates the UI to reflect this change.
+ * - restartTimer: Restarts a timer for a task, useful in scenarios like page reloads.
+ * - stopTimer: Stops the currently active timer and updates the task's time tracking.
+ * - updateRunningTaskTimeUI: Updates the UI with the current time spent on an active task.
+ * - updateTaskTime: Regularly updates the elapsed time for the active task and syncs it with the UI.
+ */
 class Timer {
+
+  /**
+   * Constructor initializes the Timer class.
+   * @param {object} activeTimer
+   * @param {string} runningTaskId
+   */
   constructor() {
     this.activeTimer = {};
     this.runningTaskId = "";
   }
 
+  /**
+   * Updates the UI to reflect the current status of the running timer.
+   * If no task is running, resets the timer UI to its default state.
+   *
+   * @returns {void}
+   */
   updateRunningTimer() {
     const timer = document.querySelector("#timer");
     const timerButton = document.querySelector("[data-action='task-timer']");
@@ -1021,6 +1083,13 @@ class Timer {
     }
   }
 
+  /**
+   * Toggles the timer for a task.
+   * If a task is already running, stops it before starting a new one.
+   *
+   * @param {Event} e - The event object associated with the timer toggle action.
+   * @returns {void}
+   */
   toggleTimer(e) {
     // Get the task id from the button
     const button = e.target;
@@ -1056,6 +1125,13 @@ class Timer {
     }
   }
 
+  /**
+   * Starts the timer for the selected task.
+   * Sets up the timer interval and updates relevant UI components.
+   * Also responsible for updating task details in the UI.
+   *
+   * @returns {void}
+   */
   startTimer() {
     if (this.runningTaskId === "") {
       return;
@@ -1095,6 +1171,12 @@ class Timer {
     Utils.showAlert("Timer started for the task", "success");
   }
 
+  /**
+   * Restarts the timer for a task that was previously running.
+   * Useful for continuing time tracking after a page reload or navigation.
+   *
+   * @returns {void}
+   */
   restartTimer() {
     const tasks = app.task.getTasks();
 
@@ -1126,6 +1208,12 @@ class Timer {
     this.updateRunningTimer();
   }
 
+  /**
+   * Stops the timer for the currently active task.
+   * Updates task's time tracking data and resets UI elements.
+   *
+   * @returns {void}
+   */
   stopTimer() {
     if (!this.runningTaskId) return;
     const taskId = this.runningTaskId;
@@ -1164,6 +1252,12 @@ class Timer {
     Utils.showAlert("Timer stopped for the task", "success");
   }
 
+  /**
+   * Updates the task timer display in the UI for a running task.
+   *
+   * @param {string} taskId - The ID of the task whose timer needs updating.
+   * @returns {void}
+   */
   updateRunningTaskTimeUI(taskId) {
     const tasks = app.task.getTasks();
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
@@ -1178,6 +1272,13 @@ class Timer {
     taskEl.innerHTML = `${time}`;
   }
 
+  /**
+   * Regularly called function that updates the elapsed time for the active task.
+   * Increments task's time spent and synchronizes this data with the UI.
+   *
+   * @param {string} taskId - The ID of the task being timed.
+   * @returns {void}
+   */
   updateTaskTime(taskId) {
     const now = new Date();
     let tasks = app.task.getTasks();
@@ -1210,18 +1311,30 @@ class Timer {
  *   behavior based on whether the current page is 'projects.html' or not.
  */
 class App {
+
+  /**
+   * App constructor function to create a new app object with the following 
+   * properties: project, task, timer
+   * 
+   * @property {Project} project - An instance of the Project class to manage projects.
+   * @property {Task} task - An instance of the Task class to manage tasks.
+   * @property {Timer} timer - An instance of the Timer class to handle task timing.
+   */
   constructor() {
     this.project = new Project();
     this.task = new Task();
     this.timer = new Timer();
   }
+
+  /**
+   * Initializes the application based on the current page.
+   */
   init() {
     if (window.location.href.toLowerCase().includes("projects.html")) {
       this.project.renderProjects();
     } else {
       this.task.renderTasks();
       this.timer.restartTimer();
-      // this.timer.updateWeeklyTime();
       this.project.renderProjectsDropdown();
       document
         .querySelector('[data-action="task-timer"]')
@@ -1240,6 +1353,7 @@ class App {
 
 let app;
 
+// Initialize the app when the DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
   app = new App();
   app.init();
