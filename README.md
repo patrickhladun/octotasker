@@ -544,3 +544,5 @@ To resolve this, I made a small alteration in the `renderProjects` method of the
 ## Acknowledgments
 
 [Back to Top](#table-of-contents)
+
+I would like to extend my heartfelt gratitude to Karolis Petrauskas and Julia Wagner. Their exceptional feedback played a pivotal role in enhancing the Octotasker app. Their insights helped me identify and refine various aspects of the application, significantly improving the user experience and avoiding potential user frustrations. Their contribution has been invaluable, and I deeply appreciate their support and guidance throughout the development process.
