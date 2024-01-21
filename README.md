@@ -268,10 +268,14 @@ Octotasker consists of two main pages: the Task Management page and the Project 
 - Delete individual tasks.
 - Bulk delete all completed tasks with a single button.
 
+![Task Management](./docs/task-management.jpg)
+
 ### Time Tracking:
 
 - Keep track of the time spent on each task with an integrated timer.
 - Time tracking continues seamlessly across task switching.
+
+![Task Timer](./docs/task-timer.jpg)
 
 ### Task Detail Editing:
 
@@ -279,12 +283,16 @@ Octotasker consists of two main pages: the Task Management page and the Project 
 - Update task names, due dates, and detailed descriptions.
 - Assign tasks to specific projects from available options.
 
+![Task Details](./docs/task-details.jpg)
+
 ### Project Management:
 
 - Add new projects to categorize tasks.
 - Delete projects.
 - Rename projects for better identification.
 - Customize project colors for visual distinction.
+
+![Projects Management](./docs/projects-management.jpg)
 
 ### User Interface:
 
