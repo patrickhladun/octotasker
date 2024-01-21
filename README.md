@@ -67,6 +67,9 @@
   - [App Deployment](#app-deployment)
   - [Setting Up Local Development](#setting-up-local-development)
 - [Issues](#issues)
+  - [Resolved Issues](#resolved-issues)
+    - [Task timer continues running after task completion](#task-timer-continues-running-after-task-completion)
+    - [Issue with Deleting the Last Project](#issue-with-deleting-the-last-project)
   - [Unresolved Issues](#unresolved-issues)
 - [Future Improvements for Octotasker MVP](#future-improvements-for-octotasker-mvp)
 - [Credits](#credits)
@@ -495,6 +498,24 @@ _Note: Make sure to replace `https://github.com/my-username/octotasker.git` with
 ## Issues
 
 [Back to Top](#table-of-contents)
+
+### Resolved Issues
+
+#### Task timer continues running after task completion
+
+- **Issue:**
+I encountered an issue where the task timer continued running even after marking a task as completed. This behavior was not intended, as completing a task should automatically stop its associated timer.
+
+- **Resolution:**
+To fix this issue, I updated the `toggleCompleted` method in the `Task` class. I added a line to call the `app.timer.stopTimer()` method from the `Timer` class whenever a task's completion status is toggled. This ensures that the timer stops as soon as a task is marked as completed.
+
+#### Issue with Deleting the Last Project
+
+- **Issue:**
+When trying to delete the last project in the app, I ran into a peculiar issue. Rather than removing the project, a new element for creating projects was added to the DOM each time the deletion was attempted. This behavior was unintended and led to confusion in the user interface.
+
+- **Resolution:**
+To resolve this, I made a small alteration in the `renderProjects` method of the `Project` class. The key change involved moving the line `projectList.innerHTML = "";` out of the conditional statement that checks for the presence of projects and render them. I placed it before the segment where the 'add project' element is created. This adjustment ensured that the project list container was cleared before adding the 'create new project' element. Subsequently, if any projects existed, they were added correctly. This repositioning effectively resolved the issue, allowing for the proper deletion of the last project without adding unintended elements to the user interface.
 
 ### Unresolved Issues
 
